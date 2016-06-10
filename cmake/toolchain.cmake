@@ -5,7 +5,7 @@ macro(set_toolchain ARCH)
         set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")
         set(CMAKE_ASM_COMPILER "arm-none-eabi-as")
 
-        set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-mcpu=cortex-m4 -march=armv7e-m -mthumb -mfpu=fpv4-sp-d16 -fno-common -ffunction-sections -fdata-sections -static -nostdlib -lgcc")
+        set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-mcpu=cortex-m4 -march=armv7e-m -mthumb -mfpu=fpv4-sp-d16 -fno-common -ffunction-sections -fdata-sections -static -nostdlib -nostdinc -lgcc")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_C_FLAGS}")
         set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
         set(CMAKE_EXECUTABLE_SUFFIX ".elf")
