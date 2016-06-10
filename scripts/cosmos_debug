@@ -1,0 +1,12 @@
+#!/bin/bash
+
+COSMOS_PATH="/home/kuba/Projects/cosmos"
+COSMOS_IMAGE_PATH="$COSMOS_PATH/bin/arm-stm32f4discovery/cosmos.elf"
+
+openocd -f /usr/share/openocd/scripts/board/stm32f4discovery.cfg -c init \
+                                                                 -c targets \
+                                                                 -c "halt" \
+                                                                 -c "flash write_image erase $COSMOS_IMAGE_PATH" \
+                                                                 -c "verify_image $COSMOS_IMAGE_PATH" \
+                                                                 -c "init" \
+                                                                 -c "reset halt"
