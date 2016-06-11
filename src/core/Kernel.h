@@ -3,8 +3,7 @@
 
 class Kernel {
 public:
-    static Kernel& instance()
-    {
+    static Kernel& instance() {
         static Kernel object;
         return object;
     }
