@@ -1,3 +1,6 @@
 # Object and executable files.
 build/
 bin/
+
+# Project files.
+CMakeLists.txt.user
