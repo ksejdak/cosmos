@@ -1,4 +1,5 @@
 #include "Kernel.h"
+#include <list>
 
 Kernel::Kernel()
 {
@@ -6,4 +7,10 @@ Kernel::Kernel()
     ++a;
     int b = a + 8;
     --b;
+
+    std::list<int> l;
+    l.push_back(a);
+    l.push_back(b);
+
+    throw "a";
 }

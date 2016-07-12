@@ -1,4 +1,5 @@
 #include <core/Kernel.h>
+#include <exception>
 
 int main()
 {
@@ -8,7 +9,12 @@ int main()
         int b = a + 3;
         a++;
 
-        Kernel::instance();
+        try {
+            Kernel::instance();
+        }
+        catch (std::exception& e) {
+            const char *msg = e.what();
+        }
     }
 
     return 0;
