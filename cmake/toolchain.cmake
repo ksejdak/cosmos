@@ -6,6 +6,7 @@ macro(set_toolchain ARCH)
         set(CMAKE_ASM_COMPILER "arm-none-eabi-as")
 
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mcpu=cortex-m4 -march=armv7e-m -mthumb -mfpu=fpv4-sp-d16 -fno-common -ffunction-sections -fdata-sections -static -lgcc")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdlib -fno-exceptions -fno-unwind-tables -fno-rtti")
         #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdinc")                 # Do not include standard headers.
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-threadsafe-statics")   # Do not produce code to initialize statics in thread-safe way.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_C_FLAGS}")

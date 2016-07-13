@@ -20,10 +20,9 @@ set(PROJECT_NAME "cosmos")
 project(${PROJECT_NAME} CXX C ASM)
 
 # Project paths.
-set(COSMOS_SRC_PATH ${CMAKE_SOURCE_DIR}/src)
-set(COSMOS_BOARD_PATH ${COSMOS_SRC_PATH}/board/${COSMOS_TARGET})
-set(COSMOS_CORE_PATH ${COSMOS_SRC_PATH}/core)
-set(COSMOS_HAL_PATH ${COSMOS_SRC_PATH}/hal/${COSMOS_ARCH})
+set(COSMOS_BOARD_PATH ${CMAKE_SOURCE_DIR}/board/${COSMOS_TARGET})
+set(COSMOS_CORE_PATH ${CMAKE_SOURCE_DIR}/core)
+set(COSMOS_HAL_PATH ${CMAKE_SOURCE_DIR}/hal/${COSMOS_ARCH})
 
 #################################################################################################################
 # TOOLCHAIN SETTINGS
@@ -46,6 +45,13 @@ message(STATUS "  Build type   : " ${CMAKE_BUILD_TYPE})
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-include_directories(src)
-include_directories(src/include)
-add_subdirectory(src)
+include_directories(include)
+include_directories(.)
+
+set(COMPONENTS
+    core
+    hal
+)
+
+register_packet()
+
