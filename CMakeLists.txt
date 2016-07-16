@@ -14,7 +14,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/macros.cmake)
 #################################################################################################################
 
 set(COSMOS_ARCH "arm")
-set(COSMOS_TARGET "stm32f4discovery")
+set(COSMOS_TARGET "beaglebone-black")
 set(CMAKE_BUILD_TYPE Debug)
 set(PROJECT_NAME "cosmos")
 project(${PROJECT_NAME} CXX C ASM)
@@ -49,6 +49,7 @@ include_directories(include)
 include_directories(.)
 
 set(COMPONENTS
+    board
     core
     hal
 )
