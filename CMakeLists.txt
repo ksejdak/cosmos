@@ -15,7 +15,6 @@ include(${CMAKE_SOURCE_DIR}/cmake/macros.cmake)
 
 set(COSMOS_ARCH "arm")
 set(COSMOS_TARGET "beaglebone-black")
-set(CMAKE_BUILD_TYPE Debug)
 set(PROJECT_NAME "cosmos")
 project(${PROJECT_NAME} CXX C ASM)
 
@@ -28,6 +27,7 @@ set(COSMOS_HAL_PATH ${CMAKE_SOURCE_DIR}/hal/${COSMOS_ARCH})
 # TOOLCHAIN SETTINGS
 #################################################################################################################
 
+set(CMAKE_BUILD_TYPE Debug)
 set_toolchain(${COSMOS_ARCH})
 
 # Set common build options.
