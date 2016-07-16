@@ -1,5 +1,3 @@
-#include <core/Kernel.h>
-
 int main()
 {
     int a = 5;
@@ -7,8 +5,8 @@ int main()
         a++;
         int b = a + 3;
         a++;
+        b++;
 
-        Kernel::instance();
     }
 
     return 0;

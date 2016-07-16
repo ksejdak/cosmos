@@ -1,5 +1,6 @@
 #include "Kernel.h"
 
+/*
 Kernel::Kernel()
 {
     B b;
@@ -7,3 +8,4 @@ Kernel::Kernel()
 
     a->fun();
 }
+*/

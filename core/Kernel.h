@@ -1,6 +1,7 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
+/*
 class A {
 public:
     virtual void fun() {
@@ -30,5 +31,6 @@ public:
 private:
     Kernel();
 };
+*/
 
 #endif
