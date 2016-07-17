@@ -1,4 +1,4 @@
-define ddr_init
+define DDRInit
 	set ((CCM_Type *) 0x4006B000)->CCGR4 |= 0x22a00000
 	set ((CCM_Type *) 0x4006B000)->CCGR3 |= 0x00004022
 	set ((CCM_Type *) 0x4006B000)->CCGR2 |= 0x0fee0000
