@@ -6,25 +6,23 @@ MEMORY {
     sram (rwx)     :      ORIGIN = 0x402f0400, LENGTH = 32K        /* Internal on-chip SRAM */
 }
 
-_bootStart_vma = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
-_textStart_vma = 0x80000000;   /* Kernel .text starts at 2 GB. */
-_stackSize     = 0x1000;       /* Stak size is 4KB.*/
+_bootStart_va = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
+_textStart_va = 0x80000000;   /* Kernel .text starts at 2 GB. */
+_stackSize    = 0x1000;       /* Stak size is 4KB.*/
 
 SECTIONS {
     /* Starup code. */
-    .boot _bootStart_vma : {
-        _bootStart_lma = .;
+    .boot _bootStart_va : {
+        _bootStart_pa = .;
 
         *(.boot)
 
-        _bootEnd_lma = .;
+        _bootEnd_pa = .;
     } AT > sram
 
     /* Kernel code. */
-    /* .text _textStart_vma : */
+    /* .text _textStart_va : */
     .text : { /* TODO: change to above in future. */
-        _textStart_lma = .;
-
         *(.text)                /* .text sections (code). */
         *(.text*)               /* .text* sections (code) - this will merge all symbols in .text into one section. */
         *(.glue_7)              /* Glue arm to thumb code. */
@@ -32,8 +30,6 @@ SECTIONS {
         *(.eh_frame)
         KEEP (*(.init))
         KEEP (*(.fini))
-
-        _textEnd_lma = .;
     } AT > sram /* TODO: change to ddr in future. */
 
     /* Constructors and destructors. */
@@ -65,7 +61,7 @@ SECTIONS {
 
 	/* BSS. */
 	.bss : {
-		_bssStart_lma = .;
+		_bssStart_pa = .;
 
 		*(.dynsbss)
 		*(.sbss .sbss.* .gnu.linkonce.sb.*)
@@ -75,11 +71,14 @@ SECTIONS {
 		*(COMMON)
 
 		. = ALIGN(4);
-		_bssEnd_lma = .;
+		_bssEnd_pa = .;
 	} AT > sram
 
 	/* Stack. */
 	.stack : ALIGN(4) {
         . += _stackSize;
 	} AT > sram
+
+	/* Calculate physical addresses of .bss and .stack for startup code. */
+	_stackStart_pa = _bssEnd_pa + SIZEOF(.stack) - 4;
 }
