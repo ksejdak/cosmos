@@ -13,8 +13,23 @@
     .func       _start
 
 _start:
+    cpsid   aif, #0x1f
+    ldr     sp, =_stackStart_pa
+
+    // Initialize registers for clearing .bss section.
+    mov     r0, #0
+    ldr     r1, =_bssStart_pa
+    ldr     r2, =_bssEnd_pa
+
+_bssClear:
+    cmp     r1, r2
+    strlo   r0, [r1], #4
+    blo     _bssClear
+
     blx     SystemInit
     blx     BoardInit
 
     ldr     lr, =main
     bx      lr
+
+    .endfunc
