@@ -8,7 +8,7 @@ MEMORY {
 
 _bootStart_va = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
 _textStart_va = 0x80000000;   /* Kernel .text starts at 2 GB. */
-_stackSize    = 0x1000;       /* Stak size is 4KB.*/
+_stackSize    = 0x1000;       /* Stack size is 4KB.*/
 
 SECTIONS {
     /* Starup code. */
