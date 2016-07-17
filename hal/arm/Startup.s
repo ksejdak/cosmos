@@ -13,11 +13,8 @@
     .func       _start
 
 _start:
-    ldr     lr, =SystemInit
-    bx      lr
-
-    ldr     lr, =BoardInit
-    bx      lr
+    blx     SystemInit
+    blx     BoardInit
 
     ldr     lr, =main
     bx      lr
