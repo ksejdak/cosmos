@@ -8,14 +8,18 @@
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////// 
 
-#ifndef ARMPROCESSOR_H
-#define ARMPROCESSOR_H
+#ifndef ARMCORTEX_A_H
+#define ARMCORTEX_A_H
 
-#include <hal/Processor.h>
+#include <hal/cpu.h>
 
-class ARMProcessor : public Processor {
+namespace hal {
+
+class ARMCortexA : public CPU {
 public:
-    ARMProcessor();
+    ARMCortexA();
 };
+
+} // namespace hal
 
 #endif

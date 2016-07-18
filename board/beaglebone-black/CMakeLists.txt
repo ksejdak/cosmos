@@ -1,5 +1,5 @@
 set(SOURCES
-    Board.cpp
+    board.cpp
 )
 
 register_module()

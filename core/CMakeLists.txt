@@ -1,6 +1,6 @@
 set(SOURCES
+	kernel.cpp
     main.cpp
-    Kernel.cpp
 )
 
 register_executable(${PROJECT_NAME})

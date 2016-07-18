@@ -8,12 +8,16 @@
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////// 
 
-#ifndef PROCESSOR_H
-#define PROCESSOR_H
+#include "armcortex-a.h"
 
-class Processor {
-public:
-    static Processor& instance();
-};
+using namespace hal;
 
-#endif
+CPU& CPU::instance()
+{
+    static ARMCortexA object;
+    return object;
+}
+
+ARMCortexA::ARMCortexA()
+{
+}

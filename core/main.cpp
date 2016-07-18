@@ -8,11 +8,11 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <hal/Processor.h>
+#include <hal/cpu.h>
 
 int main()
 {
-    Processor::instance();
+    hal::CPU::instance();
 
     return 0;
 }

@@ -1,7 +1,7 @@
 set(SOURCES
-    ARMProcessor.cpp
-    MMU.cpp
-    Startup.s
+    armcortex-a.cpp
+    mmu.cpp
+    startup.s
 )
 
 register_module()

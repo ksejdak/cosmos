@@ -8,14 +8,16 @@
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////// 
 
-#include "ARMProcessor.h"
+#ifndef CPU_H
+#define CPU_H
 
-Processor& Processor::instance()
-{
-    static ARMProcessor object;
-    return object;
-}
+namespace hal {
 
-ARMProcessor::ARMProcessor()
-{
-}
+class CPU {
+public:
+    static CPU& instance();
+};
+
+} // namespace hal
+
+#endif
