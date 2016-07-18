@@ -6,13 +6,16 @@
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
-////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////// 
 
-#include <hal/Processor.h>
+#include "ARMProcessor.h"
 
-int main()
+Processor& Processor::instance()
 {
-    Processor::instance();
+    static ARMProcessor object;
+    return object;
+}
 
-    return 0;
+ARMProcessor::ARMProcessor()
+{
 }

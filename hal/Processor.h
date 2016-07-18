@@ -6,13 +6,14 @@
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
-////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////// 
 
-#include <hal/Processor.h>
+#ifndef PROCESSOR_H
+#define PROCESSOR_H
 
-int main()
-{
-    Processor::instance();
+class Processor {
+public:
+    static Processor& instance();
+};
 
-    return 0;
-}
+#endif

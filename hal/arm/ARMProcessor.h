@@ -6,13 +6,16 @@
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
-////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////// 
+
+#ifndef ARMPROCESSOR_H
+#define ARMPROCESSOR_H
 
 #include <hal/Processor.h>
 
-int main()
-{
-    Processor::instance();
+class ARMProcessor : public Processor {
+public:
+    ARMProcessor();
+};
 
-    return 0;
-}
+#endif

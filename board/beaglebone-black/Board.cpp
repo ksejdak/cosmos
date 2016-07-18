@@ -8,13 +8,12 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <stdint.h>
-
 // Disable function name mangling.
 extern "C" {
 
-void __attribute__ ((section (".boot"))) SystemInit()
+void __attribute__ ((section (".boot"))) board_init()
 {
+    /// @todo Initialize timer for scheduler.
 }
 
 } // extern "C"

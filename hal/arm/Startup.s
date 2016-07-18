@@ -13,7 +13,7 @@
     .func       _start
 
 _start:
-    cpsid   aif, #0x1f
+    // Initialize stack pointer.
     ldr     sp, =_stackStart_pa
 
     // Initialize registers for clearing .bss section.
@@ -26,8 +26,8 @@ _bssClear:
     strlo   r0, [r1], #4
     blo     _bssClear
 
-    blx     SystemInit
-    blx     BoardInit
+    blx     mmu_init
+    blx     board_init
 
     ldr     lr, =main
     bx      lr

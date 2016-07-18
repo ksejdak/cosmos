@@ -8,10 +8,12 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <stdint.h>
+
 // Disable function name mangling.
 extern "C" {
 
-void __attribute__ ((section (".boot"))) BoardInit()
+void __attribute__ ((section (".boot"))) mmu_init()
 {
 }
 

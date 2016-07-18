@@ -1,6 +1,7 @@
 set(SOURCES
+    ARMProcessor.cpp
+    MMU.cpp
     Startup.s
-    SystemInit.cpp
 )
 
 register_module()
