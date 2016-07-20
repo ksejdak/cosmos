@@ -1,5 +1,5 @@
 set(SOURCES
-    armcortex-a.cpp
+    armcortex_a.cpp
     mmu.cpp
     startup.s
 )
