@@ -11,13 +11,13 @@
 #ifndef CPU_H
 #define CPU_H
 
-namespace hal {
+namespace HAL {
 
 class CPU {
 public:
     static CPU& instance();
 };
 
-} // namespace hal
+} // namespace HAL
 
 #endif

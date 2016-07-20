@@ -2,8 +2,8 @@ OUTPUT_FORMAT("elf32-littlearm")
 ENTRY(_start)
 
 MEMORY {
-	ddr (rwx)      :      ORIGIN = 0x00000000, LENGTH = 512M       /* External DDR3 RAM */
-    sram (rwx)     :      ORIGIN = 0x402f0400, LENGTH = 32K        /* Internal on-chip SRAM */
+	ddr (rwx)      :      ORIGIN = 0x00000000, LENGTH = 512M                        /* External DDR3 RAM */
+    sram (rwx)     :      ORIGIN = 0x402f0400, LENGTH = (0x402fffff - 0x402f0400)   /* Internal on-chip SRAM */
 }
 
 _bootStart_va = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
@@ -21,16 +21,23 @@ SECTIONS {
     } AT > sram
 
     /* Kernel code. */
-    /* .text _textStart_va : */
-    .text : { /* TODO: change to above in future. */
+    .text : {
         *(.text)                /* .text sections (code). */
-        *(.text*)               /* .text* sections (code) - this will merge all symbols in .text into one section. */
-        *(.glue_7)              /* Glue arm to thumb code. */
-        *(.glue_7t)             /* Glue thumb to arm code. */
+        *(.text*)               /* .text* sections (code). */
+        *(.glue_7)              /* Glue ARM to Thumb code. */
+        *(.glue_7t)             /* Glue Thumb to ARM code. */
         *(.eh_frame)
         KEEP (*(.init))
         KEEP (*(.fini))
-    } AT > sram /* TODO: change to ddr in future. */
+    } AT > sram
+
+    /* Memory regions provided for kernel. */
+    .memory_regions : ALIGN(4) {
+		_memoryRegions_pa = .;
+	/*  Physical address    Total size          Used size */
+        LONG(ORIGIN(sram))  LONG(LENGTH(sram))  LONG(_heapStart_pa - ORIGIN(sram))
+        LONG(0)             LONG(0)             LONG(0)
+    } AT > sram
 
     /* Constructors and destructors. */
 	.ctors : {
@@ -38,14 +45,14 @@ SECTIONS {
 		KEEP (*(EXCLUDE_FILE (*crtend*.o ) .ctors))
 		KEEP (*(SORT(.ctors.*)))
 		KEEP (*(.ctors))
-	} AT > sram /* TODO: change to ddr in future. */
+	} AT > sram
 
 	.dtors : {
 		KEEP (*crtbegin*.o(.dtors))
 		KEEP (*(EXCLUDE_FILE (*crtend*.o ) .dtors))
 		KEEP (*(SORT(.dtors.*)))
 		KEEP (*(.dtors))
-	} AT > sram /* TODO: change to ddr in future. */
+	} AT > sram
 
     /* Data. */
 	.data : {
@@ -60,7 +67,7 @@ SECTIONS {
     } AT > sram = 0
 
 	/* BSS. */
-	.bss : {
+	.bss : ALIGN(4) {
 		_bssStart_pa = .;
 
 		*(.dynsbss)
@@ -81,4 +88,7 @@ SECTIONS {
 
 	/* Calculate physical addresses of .bss and .stack for startup code. */
 	_stackStart_pa = _bssEnd_pa + SIZEOF(.stack) - 4;
+
+	/* Heap. */
+	_heapStart_pa = .;
 }

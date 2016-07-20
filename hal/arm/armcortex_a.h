@@ -13,13 +13,13 @@
 
 #include <hal/cpu.h>
 
-namespace hal {
+namespace HAL {
 
 class ARMCortexA : public CPU {
 public:
     ARMCortexA();
 };
 
-} // namespace hal
+} // namespace HAL
 
 #endif

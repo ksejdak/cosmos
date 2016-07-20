@@ -10,7 +10,7 @@
 
 #include "armcortex_a.h"
 
-using namespace hal;
+using namespace HAL;
 
 CPU& CPU::instance()
 {

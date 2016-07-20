@@ -2,19 +2,21 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       16.07.2016
+/// @date       20.07.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <os/stdint.h>
+#ifndef UNIQUE_PTR_H
+#define UNIQUE_PTR_H
 
-// Disable function name mangling.
-extern "C" {
+namespace os {
 
-void __attribute__ ((section (".boot"))) mmu_init()
-{
-}
+class unique_ptr {
+public:
+};
 
-} // extern "C"
+} // namespace os
+
+#endif 

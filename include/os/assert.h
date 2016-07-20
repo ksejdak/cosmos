@@ -2,19 +2,15 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       16.07.2016
+/// @date       20.07.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <os/stdint.h>
+#ifndef ASSERT_H
+#define ASSERT_H
 
-// Disable function name mangling.
-extern "C" {
+#define os_assert(x)       do { if (!(x)) while (true); } while (false)
 
-void __attribute__ ((section (".boot"))) mmu_init()
-{
-}
-
-} // extern "C"
+#endif

@@ -8,11 +8,14 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <hal/cpu.h>
+#include <memory/regions.h>
+
+using namespace Memory;
 
 int main()
 {
-    hal::CPU::instance();
+    MemoryRegions& regions = MemoryRegions::instance();
+    int n = regions.getCount();
 
     return 0;
 }

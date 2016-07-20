@@ -22,6 +22,7 @@ project(${PROJECT_NAME} CXX C ASM)
 set(COSMOS_BOARD_PATH ${CMAKE_SOURCE_DIR}/board/${COSMOS_TARGET})
 set(COSMOS_CORE_PATH ${CMAKE_SOURCE_DIR}/core)
 set(COSMOS_HAL_PATH ${CMAKE_SOURCE_DIR}/hal/${COSMOS_ARCH})
+set(COSMOS_MEMORY_PATH ${CMAKE_SOURCE_DIR}/memory)
 
 #################################################################################################################
 # TOOLCHAIN SETTINGS
@@ -52,6 +53,7 @@ set(COMPONENTS
     board
     core
     hal
+    memory
 )
 
 register_packet()
