@@ -1,4 +1,5 @@
 set(SOURCES
+    page.cpp
     regions.cpp
 )
 

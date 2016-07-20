@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @file
+/// @author     Kuba Sejdak
+/// @date       20.07.2016
+///
+/// @copyright  This file is a part of cosmos OS. All rights reserved.
+///
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include "page.h"
+
+using namespace Memory;
+
+PhysicalPage::PhysicalPage(uint32_t physicalAddress)
+    : m_physicalAddress(physicalAddress)
+{
+}
