@@ -17,6 +17,17 @@ namespace Memory {
 
 class StaticPagePool : public IPagePool {
 public:
+    virtual bool init();
+
+    virtual PhysicalPage* allocatePage();
+    virtual void releasePage(PhysicalPage* page);
+
+    virtual int getPagesCount();
+
+private:
+    static int PAGE_POOL_PAGES_COUNT;
+
+    PhysicalPage m_staticPages[PAGE_POOL_PAGES_COUNT];
 };
 
 } // namespace Memory

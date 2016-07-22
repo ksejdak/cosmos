@@ -33,18 +33,18 @@ int MemoryRegions::getCount()
 
 uint32_t MemoryRegions::getPhysicalAddress(int index)
 {
-    os_assert(index < m_count);
+    assert(index < m_count);
     return regions[index].physicalAddress;
 }
 
 uint32_t MemoryRegions::getTotalSize(int index)
 {
-    os_assert(index < m_count);
+    assert(index < m_count);
     return regions[index].totalSize;
 }
 
 uint32_t MemoryRegions::getUsedSize(int index)
 {
-    os_assert(index < m_count);
+    assert(index < m_count);
     return regions[index].usedSize;
 }

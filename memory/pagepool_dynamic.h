@@ -17,6 +17,10 @@ namespace Memory {
 
 class DynamicPagePool : public IPagePool {
 public:
+    virtual bool init();
+
+    virtual PhysicalPage* allocatePage();
+    virtual void releasePage(PhysicalPage* page);
 };
 
 } // namespace Memory

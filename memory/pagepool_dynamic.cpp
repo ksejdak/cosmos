@@ -11,3 +11,17 @@
 #include "pagepool_dynamic.h"
 
 using namespace Memory;
+
+bool DynamicPagePool::init()
+{
+    return false;
+}
+
+PhysicalPage* DynamicPagePool::allocatePage()
+{
+    return nullptr;
+}
+
+void DynamicPagePool::releasePage(PhysicalPage* page)
+{
+}

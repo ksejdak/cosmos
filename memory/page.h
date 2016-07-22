@@ -17,10 +17,17 @@ namespace Memory {
 
 class PhysicalPage {
 public:
+    void* operator new(unsigned int size);
+
     PhysicalPage(uint32_t physicalAddress);
+    
+    bool isOccupied();
+    void setOccupied();
+    void setFree();
 
 private:
     uint32_t m_physicalAddress;
+    bool m_occupied;
 };
 
 } // namespace Memory
