@@ -25,7 +25,7 @@ public:
     virtual int getPagesCount();
 
 private:
-    static int PAGE_POOL_PAGES_COUNT;
+    static const int PAGE_POOL_PAGES_COUNT = 4;
 
     PhysicalPage m_staticPages[PAGE_POOL_PAGES_COUNT];
 };

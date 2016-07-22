@@ -10,9 +10,14 @@
 
 #include "allocator.h"
 
-using namespace Memory;
+namespace Memory {
+
+IAllocator* staticAllocator = nullptr;
+IAllocator* dynamicAllocator = nullptr;
 
 IAllocator::IAllocator(IPagePool* pagePool)
     : m_pagePool(pagePool)
 {
 }
+
+} // namespace Memory

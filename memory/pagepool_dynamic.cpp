@@ -10,7 +10,7 @@
 
 #include "pagepool_dynamic.h"
 
-using namespace Memory;
+namespace Memory {
 
 bool DynamicPagePool::init()
 {
@@ -25,3 +25,10 @@ PhysicalPage* DynamicPagePool::allocatePage()
 void DynamicPagePool::releasePage(PhysicalPage* page)
 {
 }
+
+int DynamicPagePool::getPagesCount()
+{
+    return 0;
+}
+
+} // namespace Memory

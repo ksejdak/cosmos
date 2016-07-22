@@ -8,14 +8,17 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <memory/allocator.h>
 #include <memory/regions.h>
 
 using namespace Memory;
 
 int main()
 {
+    IAllocator::init();
+
     MemoryRegions& regions = MemoryRegions::instance();
-    int n = regions.getCount();
+    regions.getCount();
 
     return 0;
 }

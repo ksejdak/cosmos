@@ -21,6 +21,8 @@ public:
 
     virtual PhysicalPage* allocatePage();
     virtual void releasePage(PhysicalPage* page);
+
+    virtual int getPagesCount();
 };
 
 } // namespace Memory

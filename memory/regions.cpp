@@ -12,9 +12,9 @@
 
 #include <os/assert.h>
 
-using namespace Memory;
-
 extern int _memoryRegions_pa;
+
+namespace Memory {
 
 MemoryRegions::MemoryRegions()
     : regions(nullptr)
@@ -48,3 +48,5 @@ uint32_t MemoryRegions::getUsedSize(int index)
     assert(index < m_count);
     return regions[index].usedSize;
 }
+
+} // namespace Memory

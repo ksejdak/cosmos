@@ -11,7 +11,6 @@
 #include <hal/mmu.h>
 #include <os/stdint.h>
 
-// Disable function name mangling.
 extern "C" {
 
 void __attribute__ ((section (".boot"))) mmu_init()
@@ -20,9 +19,12 @@ void __attribute__ ((section (".boot"))) mmu_init()
 
 } // extern "C"
 
-using namespace HAL;
+namespace HAL {
 
 int IMemoryManagementUnit::getPageSize()
 {
     return 4 * 1024;
 }
+
+} // namespace HAL
+

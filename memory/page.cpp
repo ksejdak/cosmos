@@ -9,18 +9,34 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "page.h"
+#include "buddy_allocator.h"
+#include "pagepool_static.h"
 
-using namespace Memory;
+namespace Memory {
 
 void* PhysicalPage::operator new(unsigned int size)
 {
     return nullptr;
 }
 
+void PhysicalPage::operator delete(void* pointer)
+{
+}
+
+PhysicalPage::PhysicalPage()
+    : PhysicalPage(0)
+{
+}
+
 PhysicalPage::PhysicalPage(uint32_t physicalAddress)
     : m_physicalAddress(physicalAddress)
     , m_occupied(false)
 {
+}
+
+uint32_t PhysicalPage::getPhysicalAddress()
+{
+    return m_physicalAddress;
 }
 
 bool PhysicalPage::isOccupied()
@@ -37,3 +53,5 @@ void PhysicalPage::setFree()
 {
     m_occupied = false;
 }
+
+} // namespace Memory

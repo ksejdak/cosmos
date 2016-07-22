@@ -18,9 +18,12 @@ namespace Memory {
 class PhysicalPage {
 public:
     void* operator new(unsigned int size);
+    void operator delete(void* pointer);
 
+    PhysicalPage();
     PhysicalPage(uint32_t physicalAddress);
-    
+
+    uint32_t getPhysicalAddress();
     bool isOccupied();
     void setOccupied();
     void setFree();

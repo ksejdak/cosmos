@@ -19,14 +19,20 @@ namespace Memory {
 
 class IAllocator {
 public:
-    IAllocator(IPagePool* pagePool);
+    static void init();
 
     virtual void* allocate(uint32_t size) = 0;
     virtual void release(void *memoryChunk) = 0;
 
 protected:
+    IAllocator(IPagePool* pagePool);
+
+protected:
     IPagePool* m_pagePool;
 };
+
+extern IAllocator* staticAllocator;
+extern IAllocator* dynamicAllocator;
 
 } // namespace Memory
 

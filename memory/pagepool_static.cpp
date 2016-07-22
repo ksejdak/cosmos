@@ -9,18 +9,21 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "pagepool_static.h"
+
 #include <hal/mmu.h>
 #include <os/assert.h>
 
-using namespace Memory;
+using namespace HAL;
 
 extern int _pagePoolSize;
 
-int StaticPagePool::PAGE_POOL_PAGES_COUNT = _pagePoolSize / IMemoryManagementUnit::getPageSize();
+namespace Memory {
 
 bool StaticPagePool::init()
 {
-    // Nothing fancy to do here.
+    int realPoolSize = _pagePoolSize / IMemoryManagementUnit::getPageSize();
+    assert(PAGE_POOL_PAGES_COUNT == realPoolSize);
+
     return true;
 }
 
@@ -39,7 +42,7 @@ PhysicalPage* StaticPagePool::allocatePage()
 void StaticPagePool::releasePage(PhysicalPage* page)
 {
     for (int i = 0; i < PAGE_POOL_PAGES_COUNT; ++i) {
-        if (m_staticPages[i].physicalAddress() == page->physicalAddress()) {
+        if (m_staticPages[i].getPhysicalAddress() == page->getPhysicalAddress()) {
             page->setFree();
             return;
         }
@@ -52,3 +55,5 @@ int StaticPagePool::getPagesCount()
 {
     return PAGE_POOL_PAGES_COUNT;
 }
+
+} // namespace Memory

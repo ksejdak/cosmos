@@ -2,17 +2,19 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       16.07.2016
+/// @date       21.07.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <os/assert.h>
+
 extern "C" {
 
-void __attribute__ ((section (".boot"))) board_init()
+void __cxa_pure_virtual()
 {
-    /// @todo Initialize timer for scheduler.
+    assert(false);
 }
 
 } // extern "C"
