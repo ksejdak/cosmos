@@ -23,6 +23,7 @@ macro(set_toolchain ARCH)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-unwind-tables")    # Disable C++ exceptions support, because it requires libc.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")                             # Disable C++ run time information, because it requires libc.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-threadsafe-statics")               # Do not produce code to initialize statics in thread-safe way.
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcheck-new")                           # Allow returning nullptr from operator new.
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
         set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -Werror")
     endif()

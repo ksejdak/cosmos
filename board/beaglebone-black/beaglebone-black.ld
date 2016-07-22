@@ -8,6 +8,7 @@ MEMORY {
 
 _bootStart_va = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
 _textStart_va = 0x80000000;   /* Kernel .text starts at 2 GB. */
+_pagePoolSize = 0x4000;       /* Static page pool has size of 16 KB (4 pages).*/
 _stackSize    = 0x1000;       /* Stack size is 4KB.*/
 
 SECTIONS {
@@ -65,6 +66,11 @@ SECTIONS {
         *(.rodata .rodata.* .gnu.linkonce.r.*)
         *(.rodata1)
     } AT > sram = 0
+
+	/* Static page pool. */
+	.pagePool : ALIGN(4) {
+        . += _pagePoolSize;
+	} AT > sram = 0
 
 	/* BSS. */
 	.bss : ALIGN(4) {

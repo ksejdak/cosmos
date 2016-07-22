@@ -53,6 +53,7 @@ set(COMPONENTS
     board
     core
     hal
+    lib
     memory
 )
 
