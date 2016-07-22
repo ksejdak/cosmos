@@ -2,27 +2,22 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       16.07.2016
+/// @date       21.07.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <hal/mmu.h>
-#include <os/stdint.h>
+#ifndef MMU_H
+#define MMU_H
 
-// Disable function name mangling.
-extern "C" {
+namespace HAL {
 
-void __attribute__ ((section (".boot"))) mmu_init()
-{
-}
+class IMemoryManagementUnit {
+public:
+    static int getPageSize();
+};
 
-} // extern "C"
+} // namespace HAL
 
-using namespace HAL;
-
-int IMemoryManagementUnit::getPageSize()
-{
-    return 4 * 1024;
-}
+#endif
