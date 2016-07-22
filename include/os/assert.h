@@ -11,6 +11,6 @@
 #ifndef ASSERT_H
 #define ASSERT_H
 
-#define os_assert(x)       do { if (!(x)) while (true); } while (false)
+#define assert(x)       do { if (!(x)) while (true); } while (false)
 
 #endif
