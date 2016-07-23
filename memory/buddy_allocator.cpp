@@ -13,10 +13,13 @@
 #include "pagepool_static.h"
 
 #include <hal/mmu.h>
+#include <os/assert.h>
 
 using namespace HAL;
 
 namespace Memory {
+
+static const uint32_t MEMORY_CHUNK_DESC_MAGIC = 0x08081990;
 
 void IAllocator::init()
 {
@@ -36,11 +39,20 @@ BuddyAllocator::BuddyAllocator(IPagePool* pagePool)
 
 void* BuddyAllocator::allocate(uint32_t size)
 {
+    if (size == 0)
+        return nullptr;
+
+    uint32_t totalSize = size + sizeof(MemoryChunkDesc);
     return nullptr;
 }
 
 void BuddyAllocator::release(void *memoryChunk)
 {
+    if (memoryChunk == nullptr)
+        return;
+
+    MemoryChunkDesc* desc = memoryChunk - sizeof(MemoryChunkDesc);
+    assert(desc->magic == MEMORY_CHUNK_DESC_MAGIC);
 }
 
 } // namespace Memory

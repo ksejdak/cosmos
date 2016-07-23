@@ -22,6 +22,12 @@ public:
 
     virtual void* allocate(uint32_t size);
     virtual void release(void *memoryChunk);
+
+private:
+    struct __attribute__((packed)) MemoryChunkDesc {
+        uint32_t magic;
+        uint32_t size;
+    };
 };
 
 } // namespace Memory
