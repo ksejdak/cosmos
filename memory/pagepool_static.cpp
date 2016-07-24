@@ -21,8 +21,8 @@ namespace Memory {
 
 bool StaticPagePool::init()
 {
-    int realPoolSize = _pagePoolSize / IMemoryManagementUnit::getPageSize();
-    assert(PAGE_POOL_PAGES_COUNT == realPoolSize);
+    int realPoolPagesCount = _pagePoolSize / IMemoryManagementUnit::getPageSize();
+    assert(PAGE_POOL_PAGES_COUNT == realPoolPagesCount);
 
     return true;
 }
