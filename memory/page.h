@@ -11,11 +11,12 @@
 #ifndef PAGE_H
 #define PAGE_H
 
+#include <os/chain.h>
 #include <os/stdint.h>
 
 namespace Memory {
 
-class PhysicalPage {
+class PhysicalPage : public os::IChainable<PhysicalPage> {
 public:
     void* operator new(unsigned int size);
     void operator delete(void* pointer);

@@ -13,14 +13,16 @@
 
 #include "page.h"
 
+#include <os/chain.h>
+
 namespace Memory {
 
 class IPagePool {
 public:
     virtual bool init() = 0;
 
-    virtual PhysicalPage* allocatePage() = 0;
-    virtual void releasePage(PhysicalPage* page) = 0;
+    virtual os::chain<PhysicalPage*> allocatePage() = 0;
+    virtual void releasePage(os::chain<PhysicalPage*>& pages) = 0;
 
     virtual int getPagesCount() = 0;
 };
