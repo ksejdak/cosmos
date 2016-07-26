@@ -43,6 +43,9 @@ void* BuddyAllocator::allocate(uint32_t size)
         return nullptr;
 
     uint32_t totalSize = size + sizeof(MemoryChunkDesc);
+    int wholePages = totalSize / IMemoryManagementUnit::getPageSize();
+    uint32_t remainingSize = totalSize / IMemoryManagementUnit::getPageSize();
+
     return nullptr;
 }
 
@@ -51,7 +54,7 @@ void BuddyAllocator::release(void *memoryChunk)
     if (memoryChunk == nullptr)
         return;
 
-    MemoryChunkDesc* desc = memoryChunk - sizeof(MemoryChunkDesc);
+    MemoryChunkDesc* desc = reinterpret_cast<MemoryChunkDesc*>((char*) memoryChunk - sizeof(MemoryChunkDesc));
     assert(desc->magic == MEMORY_CHUNK_DESC_MAGIC);
 }
 
