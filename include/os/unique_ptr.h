@@ -106,7 +106,7 @@ void unique_ptr::reset(T* pointer)
 template <typename T>
 T* unique_ptr::release()
 {
-    T* tmp = m_pointer
+    T* tmp = m_pointer;
     m_pointer = nullptr;
     return tmp;
 }

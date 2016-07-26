@@ -16,6 +16,15 @@
 namespace os {
 
 template <typename T>
+class IChainable {
+public:
+    IChainable() : next(nullptr) {}
+
+public:
+    T* next;
+};
+
+template <typename T>
 class chain {
 public:
     chain();
@@ -40,14 +49,14 @@ private:
 };
 
 template <typename T>
-chain::chain()
+chain<T>::chain()
     : m_head(nullptr)
     , m_size(0)
 {
 }
 
 template <typename T>
-chain::chain(T* pointer)
+chain<T>::chain(T* pointer)
     : m_head(pointer)
     , m_size(0)
 {
@@ -55,38 +64,99 @@ chain::chain(T* pointer)
 }
 
 template <typename T>
-chain::chain(const chain& other)
+chain<T>::chain(const chain& other)
     : m_head(other.m_head)
 {
     const_cast<chain&>(other).m_head = nullptr;
 }
 
 template <typename T>
-T& chain::operator[](const int index)
+T& chain<T>::operator[](const int index)
 {
     return const_cast<T&>(static_cast<chain&>(*this)[index]);
 }
 
 template <typename T>
-const T& chain::operator[](const int index) const
+const T& chain<T>::operator[](const int index) const
 {
     assert(index < m_size);
 
     T* it = m_head;
-	for (int i = 0; i != index; it = it->next, ++i);
+    for (int i = 0; i != index; ++i, it = it->next);
 	
 	return *it;
 }
 
-void push_front(T* pointer);
-void push_back(T* pointer);
-T* pop_front();
-T* pop_back();
-void insert(T* pointer, int index);
-T* remove(int index);
+template <typename T>
+void chain<T>::push_front(T* pointer)
+{
+    insert(pointer, 0);
+}
 
 template <typename T>
-unsigned int chain::size()
+void chain<T>::push_back(T* pointer)
+{
+    insert(pointer, size());
+}
+
+template <typename T>
+T* chain<T>::pop_front()
+{
+    return remove(0);
+}
+
+template <typename T>
+T* chain<T>::pop_back()
+{
+    return remove(size() - 1);
+}
+
+template <typename T>
+void chain<T>::insert(T* pointer, int index)
+{
+    // Less or equal, because we may be inserting as last element.
+    assert(index <= m_size);
+
+    pointer->next = nullptr;
+    ++m_size;
+
+    if (index == 0) {
+        pointer->next = m_head;
+        m_head = pointer;
+        return;
+    }
+
+    T* it = m_head;
+    for (int i = 0; i != (index - 1); ++i, it = it->next);
+
+    pointer->next = it->next;
+    it->next = pointer;
+}
+
+template <typename T>
+T* chain<T>::remove(int index)
+{
+    assert(index < m_size);
+
+    --m_size;
+
+    if (index == 0) {
+        T* result = m_head;
+        m_head = m_head->next;
+        result->next = nullptr;
+        return result;
+    }
+
+    T* it = m_head;
+    for (int i = 0; i != (index - 1); ++i, it = it->next);
+
+    T* result = it->next;
+    it->next = it->next->next;
+    return result;
+}
+
+template <typename T>
+unsigned int chain<T>::size()
 {
     return m_size;
 }
