@@ -20,17 +20,17 @@ class unique_ptr {
 public:
     unique_ptr();
     explicit unique_ptr(T* pointer);
-    unique_ptr(const unique_ptr& other);
+    unique_ptr(const unique_ptr<T>& other);
     ~unique_ptr();
 
-    unique_ptr& operator=(unique_ptr& other);
+    unique_ptr<T>& operator=(unique_ptr<T>& other);
     operator bool() const;
     T& operator*() const;
     T* operator->() const;
 
     void reset();
     void reset(T* pointer);
-    void release();
+    T* release();
     T* get() const;
 
 private:
@@ -38,73 +38,73 @@ private:
 };
 
 template <typename T>
-unique_ptr::unique_ptr()
+unique_ptr<T>::unique_ptr()
     : m_pointer(nullptr)
 {
 }
 
 template <typename T>
-unique_ptr::unique_ptr(T* pointer)
+unique_ptr<T>::unique_ptr(T* pointer)
     : m_pointer(pointer)
 {
 }
 
 template <typename T>
-unique_ptr::unique_ptr(const unique_ptr& other)
+unique_ptr<T>::unique_ptr(const unique_ptr<T>& other)
     : m_pointer(other.m_pointer)
 {
-    const_cast<unique_ptr&>(other).m_pointer = nullptr;
+    const_cast<unique_ptr<T>&>(other).m_pointer = nullptr;
 }
 
 template <typename T>
-unique_ptr& unique_ptr::operator=(unique_ptr& other)
+unique_ptr<T>& unique_ptr<T>::operator=(unique_ptr<T>& other)
 {
     reset(other.release());
     return *this;
 }
 
 template <typename T>
-unique_ptr::operator bool() const
+unique_ptr<T>::operator bool() const
 {
     return (m_pointer != nullptr);
 }
 
 template <typename T>
-T& unique_ptr::operator*() const
+T& unique_ptr<T>::operator*() const
 {
     assert(m_pointer != nullptr);
     return *m_pointer;
 }
 
 template <typename T>
-T* unique_ptr::operator->() const
+T* unique_ptr<T>::operator->() const
 {
     assert(m_pointer != nullptr);
     return m_pointer;
 }
 
 template <typename T>
-unique_ptr::~unique_ptr()
+unique_ptr<T>::~unique_ptr()
 {
     delete m_pointer;
 }
 
 template <typename T>
-void unique_ptr::reset()
+void unique_ptr<T>::reset()
 {
     delete m_pointer;
     m_pointer = nullptr;
 }
 
 template <typename T>
-void unique_ptr::reset(T* pointer)
+void unique_ptr<T>::reset(T* pointer)
 {
     reset();
     m_pointer = pointer;
 }
 
 template <typename T>
-T* unique_ptr::release()
+T* unique_ptr<T>::release()
 {
     T* tmp = m_pointer;
     m_pointer = nullptr;
@@ -112,7 +112,7 @@ T* unique_ptr::release()
 }
 
 template <typename T>
-T* unique_ptr::get() const
+T* unique_ptr<T>::get() const
 {
     return m_pointer;
 }
