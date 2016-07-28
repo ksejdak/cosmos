@@ -19,13 +19,11 @@ class StaticPagePool : public IPagePool {
 public:
     virtual bool init();
 
-    virtual PhysicalPage* allocatePage();
-    virtual void releasePage(PhysicalPage* page);
-
-    virtual int getPagesCount();
+    virtual os::chain<PhysicalPage> allocatePages(unsigned int count);
+    virtual void releasePages(os::chain<PhysicalPage>& pages);
 
 private:
-    static const int PAGE_POOL_PAGES_COUNT = 4;
+    static const unsigned int PAGE_POOL_PAGES_COUNT = 4;
 
     PhysicalPage m_staticPages[PAGE_POOL_PAGES_COUNT];
 };

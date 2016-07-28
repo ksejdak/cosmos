@@ -19,12 +19,18 @@ namespace Memory {
 
 class IPagePool {
 public:
+    IPagePool();
+
     virtual bool init() = 0;
+    virtual os::chain<PhysicalPage> allocatePages(unsigned int count) = 0;
+    virtual void releasePages(os::chain<PhysicalPage>& pages) = 0;
 
-    virtual os::chain<PhysicalPage*> allocatePage() = 0;
-    virtual void releasePage(os::chain<PhysicalPage*>& pages) = 0;
+    unsigned int getPagesCount();
+    unsigned int getFreePagesCount();
 
-    virtual int getPagesCount() = 0;
+protected:
+    unsigned int m_pagesCount;
+    unsigned int m_freePagesCount;
 };
 
 } // namespace Memory

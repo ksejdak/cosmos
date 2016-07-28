@@ -17,18 +17,13 @@ bool DynamicPagePool::init()
     return false;
 }
 
-PhysicalPage* DynamicPagePool::allocatePage()
+os::chain<PhysicalPage> DynamicPagePool::allocatePages(unsigned int count)
 {
-    return nullptr;
+    return os::chain<PhysicalPage>();
 }
 
-void DynamicPagePool::releasePage(PhysicalPage* page)
+void DynamicPagePool::releasePages(os::chain<PhysicalPage>& pages)
 {
-}
-
-int DynamicPagePool::getPagesCount()
-{
-    return 0;
 }
 
 } // namespace Memory

@@ -2,7 +2,7 @@ set(SOURCES
 	allocator.cpp
 	buddy_allocator.cpp
     page.cpp
-    pagepool.h
+    pagepool.cpp
     pagepool_dynamic.cpp
     pagepool_static.cpp
     regions.cpp

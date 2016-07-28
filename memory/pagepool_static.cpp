@@ -24,36 +24,40 @@ bool StaticPagePool::init()
     int realPoolPagesCount = _pagePoolSize / IMemoryManagementUnit::getPageSize();
     assert(PAGE_POOL_PAGES_COUNT == realPoolPagesCount);
 
+    m_pagesCount = realPoolPagesCount;
+    m_freePagesCount = m_pagesCount;
     return true;
 }
 
-PhysicalPage* StaticPagePool::allocatePage()
+os::chain<PhysicalPage> StaticPagePool::allocatePages(unsigned int count)
 {
-    for (int i = 0; i < PAGE_POOL_PAGES_COUNT; ++i) {
-        if (!m_staticPages[i].isOccupied()) {
-            m_staticPages[i].setOccupied();
-            return &m_staticPages[i];
+    os::chain<PhysicalPage> pages;
+    if (m_freePagesCount < count)
+        return pages;
+
+    for (unsigned int i = 0; i < count; ++i) {
+        for (unsigned int j = 0; j < m_pagesCount; ++j) {
+            if (!m_staticPages[j].isOccupied()) {
+                m_staticPages[j].setOccupied();
+                pages.push_back(&m_staticPages[j]);
+            }
         }
     }
 
-    return nullptr;
+    return pages;
 }
 
-void StaticPagePool::releasePage(PhysicalPage* page)
+void StaticPagePool::releasePages(os::chain<PhysicalPage>& pages)
 {
-    for (int i = 0; i < PAGE_POOL_PAGES_COUNT; ++i) {
-        if (m_staticPages[i].getPhysicalAddress() == page->getPhysicalAddress()) {
-            page->setFree();
-            return;
+    while (pages.size() > 0) {
+        for (unsigned int i = 0; i < m_pagesCount; ++i) {
+            if (m_staticPages[i].getPhysicalAddress() != pages[i]->getPhysicalAddress())
+                assert(false);
+
+            pages[i]->setFree();
+            pages.pop_back();
         }
     }
-
-    assert(false);
-}
-
-int StaticPagePool::getPagesCount()
-{
-    return PAGE_POOL_PAGES_COUNT;
 }
 
 } // namespace Memory
