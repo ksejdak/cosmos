@@ -31,15 +31,15 @@ public:
     explicit chain(T* pointer);
     chain(const chain& other);
 
-    T* operator[](const int index);
-	const T* operator[](const int index) const;
+    T* operator[](const unsigned int index);
+    const T* operator[](const unsigned int index) const;
 
     void push_front(T* pointer);
     void push_back(T* pointer);
     T* pop_front();
     T* pop_back();
-    void insert(T* pointer, int index);
-    T* remove(int index);
+    void insert(T* pointer, unsigned int index);
+    T* remove(unsigned int index);
 
     unsigned int size();
 
@@ -72,18 +72,18 @@ chain<T>::chain(const chain<T>& other)
 }
 
 template <typename T>
-T* chain<T>::operator[](const int index)
+T* chain<T>::operator[](const unsigned int index)
 {
 	return const_cast<T*>(static_cast<const chain<T>&>(*this)[index]);
 }
 
 template <typename T>
-const T* chain<T>::operator[](const int index) const
+const T* chain<T>::operator[](const unsigned int index) const
 {
     assert(index < m_size);
 
     T* it = m_head;
-    for (int i = 0; i != index; ++i, it = it->next);
+    for (unsigned int i = 0; i != index; ++i, it = it->next);
 	
 	return it;
 }
@@ -113,7 +113,7 @@ T* chain<T>::pop_back()
 }
 
 template <typename T>
-void chain<T>::insert(T* pointer, int index)
+void chain<T>::insert(T* pointer, unsigned int index)
 {
     // Less or equal, because we may be inserting as last element.
     assert(index <= m_size);
@@ -128,14 +128,14 @@ void chain<T>::insert(T* pointer, int index)
     }
 
     T* it = m_head;
-    for (int i = 0; i != (index - 1); ++i, it = it->next);
+    for (unsigned int i = 0; i != (index - 1); ++i, it = it->next);
 
     pointer->next = it->next;
     it->next = pointer;
 }
 
 template <typename T>
-T* chain<T>::remove(int index)
+T* chain<T>::remove(unsigned int index)
 {
     assert(index < m_size);
 
@@ -149,7 +149,7 @@ T* chain<T>::remove(int index)
     }
 
     T* it = m_head;
-    for (int i = 0; i != (index - 1); ++i, it = it->next);
+    for (unsigned int i = 0; i != (index - 1); ++i, it = it->next);
 
     T* result = it->next;
     it->next = it->next->next;
