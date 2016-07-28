@@ -31,8 +31,8 @@ public:
     explicit chain(T* pointer);
     chain(const chain& other);
 
-    T& operator[](const int index);
-	const T& operator[](const int index) const;
+    T* operator[](const int index);
+	const T* operator[](const int index) const;
 
     void push_front(T* pointer);
     void push_back(T* pointer);
@@ -64,27 +64,28 @@ chain<T>::chain(T* pointer)
 }
 
 template <typename T>
-chain<T>::chain(const chain& other)
+chain<T>::chain(const chain<T>& other)
     : m_head(other.m_head)
 {
-    const_cast<chain&>(other).m_head = nullptr;
+    const_cast<chain<T>&>(other).m_head = nullptr;
+	const_cast<chain<T>&>(other).m_size = 0;
 }
 
 template <typename T>
-T& chain<T>::operator[](const int index)
+T* chain<T>::operator[](const int index)
 {
-    return const_cast<T&>(static_cast<chain&>(*this)[index]);
+	return const_cast<T*>(static_cast<const chain<T>&>(*this)[index]);
 }
 
 template <typename T>
-const T& chain<T>::operator[](const int index) const
+const T* chain<T>::operator[](const int index) const
 {
     assert(index < m_size);
 
     T* it = m_head;
     for (int i = 0; i != index; ++i, it = it->next);
 	
-	return *it;
+	return it;
 }
 
 template <typename T>
