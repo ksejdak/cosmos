@@ -29,7 +29,7 @@ class chain {
 public:
     chain();
     explicit chain(T* pointer);
-    chain(const chain& other);
+    chain(const chain<T>& other);
 
     T* operator[](const unsigned int index);
     const T* operator[](const unsigned int index) const;
@@ -39,6 +39,7 @@ public:
     T* pop_front();
     T* pop_back();
     void insert(T* pointer, unsigned int index);
+    void insert(chain<T>& other);
     T* remove(unsigned int index);
 
     unsigned int size();
@@ -132,6 +133,13 @@ void chain<T>::insert(T* pointer, unsigned int index)
 
     pointer->next = it->next;
     it->next = pointer;
+}
+
+template <typename T>
+void chain<T>::insert(chain<T>& other)
+{
+    while (other.size() > 0)
+        push_back(other.pop_front());
 }
 
 template <typename T>
