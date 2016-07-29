@@ -21,7 +21,7 @@ void __attribute__ ((section (".boot"))) mmu_init()
 
 namespace HAL {
 
-int IMemoryManagementUnit::getPageSize()
+int IMMU::getPageSize()
 {
     return 4 * 1024;
 }

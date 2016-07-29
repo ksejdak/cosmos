@@ -43,8 +43,8 @@ void* BuddyAllocator::allocate(uint32_t size)
         return nullptr;
 
     uint32_t totalSize = size + sizeof(MemoryChunkDesc);
-    unsigned int wholePages = totalSize / IMemoryManagementUnit::getPageSize();
-    uint32_t remainingSize = totalSize - (wholePages * IMemoryManagementUnit::getPageSize());
+    unsigned int wholePages = totalSize / IMMU::getPageSize();
+    uint32_t remainingSize = totalSize - (wholePages * IMMU::getPageSize());
 
     return nullptr;
 }

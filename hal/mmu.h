@@ -13,7 +13,7 @@
 
 namespace HAL {
 
-class IMemoryManagementUnit {
+class IMMU {
 public:
     static int getPageSize();
 };
