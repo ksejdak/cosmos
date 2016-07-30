@@ -16,13 +16,14 @@
 
 namespace Memory {
 
-class PhysicalPage : public os::IChainable<PhysicalPage> {
+class Page : public os::IChainable<Page> {
 public:
+    // Pages should be allocated by static allocator.
     void* operator new(unsigned int size);
     void operator delete(void* pointer);
 
-    PhysicalPage();
-    PhysicalPage(uint32_t physicalAddress);
+    Page();
+    Page(uint32_t physicalAddress);
 
     uint32_t getPhysicalAddress();
     bool isOccupied();

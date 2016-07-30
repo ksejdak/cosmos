@@ -22,8 +22,8 @@ public:
     IPagePool();
 
     virtual bool init() = 0;
-    virtual os::chain<PhysicalPage> allocatePages(unsigned int count) = 0;
-    virtual void releasePages(os::chain<PhysicalPage>& pages) = 0;
+    virtual os::chain<Page> allocatePages(unsigned int count) = 0;
+    virtual void releasePages(os::chain<Page>& pages) = 0;
 
     unsigned int getPagesCount();
     unsigned int getFreePagesCount();

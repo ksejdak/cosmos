@@ -17,12 +17,12 @@ bool DynamicPagePool::init()
     return false;
 }
 
-os::chain<PhysicalPage> DynamicPagePool::allocatePages(unsigned int count)
+os::chain<Page> DynamicPagePool::allocatePages(unsigned int count)
 {
-    return os::chain<PhysicalPage>();
+    return os::chain<Page>();
 }
 
-void DynamicPagePool::releasePages(os::chain<PhysicalPage>& pages)
+void DynamicPagePool::releasePages(os::chain<Page>& pages)
 {
 }
 

@@ -19,13 +19,13 @@ class StaticPagePool : public IPagePool {
 public:
     virtual bool init();
 
-    virtual os::chain<PhysicalPage> allocatePages(unsigned int count);
-    virtual void releasePages(os::chain<PhysicalPage>& pages);
+    virtual os::chain<Page> allocatePages(unsigned int count);
+    virtual void releasePages(os::chain<Page>& pages);
 
 private:
-    static const unsigned int PAGE_POOL_PAGES_COUNT = 4;
+    static const unsigned int PAGES_COUNT = 4;
 
-    PhysicalPage m_staticPages[PAGE_POOL_PAGES_COUNT];
+    Page m_staticPages[PAGES_COUNT];
 };
 
 } // namespace Memory

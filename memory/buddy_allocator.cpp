@@ -19,7 +19,38 @@ using namespace HAL;
 
 namespace Memory {
 
-static const uint32_t MEMORY_CHUNK_DESC_MAGIC = 0x08081990;
+static const uint32_t MEMORY_CHUNK_MAGIC = 0x08081990;
+
+MemoryChunk::MemoryChunk(uint32_t virtualAddress, uint16_t size)
+    : m_magic(MEMORY_CHUNK_MAGIC)
+    , m_virtualAddress(virtualAddress)
+    , m_size(size)
+{
+}
+
+MemoryChunk::MemoryChunk(void* pointer)
+{
+    MemoryChunk* chunk = reinterpret_cast<MemoryChunk*>(pointer);
+
+    m_magic = chunk->getMagic();
+    m_virtualAddress = chunk->getVirtualAddress();
+    m_size = chunk->getSize();
+}
+
+uint32_t MemoryChunk::getMagic()
+{
+    return m_magic;
+}
+
+uint32_t MemoryChunk::getVirtualAddress()
+{
+    return m_virtualAddress;
+}
+
+uint16_t MemoryChunk::getSize()
+{
+    return m_size;
+}
 
 void IAllocator::init()
 {
@@ -42,9 +73,26 @@ void* BuddyAllocator::allocate(uint32_t size)
     if (size == 0)
         return nullptr;
 
-    uint32_t totalSize = size + sizeof(MemoryChunkDesc);
-    unsigned int wholePages = totalSize / IMMU::getPageSize();
-    uint32_t remainingSize = totalSize - (wholePages * IMMU::getPageSize());
+    // Find chunk size, that will suit best for this allocation.
+    uint32_t remainingSize = size;
+    do {
+        // Each chunk will need its descriptor, so add it to allocation size.
+        remainingSize += sizeof(MemoryChunk);
+        if (remainingSize > IMMU::getPageSize()) {
+            m_allocatedPages.insert(m_pagePool->allocatePages(1));
+
+        }
+
+
+        for (int i = 0; i < MEMORY_CHUNK_FACTOR; ++i) {
+            int chunkSize = 1 << i;
+            if (chunkSize <= remainingSize) {
+
+                return cos;
+            }
+        }
+    }
+    while (remainingSize > 0);
 
     return nullptr;
 }
@@ -54,8 +102,8 @@ void BuddyAllocator::release(void *memoryChunk)
     if (memoryChunk == nullptr)
         return;
 
-    MemoryChunkDesc* desc = reinterpret_cast<MemoryChunkDesc*>((char*) memoryChunk - sizeof(MemoryChunkDesc));
-    assert(desc->magic == MEMORY_CHUNK_DESC_MAGIC);
+    MemoryChunk* chunk = reinterpret_cast<MemoryChunk*>((char*) memoryChunk - sizeof(MemoryChunk));
+    assert(chunk->getMagic() == MEMORY_CHUNK_MAGIC);
 }
 
 } // namespace Memory

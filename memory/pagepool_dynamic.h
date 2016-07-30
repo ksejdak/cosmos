@@ -19,8 +19,8 @@ class DynamicPagePool : public IPagePool {
 public:
     virtual bool init();
 
-    virtual os::chain<PhysicalPage> allocatePages(unsigned int count);
-    virtual void releasePages(os::chain<PhysicalPage>& pages);
+    virtual os::chain<Page> allocatePages(unsigned int count);
+    virtual void releasePages(os::chain<Page>& pages);
 };
 
 } // namespace Memory

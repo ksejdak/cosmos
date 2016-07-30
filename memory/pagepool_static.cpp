@@ -22,16 +22,16 @@ namespace Memory {
 bool StaticPagePool::init()
 {
     int realPoolPagesCount = _pagePoolSize / IMMU::getPageSize();
-    assert(PAGE_POOL_PAGES_COUNT == realPoolPagesCount);
+    assert(PAGES_COUNT == realPoolPagesCount);
 
     m_pagesCount = realPoolPagesCount;
     m_freePagesCount = m_pagesCount;
     return true;
 }
 
-os::chain<PhysicalPage> StaticPagePool::allocatePages(unsigned int count)
+os::chain<Page> StaticPagePool::allocatePages(unsigned int count)
 {
-    os::chain<PhysicalPage> pages;
+    os::chain<Page> pages;
     if (m_freePagesCount < count)
         return pages;
 
@@ -47,7 +47,7 @@ os::chain<PhysicalPage> StaticPagePool::allocatePages(unsigned int count)
     return pages;
 }
 
-void StaticPagePool::releasePages(os::chain<PhysicalPage>& pages)
+void StaticPagePool::releasePages(os::chain<Page>& pages)
 {
     while (pages.size() > 0) {
         for (unsigned int i = 0; i < m_pagesCount; ++i) {
