@@ -28,21 +28,26 @@ template <typename T>
 class chain {
 public:
     chain();
-    explicit chain(T* pointer);
+    explicit chain(T* object);
     chain(const chain<T>& other);
 
     T* operator[](const unsigned int index);
     const T* operator[](const unsigned int index) const;
+    T* front();
+    const T* front() const;
+    T* back();
+    const T* back() const;
 
-    void push_front(T* pointer);
-    void push_back(T* pointer);
+    void push_front(T* object);
+    void push_back(T* object);
     T* pop_front();
     T* pop_back();
-    void insert(T* pointer, unsigned int index);
+    void insert(T* object, unsigned int index);
     void insert(chain<T>& other);
     T* remove(unsigned int index);
 
     unsigned int size();
+    int indexOf(T* object);
 
 private:
     T* m_head;
@@ -57,8 +62,8 @@ chain<T>::chain()
 }
 
 template <typename T>
-chain<T>::chain(T* pointer)
-    : m_head(pointer)
+chain<T>::chain(T* object)
+    : m_head(object)
     , m_size(0)
 {
     for (T* it = m_head; it != nullptr; it = it->next, ++m_size);
@@ -90,15 +95,42 @@ const T* chain<T>::operator[](const unsigned int index) const
 }
 
 template <typename T>
-void chain<T>::push_front(T* pointer)
+T* chain<T>::front()
 {
-    insert(pointer, 0);
+    return const_cast<T*>(static_cast<const chain<T>&>(*this).front());
 }
 
 template <typename T>
-void chain<T>::push_back(T* pointer)
+const T* chain<T>::front() const
 {
-    insert(pointer, size());
+    return m_head;
+}
+
+template <typename T>
+T* chain<T>::back()
+{
+    return const_cast<T*>(static_cast<const chain<T>&>(*this).back());
+}
+
+template <typename T>
+const T* chain<T>::back() const
+{
+    T* it = m_head;
+    for (; it->next != nullptr; it = it->next);
+
+    return it;
+}
+
+template <typename T>
+void chain<T>::push_front(T* object)
+{
+    insert(object, 0);
+}
+
+template <typename T>
+void chain<T>::push_back(T* object)
+{
+    insert(object, size());
 }
 
 template <typename T>
@@ -114,25 +146,25 @@ T* chain<T>::pop_back()
 }
 
 template <typename T>
-void chain<T>::insert(T* pointer, unsigned int index)
+void chain<T>::insert(T* object, unsigned int index)
 {
     // Less or equal, because we may be inserting as last element.
     assert(index <= m_size);
 
-    pointer->next = nullptr;
+    object->next = nullptr;
     ++m_size;
 
     if (index == 0) {
-        pointer->next = m_head;
-        m_head = pointer;
+        object->next = m_head;
+        m_head = object;
         return;
     }
 
     T* it = m_head;
     for (unsigned int i = 0; i != (index - 1); ++i, it = it->next);
 
-    pointer->next = it->next;
-    it->next = pointer;
+    object->next = it->next;
+    it->next = object;
 }
 
 template <typename T>
@@ -168,6 +200,18 @@ template <typename T>
 unsigned int chain<T>::size()
 {
     return m_size;
+}
+
+template <typename T>
+int chain<T>::indexOf(T* object)
+{
+    T* it = m_head;
+    for (unsigned int i = 0; i < m_size; ++i, it = it->next) {
+        if (it == object)
+            return i;
+    }
+
+    return -1;
 }
 
 } // namespace os
