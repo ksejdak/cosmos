@@ -22,10 +22,10 @@ public:
         return object;
     }
 
-    int getCount();
-    uint32_t getPhysicalAddress(int index);
-    uint32_t getTotalSize(int index);
-    uint32_t getUsedSize(int index);
+    int count();
+    uint32_t physicalAddress(int index);
+    uint32_t totalSize(int index);
+    uint32_t usedSize(int index);
 
 private:
     MemoryRegions();

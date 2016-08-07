@@ -25,7 +25,7 @@ public:
     Page();
     Page(uint32_t physicalAddress);
 
-    uint32_t getPhysicalAddress();
+    uint32_t physicalAddress();
     bool isOccupied();
     void setOccupied();
     void setFree();

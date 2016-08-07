@@ -15,7 +15,7 @@ namespace HAL {
 
 class IMMU {
 public:
-    static int getPageSize();
+    static int pageSize();
 };
 
 } // namespace HAL

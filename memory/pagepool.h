@@ -25,8 +25,8 @@ public:
     virtual os::chain<Page> allocatePages(unsigned int count) = 0;
     virtual void releasePages(os::chain<Page>& pages) = 0;
 
-    unsigned int getPagesCount();
-    unsigned int getFreePagesCount();
+    unsigned int pagesCount();
+    unsigned int freePagesCount();
 
 protected:
     unsigned int m_pagesCount;

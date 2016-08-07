@@ -18,7 +18,7 @@ int main()
     IAllocator::init();
 
     MemoryRegions& regions = MemoryRegions::instance();
-    regions.getCount();
+    regions.count();
 
     return 0;
 }

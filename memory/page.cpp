@@ -34,7 +34,7 @@ Page::Page(uint32_t physicalAddress)
 {
 }
 
-uint32_t Page::getPhysicalAddress()
+uint32_t Page::physicalAddress()
 {
     return m_physicalAddress;
 }

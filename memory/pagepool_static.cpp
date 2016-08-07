@@ -21,7 +21,7 @@ namespace Memory {
 
 bool StaticPagePool::init()
 {
-    int realPoolPagesCount = _pagePoolSize / IMMU::getPageSize();
+    int realPoolPagesCount = _pagePoolSize / IMMU::pageSize();
     assert(PAGES_COUNT == realPoolPagesCount);
 
     m_pagesCount = realPoolPagesCount;
@@ -51,7 +51,7 @@ void StaticPagePool::releasePages(os::chain<Page>& pages)
 {
     while (pages.size() > 0) {
         for (unsigned int i = 0; i < m_pagesCount; ++i) {
-            if (m_staticPages[i].getPhysicalAddress() != pages[i]->getPhysicalAddress())
+            if (m_staticPages[i].physicalAddress() != pages[i]->physicalAddress())
                 assert(false);
 
             pages[i]->setFree();

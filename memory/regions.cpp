@@ -26,24 +26,24 @@ MemoryRegions::MemoryRegions()
         ++m_count;
 }
 
-int MemoryRegions::getCount()
+int MemoryRegions::count()
 {
     return m_count;
 }
 
-uint32_t MemoryRegions::getPhysicalAddress(int index)
+uint32_t MemoryRegions::physicalAddress(int index)
 {
     assert(index < m_count);
     return regions[index].physicalAddress;
 }
 
-uint32_t MemoryRegions::getTotalSize(int index)
+uint32_t MemoryRegions::totalSize(int index)
 {
     assert(index < m_count);
     return regions[index].totalSize;
 }
 
-uint32_t MemoryRegions::getUsedSize(int index)
+uint32_t MemoryRegions::usedSize(int index)
 {
     assert(index < m_count);
     return regions[index].usedSize;

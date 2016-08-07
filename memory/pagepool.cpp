@@ -19,12 +19,12 @@ IPagePool::IPagePool()
 {
 }
 
-unsigned int IPagePool::getPagesCount()
+unsigned int IPagePool::pagesCount()
 {
     return m_pagesCount;
 }
 
-unsigned int IPagePool::getFreePagesCount()
+unsigned int IPagePool::freePagesCount()
 {
     return m_freePagesCount;
 }
