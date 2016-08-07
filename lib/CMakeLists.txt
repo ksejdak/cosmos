@@ -3,6 +3,7 @@ set(SOURCES
     ../include/os/chain.h
     ../include/os/circular_buffer.h
     ../include/os/list.h
+    ../include/os/pair.h
     ../include/os/shared_ptr.h
     ../include/os/stdint.h
     ../include/os/string.h
