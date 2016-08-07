@@ -16,23 +16,32 @@
 #include "pagepool.h"
 
 #include <os/chain.h>
+#include <os/pair.h>
 #include <os/stdint.h>
 
 namespace Memory {
 
-class MemoryChunk :  public os::IChainable<MemoryChunk>  {
+class MemoryChunk : public os::IChainable<MemoryChunk> {
 public:
-    MemoryChunk(uint32_t virtualAddress, uint16_t size);
-    MemoryChunk(void* pointer);
+    MemoryChunk();
 
-    uint32_t getMagic();
-    uint32_t getVirtualAddress();
-    uint16_t getSize();
+    bool checkMagic();
+    uint32_t virtualAddress();
+    void* data();
+    uint16_t size();
+    Page* parentPage();
+
+    void init(Page* parentPage);
+    void setVirtualAddress(uint32_t virtualAddress);
+    void setSize(uint32_t size);
+
+    os::pair<MemoryChunk, MemoryChunk> split();
 
 private:
     uint32_t m_magic;
     uint32_t m_virtualAddress;
-    uint16_t m_size;
+    uint32_t m_size;
+    Page* m_parentPage;
 } __attribute__ ((packed));
 
 class BuddyAllocator : public IAllocator {
@@ -43,9 +52,14 @@ public:
     virtual void release(void *memoryChunk);
 
 private:
+    bool allocatePage();
+    int sizeToFactor(uint32_t size);
+    uint32_t factorToSize(int factor);
+    void splitChunk(MemoryChunk* chunk);
+
+private:
     static const int MEMORY_CHUNK_FACTOR = 13;
 
-    os::chain<Page> m_allocatedPages;
     os::chain<MemoryChunk> m_freeChunks[MEMORY_CHUNK_FACTOR];
 };
 
