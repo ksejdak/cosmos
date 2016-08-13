@@ -11,6 +11,8 @@
 #include <memory/allocator.h>
 #include <memory/regions.h>
 
+#include <memory/page.h>
+
 using namespace Memory;
 
 int main()
@@ -19,6 +21,9 @@ int main()
 
     MemoryRegions& regions = MemoryRegions::instance();
     regions.count();
+
+    Page* page = new Page();
+    delete page;
 
     return 0;
 }
