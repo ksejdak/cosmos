@@ -15,17 +15,22 @@
 
 using namespace HAL;
 
+extern int _pagePoolStart_pa;
 extern int _pagePoolSize;
 
 namespace Memory {
 
 bool StaticPagePool::init()
 {
-    int realPoolPagesCount = _pagePoolSize / IMMU::pageSize();
+    int realPoolPagesCount = (int) &_pagePoolSize / IMMU::pageSize();
     assert(PAGES_COUNT == realPoolPagesCount);
 
     m_pagesCount = realPoolPagesCount;
     m_freePagesCount = m_pagesCount;
+
+    for (unsigned int i = 0; i < m_pagesCount; ++i)
+        m_staticPages[i].setPhysicalAddress((int) &_pagePoolStart_pa + (i * IMMU::pageSize()));
+
     return true;
 }
 

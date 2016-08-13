@@ -35,6 +35,7 @@ SECTIONS {
     /* Memory regions provided for kernel. */
     .memory_regions : ALIGN(4) {
 		_memoryRegions_pa = .;
+
 	/*  Physical address    Total size          Used size */
         LONG(ORIGIN(sram))  LONG(LENGTH(sram))  LONG(_heapStart_pa - ORIGIN(sram))
         LONG(0)             LONG(0)             LONG(0)
@@ -69,7 +70,9 @@ SECTIONS {
 
 	/* Static page pool. */
 	.pagePool : ALIGN(4) {
-        . += _pagePoolSize;
+		_pagePoolStart_pa = .;
+
+        . += 0x4000;
 	} AT > sram = 0
 
 	/* BSS. */
