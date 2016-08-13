@@ -39,6 +39,11 @@ uint32_t Page::physicalAddress()
     return m_physicalAddress;
 }
 
+void Page::setPhysicalAddress(uint32_t physicalAddress)
+{
+    m_physicalAddress = physicalAddress;
+}
+
 bool Page::isOccupied()
 {
     return m_occupied;
