@@ -9,8 +9,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "buddy_allocator.h"
-#include "pagepool_dynamic.h"
-#include "pagepool_static.h"
 
 #include <hal/mmu.h>
 #include <os/assert.h>
@@ -90,7 +88,6 @@ os::pair<MemoryChunk, MemoryChunk> MemoryChunk::split()
 void IAllocator::init()
 {
     static PagePool pagePool;
-    pagePool.init();
     static BuddyAllocator buddyAllocator(&pagePool);
     kernelAllocator = &buddyAllocator;
 }
@@ -98,6 +95,7 @@ void IAllocator::init()
 BuddyAllocator::BuddyAllocator(PagePool* pagePool)
     : IAllocator(pagePool)
 {
+    m_pagePool->init();
 }
 
 void* BuddyAllocator::allocate(uint32_t size)
