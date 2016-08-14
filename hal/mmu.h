@@ -11,11 +11,13 @@
 #ifndef MMU_H
 #define MMU_H
 
+#include <os/stdint.h>
+
 namespace HAL {
 
 class IMMU {
 public:
-    static int pageSize();
+    static uint32_t pageSize();
 };
 
 } // namespace HAL

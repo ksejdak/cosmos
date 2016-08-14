@@ -9,7 +9,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <hal/mmu.h>
-#include <os/stdint.h>
 
 extern "C" {
 
@@ -21,7 +20,7 @@ void __attribute__ ((section (".boot"))) mmu_init()
 
 namespace HAL {
 
-int IMMU::pageSize()
+uint32_t IMMU::pageSize()
 {
     return 4 * 1024;
 }
