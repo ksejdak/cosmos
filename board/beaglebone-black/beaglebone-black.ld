@@ -6,14 +6,20 @@ MEMORY {
     sram (rwx)     :      ORIGIN = 0x402f0400, LENGTH = (0x402fffff - 0x402f0400)   /* Internal on-chip SRAM */
 }
 
-_bootStart_va        = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
 _textStart_va        = 0x80000000;   /* Kernel .text starts at 2 GB. */
 _pagePoolInitialSize = 0x1000;       /* Preallocated page for page pool.*/
 _stackSize           = 0x1000;       /* Stack size is 4KB.*/
 
 SECTIONS {
+	/* Static page pool. */
+	.pagePool : ALIGN(4) {
+		_pagePoolStart_pa = .;
+
+        . += _pagePoolInitialSize;
+	} AT > sram = 0
+
     /* Starup code. */
-    .boot _bootStart_va : {
+    .boot : {
         _bootStart_pa = .;
 
         *(.boot)
@@ -67,13 +73,6 @@ SECTIONS {
         *(.rodata .rodata.* .gnu.linkonce.r.*)
         *(.rodata1)
     } AT > sram = 0
-
-	/* Static page pool. */
-	.pagePool : ALIGN(4) {
-		_pagePoolStart_pa = .;
-
-        . += _pagePoolInitialSize;
-	} AT > sram = 0
 
 	/* BSS. */
 	.bss : ALIGN(4) {

@@ -9,22 +9,56 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "pagepool.h"
+#include "regions.h"
+
+#include <hal/mmu.h>
 
 extern int _pagePoolStart_pa;
+
+using namespace HAL;
 
 namespace Memory {
 
 PagePool::PagePool()
-    : m_pagesCount(1)
-    , m_freePagesCount(m_pagesCount)
 {
-    m_initialPage.setPhysicalAddress((uint32_t) &_pagePoolStart_pa);
+    // Check, that initial page starts at the beginning of first region.
+    uint32_t initialPagePA = (uint32_t) &_pagePoolStart_pa;
+    MemoryRegions& regions = MemoryRegions::instance();
+    assert(initialPagePA == regions.physicalAddress(0));
+
+    m_initialPage.setPhysicalAddress(initialPagePA);
     m_allPages.push_back(&m_initialPage);
+
+    m_pagesCount = m_allPages.size();
+    m_freePagesCount = m_pagesCount;
 }
 
 bool PagePool::init()
 {
-    /// @todo Initialize rest of memory.
+    MemoryRegions& regions = MemoryRegions::instance();
+    for (int i = 0; i < regions.count(); ++i) {
+        uint32_t regionEndPA = regions.physicalAddress(i) + regions.totalSize(i);
+        uint32_t regionUsedEndPA = regions.physicalAddress(i) + regions.usedSize(i);
+
+        for (uint32_t address = regions.physicalAddress(i); address + IMMU::pageSize() < regionEndPA; address += IMMU::pageSize()) {
+            if (address == regions.physicalAddress(0)) {
+                // Skip address describing initial page. We already have it.
+                continue;
+            }
+
+            Page* page = new Page(address);
+            page->setOccupied();
+
+            ++m_pagesCount;
+            if (address >= regionUsedEndPA) {
+                page->setFree();
+                ++m_freePagesCount;
+            }
+
+            m_allPages.push_back(page);
+        }
+    }
+
     return true;
 }
 
