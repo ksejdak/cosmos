@@ -9,8 +9,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <memory/allocator.h>
-#include <memory/regions.h>
-
 #include <memory/page.h>
 
 using namespace Memory;
@@ -18,9 +16,6 @@ using namespace Memory;
 int main()
 {
     IAllocator::init();
-
-    MemoryRegions& regions = MemoryRegions::instance();
-    regions.count();
 
     Page* page = new Page();
     delete page;
