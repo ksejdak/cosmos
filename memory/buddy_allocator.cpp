@@ -79,7 +79,7 @@ os::pair<MemoryChunk, MemoryChunk> MemoryChunk::split()
 
     MemoryChunk* second = reinterpret_cast<MemoryChunk*>(m_virtualAddress + newSize);
     second->init(m_parentPage);
-    first->setVirtualAddress(m_virtualAddress + newSize);
+    second->setVirtualAddress(m_virtualAddress + newSize);
     second->setSize(newSize);
 
     return os::pair<MemoryChunk, MemoryChunk>(first, second);
@@ -89,12 +89,12 @@ void IAllocator::init()
 {
     static BuddyAllocator buddyAllocator;
     kernelAllocator = &buddyAllocator;
+    PagePool::instance().init();
 }
 
 BuddyAllocator::BuddyAllocator()
     : IAllocator(PagePool::instance())
 {
-    m_pagePool.init();
 }
 
 void* BuddyAllocator::allocate(uint32_t size)
