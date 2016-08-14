@@ -29,7 +29,7 @@ namespace Memory {
 
 IAllocator* kernelAllocator = nullptr;
 
-IAllocator::IAllocator(PagePool* pagePool)
+IAllocator::IAllocator(PagePool& pagePool)
     : m_pagePool(pagePool)
 {
 }

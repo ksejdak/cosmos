@@ -19,7 +19,11 @@ namespace Memory {
 
 class PagePool {
 public:
-    PagePool();
+    static PagePool& instance()
+    {
+        static PagePool object;
+        return object;
+    }
 
     bool init();
     os::chain<Page> allocatePages(unsigned int count);
@@ -27,6 +31,9 @@ public:
 
     unsigned int pagesCount();
     unsigned int freePagesCount();
+
+private:
+    PagePool();
 
 private:
     Page m_initialPage;

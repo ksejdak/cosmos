@@ -87,15 +87,14 @@ os::pair<MemoryChunk, MemoryChunk> MemoryChunk::split()
 
 void IAllocator::init()
 {
-    static PagePool pagePool;
-    static BuddyAllocator buddyAllocator(&pagePool);
+    static BuddyAllocator buddyAllocator;
     kernelAllocator = &buddyAllocator;
 }
 
-BuddyAllocator::BuddyAllocator(PagePool* pagePool)
-    : IAllocator(pagePool)
+BuddyAllocator::BuddyAllocator()
+    : IAllocator(PagePool::instance())
 {
-    m_pagePool->init();
+    m_pagePool.init();
 }
 
 void* BuddyAllocator::allocate(uint32_t size)
@@ -149,7 +148,7 @@ void BuddyAllocator::release(void *memoryChunk)
 
 bool BuddyAllocator::allocatePage()
 {
-    auto page = m_pagePool->allocatePages(1);
+    auto page = m_pagePool.allocatePages(1);
     if (page.size() == 0)
         return false;
 
