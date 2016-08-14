@@ -46,7 +46,7 @@ private:
 
 class BuddyAllocator : public IAllocator {
 public:
-    BuddyAllocator(IPagePool* pagePool);
+    BuddyAllocator(PagePool* pagePool);
 
     virtual void* allocate(uint32_t size);
     virtual void release(void *memoryChunk);

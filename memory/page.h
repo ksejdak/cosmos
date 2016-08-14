@@ -18,10 +18,6 @@ namespace Memory {
 
 class Page : public os::IChainable<Page> {
 public:
-    // Pages should be allocated by static allocator.
-    void* operator new(unsigned int size);
-    void operator delete(void* pointer);
-
     Page();
     Page(uint32_t physicalAddress);
 

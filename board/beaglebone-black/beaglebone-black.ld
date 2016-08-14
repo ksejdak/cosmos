@@ -6,10 +6,10 @@ MEMORY {
     sram (rwx)     :      ORIGIN = 0x402f0400, LENGTH = (0x402fffff - 0x402f0400)   /* Internal on-chip SRAM */
 }
 
-_bootStart_va = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
-_textStart_va = 0x80000000;   /* Kernel .text starts at 2 GB. */
-_pagePoolSize = 0x4000;       /* Static page pool has size of 16 KB (4 pages).*/
-_stackSize    = 0x1000;       /* Stack size is 4KB.*/
+_bootStart_va        = ORIGIN(sram); /* Kernel .boot VMA should be the same as LMA, as MMU is not configured. */
+_textStart_va        = 0x80000000;   /* Kernel .text starts at 2 GB. */
+_pagePoolInitialSize = 0x1000;       /* Preallocated page for page pool.*/
+_stackSize           = 0x1000;       /* Stack size is 4KB.*/
 
 SECTIONS {
     /* Starup code. */
@@ -72,7 +72,7 @@ SECTIONS {
 	.pagePool : ALIGN(4) {
 		_pagePoolStart_pa = .;
 
-        . += 0x4000;
+        . += _pagePoolInitialSize;
 	} AT > sram = 0
 
 	/* BSS. */

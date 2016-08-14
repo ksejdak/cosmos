@@ -9,19 +9,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "page.h"
-#include "allocator.h"
 
 namespace Memory {
-
-void* Page::operator new(unsigned int size)
-{
-    return staticAllocator->allocate(size);
-}
-
-void Page::operator delete(void* pointer)
-{
-    staticAllocator->release(pointer);
-}
 
 Page::Page()
     : Page(0)

@@ -25,14 +25,13 @@ public:
     virtual void release(void *memoryChunk) = 0;
 
 protected:
-    IAllocator(IPagePool* pagePool);
+    IAllocator(PagePool* pagePool);
 
 protected:
-    IPagePool* m_pagePool;
+    PagePool* m_pagePool;
 };
 
-extern IAllocator* staticAllocator;
-extern IAllocator* dynamicAllocator;
+extern IAllocator* kernelAllocator;
 
 } // namespace Memory
 

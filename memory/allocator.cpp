@@ -15,22 +15,21 @@
 // Replace global operator new and delete to use kernel allocator.
 void* operator new(unsigned int size)
 {
-    assert(Memory::dynamicAllocator != nullptr);
-    return Memory::dynamicAllocator->allocate(size);
+    assert(Memory::kernelAllocator != nullptr);
+    return Memory::kernelAllocator->allocate(size);
 }
 
 void operator delete(void* memoryChunk)
 {
-    assert(Memory::dynamicAllocator != nullptr);
-    Memory::dynamicAllocator->release(memoryChunk);
+    assert(Memory::kernelAllocator != nullptr);
+    Memory::kernelAllocator->release(memoryChunk);
 }
 
 namespace Memory {
 
-IAllocator* staticAllocator = nullptr;
-IAllocator* dynamicAllocator = nullptr;
+IAllocator* kernelAllocator = nullptr;
 
-IAllocator::IAllocator(IPagePool* pagePool)
+IAllocator::IAllocator(PagePool* pagePool)
     : m_pagePool(pagePool)
 {
 }

@@ -89,18 +89,13 @@ os::pair<MemoryChunk, MemoryChunk> MemoryChunk::split()
 
 void IAllocator::init()
 {
-    static StaticPagePool staticPool;
-    staticPool.init();
-    static BuddyAllocator staticBuddy(&staticPool);
-    staticAllocator = &staticBuddy;
-
-    static DynamicPagePool dynamicPool;
-    dynamicPool.init();
-    static BuddyAllocator dynamicBuddy(&dynamicPool);
-    dynamicAllocator = &dynamicBuddy;
+    static PagePool pagePool;
+    pagePool.init();
+    static BuddyAllocator buddyAllocator(&pagePool);
+    kernelAllocator = &buddyAllocator;
 }
 
-BuddyAllocator::BuddyAllocator(IPagePool* pagePool)
+BuddyAllocator::BuddyAllocator(PagePool* pagePool)
     : IAllocator(pagePool)
 {
 }

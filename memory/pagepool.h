@@ -17,18 +17,21 @@
 
 namespace Memory {
 
-class IPagePool {
+class PagePool {
 public:
-    IPagePool();
+    PagePool();
 
-    virtual bool init() = 0;
-    virtual os::chain<Page> allocatePages(unsigned int count) = 0;
-    virtual void releasePages(os::chain<Page>& pages) = 0;
+    bool init();
+    os::chain<Page> allocatePages(unsigned int count);
+    void releasePages(os::chain<Page>& pages);
 
     unsigned int pagesCount();
     unsigned int freePagesCount();
 
-protected:
+private:
+    Page m_initialPage;
+    os::chain<Page> m_allPages;
+
     unsigned int m_pagesCount;
     unsigned int m_freePagesCount;
 };

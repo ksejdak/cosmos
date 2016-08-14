@@ -3,8 +3,6 @@ set(SOURCES
 	buddy_allocator.cpp
     page.cpp
     pagepool.cpp
-    pagepool_dynamic.cpp
-    pagepool_static.cpp
     regions.cpp
 )
 
