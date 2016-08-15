@@ -6,7 +6,6 @@ set(SOURCES
     regions.cpp
 )
 
-
 register_module()
 
 link_target(${COSMOS_LIB_PATH})
