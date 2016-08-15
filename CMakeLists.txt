@@ -53,6 +53,8 @@ include_directories(.)
 set(COMPONENTS
     board
     core
+    dev
+    fs
     hal
     lib
     memory
