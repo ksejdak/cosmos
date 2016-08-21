@@ -27,7 +27,6 @@ _bssClear:
     blo     _bssClear
 
     blx     mmu_init
-    blx     board_init
 
     ldr     lr, =main
     bx      lr
