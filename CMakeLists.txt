@@ -15,11 +15,12 @@ include(${CMAKE_SOURCE_DIR}/cmake/macros.cmake)
 
 set(COSMOS_ARCH "arm")
 set(COSMOS_TARGET "beaglebone-black")
+set(COSMOS_CPU "ti_am335x")
 set(PROJECT_NAME "cosmos")
 project(${PROJECT_NAME} CXX C ASM)
 
 # Project paths.
-set(COSMOS_BOARD_PATH ${CMAKE_SOURCE_DIR}/board/${COSMOS_TARGET})
+set(COSMOS_BOARD_PATH ${CMAKE_SOURCE_DIR}/board)
 set(COSMOS_CORE_PATH ${CMAKE_SOURCE_DIR}/core)
 set(COSMOS_HAL_PATH ${CMAKE_SOURCE_DIR}/hal/${COSMOS_ARCH})
 set(COSMOS_LIB_PATH ${CMAKE_SOURCE_DIR}/lib)

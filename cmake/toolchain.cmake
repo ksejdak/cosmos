@@ -10,7 +10,7 @@ macro(set_toolchain ARCH)
         set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
         # Set linker script.
-        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${COSMOS_BOARD_PATH}/${COSMOS_TARGET}.ld")
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${COSMOS_BOARD_PATH}/${COSMOS_TARGET}/${COSMOS_TARGET}.ld")
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE ${CMAKE_EXE_LINKER_FLAGS_RELEASE} "-s")
 
         # Set C compilation flags.
