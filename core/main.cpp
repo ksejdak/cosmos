@@ -8,17 +8,16 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <board/board.h>
 #include <memory/allocator.h>
-#include <memory/page.h>
 
+using namespace Board;
 using namespace Memory;
 
 int main()
 {
     IAllocator::init();
-
-    Page* page = new Page();
-    delete page;
+    IBoard::init();
 
     return 0;
 }
