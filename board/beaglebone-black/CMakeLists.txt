@@ -1,5 +1,5 @@
 set(SOURCES
-    board.cpp
+    beaglebone_black.cpp
 )
 
 register_module()

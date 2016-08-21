@@ -2,17 +2,28 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       16.07.2016
+/// @date       21.08.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-extern "C" {
+#include "beaglebone_black.h"
 
-void __attribute__ ((section (".boot"))) board_init()
+namespace Board {
+
+IBoard* IBoard::create()
 {
-    /// @todo Initialize timer for scheduler.
+    return new BeagleBoneBlack();
 }
 
-} // extern "C"
+BeagleBoneBlack::BeagleBoneBlack()
+{
+}
+
+bool BeagleBoneBlack::initDevice()
+{
+    return true;
+}
+
+} // namespace Board
