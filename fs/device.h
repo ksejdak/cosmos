@@ -2,38 +2,28 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       15.08.2016
+/// @date       21.08.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#ifndef FILE_H
-#define FILE_H
+#ifndef DEVICE_H
+#define DEVICE_H
+
+#include "file.h"
 
 #include <os/stdint.h>
 
 namespace Filesystem {
 
-class File {
+class Device : public File {
 public:
-    typedef enum {
-        REGULAR_FILE,
-        DEVICE_FILE
-    } FileType;
+    Device();
 
-    File(FileType fileType = REGULAR_FILE);
-    FileType fileType() const;
+    bool ioctl(uint32_t command, void* arg);
 
-    bool open();
-    bool close();
-
-    int read(uint8_t* buffer, uint32_t size);
-    int write(uint8_t* buffer, uint32_t size);
-
-protected:
-    FileType m_fileType;
-    uint32_t m_offset;
+private:
 };
 
 } // namespace Filesystem;

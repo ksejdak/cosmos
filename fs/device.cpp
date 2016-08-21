@@ -2,45 +2,24 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       15.08.2016
+/// @date       21.08.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "file.h"
+#include "device.h"
 
 namespace Filesystem {
 
-File::File(FileType fileType)
-    : m_fileType(fileType)
-    , m_offset(0)
+Device::Device()
+    : File(DEVICE_FILE)
 {
 }
 
-File::FileType File::fileType() const
-{
-    return m_fileType;
-}
-
-bool File::open()
+bool Device::ioctl(uint32_t, void*)
 {
     return true;
-}
-
-bool File::close()
-{
-    return true;
-}
-
-int File::read(uint8_t*, uint32_t)
-{
-    return 0;
-}
-
-int File::write(uint8_t*, uint32_t)
-{
-    return 0;
 }
 
 } // namespace Filesystem
