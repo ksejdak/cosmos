@@ -2,18 +2,29 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       15.08.2016
+/// @date       21.08.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "uart.h"
+#include "am335x_uart.h"
 
 namespace Device {
 
-IUART::IUART()
+IUART* IUART::create()
 {
+    return new AM335x_UART();
+}
+
+AM335x_UART::AM335x_UART()
+{
+    init();
+}
+
+void AM335x_UART::init()
+{
+
 }
 
 } // namespace Device

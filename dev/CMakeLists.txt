@@ -2,4 +2,8 @@ set(SOURCES
 	uart.cpp
 )
 
-register_module()
+set(MODULES
+    ${COSMOS_CPU}
+)
+
+register_component()

@@ -2,18 +2,10 @@
 ///
 /// @file
 /// @author     Kuba Sejdak
-/// @date       15.08.2016
+/// @date       21.08.2016
 ///
 /// @copyright  This file is a part of cosmos OS. All rights reserved.
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "uart.h"
-
-namespace Device {
-
-IUART::IUART()
-{
-}
-
-} // namespace Device
+// Empty on purpose. Just to create component.
