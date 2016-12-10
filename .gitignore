@@ -4,3 +4,4 @@ bin/
 
 # Project files.
 CMakeLists.txt.user
+.vscode/
