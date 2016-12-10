@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COSMOS_PATH="/home/kuba/Projects/cosmos"
+COSMOS_PATH="$PROJECTS_PATH/cosmos"
 COSMOS_IMAGE_PATH="$COSMOS_PATH/bin/arm-beaglebone-black/cosmos.elf"
 COSMOS_GDBINIT_PATH="$COSMOS_PATH/scripts/cosmos.gdbinit"
 
