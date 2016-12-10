@@ -3,7 +3,7 @@ target remote :2331
 set output-radix 16
 
 monitor reset
-#DDRInit
+#ddr_init
 load
 monitor reset halt
 
