@@ -9,6 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "am335x_uart.h"
+#include "am335x_clock.h"
 
 namespace Device {
 
@@ -20,6 +21,8 @@ AM335x_UART::AM335x_UART(AM335x_UARTId_t id)
 
 void AM335x_UART::init()
 {
+    AM335x_Clock clockManager;
+    clockManager.initUart(m_id)
 }
 
 } // namespace Device

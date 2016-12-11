@@ -16,12 +16,12 @@
 namespace Device {
 
 typedef enum {
-    UART0,
-    UART1,
-    UART2,
-    UART3,
-    UART4,
-    UART5
+    AM335x_UART0,
+    AM335x_UART1,
+    AM335x_UART2,
+    AM335x_UART3,
+    AM335x_UART4,
+    AM335x_UART5
 } AM335x_UARTId_t;
 
 class AM335x_UART : public IUART {
