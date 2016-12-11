@@ -19,8 +19,7 @@ namespace Memory {
 
 class PagePool {
 public:
-    static PagePool& instance()
-    {
+    static PagePool& instance() {
         static PagePool object;
         return object;
     }

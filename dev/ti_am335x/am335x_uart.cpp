@@ -24,7 +24,6 @@ AM335x_UART::AM335x_UART()
 
 void AM335x_UART::init()
 {
-
 }
 
 } // namespace Device
