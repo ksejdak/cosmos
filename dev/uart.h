@@ -19,32 +19,32 @@ typedef enum {
     UART_DATA_BITS_7,
     UART_DATA_BITS_8,
     UART_DATA_BITS_9
-} UARTDataBits;
+} UARTDataBits_t;
 
 typedef enum {
     UART_STOP_BITS_0_5,
     UART_STOP_BITS_1,
     UART_STOP_BITS_1_5,
     UART_STOP_BITS_2
-} UARTStopBits;
+} UARTStopBits_t;
 
 typedef enum {
     UART_PARTITY_NONE,
     UART_PARTITY_EVEN,
     UART_PARTITY_ODD
-} UARTPartity;
+} UARTPartity_t;
 
 typedef enum {
     UART_FLOW_CONTROL_NONE,
     UART_FLOW_CONTROL_RTS_CTS,
     UART_FLOW_CONTROL_XON_XOFF
-} UARTFlowControl;
+} UARTFlowControl_t;
 
 typedef enum {
     UART_DIRECTION_READ,
     UART_DIRECTION_WRITE,
     UART_DIRECTION_BIDIRECTIONAL
-} UARTDirection;
+} UARTDirection_t;
 
 typedef enum {
     UART_MODE_SYNCHRONOUS,
@@ -53,9 +53,6 @@ typedef enum {
 
 class IUART : public Filesystem::Device {
 public:
-    static IUART* create();
-
-protected:
     IUART();
 };
 

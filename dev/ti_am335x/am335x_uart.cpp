@@ -12,12 +12,8 @@
 
 namespace Device {
 
-IUART* IUART::create()
-{
-    return new AM335x_UART();
-}
-
-AM335x_UART::AM335x_UART()
+AM335x_UART::AM335x_UART(AM335x_UARTId_t id)
+    : m_id(id)
 {
     init();
 }
