@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 3.5.1)
 
 # Additional user defined macros.
-include(${CMAKE_SOURCE_DIR}/cmake/toolchain.cmake)
-include(${CMAKE_SOURCE_DIR}/cmake/macros.cmake)
+include(${CMAKE_SOURCE_DIR}/scripts/toolchain.cmake)
+include(${CMAKE_SOURCE_DIR}/scripts/macros.cmake)
 
 #################################################################################################################
 # PROJECT SETTINGS
