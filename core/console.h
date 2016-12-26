@@ -1,0 +1,23 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @file
+/// @author     Kuba Sejdak
+/// @date       26.12.2016
+///
+/// @copyright  This file is a part of cosmos OS. All rights reserved.
+///
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+#ifndef CONSOLE_H
+#define CONSOLE_H
+
+class Console {
+public:
+    Console();
+    bool init();
+};
+
+// Global console object.
+extern Console console;
+
+#endif

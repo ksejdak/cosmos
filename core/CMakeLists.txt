@@ -1,4 +1,5 @@
 set(SOURCES
+    console.cpp
     main.cpp
 )
 
