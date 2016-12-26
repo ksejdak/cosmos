@@ -188,7 +188,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t DELTAMSTEP_FRACTION : 18;
-        uint32_t DELTAMSTEP_INTEGER : 2
+        uint32_t DELTAMSTEP_INTEGER : 2;
         uint32_t : 12;
     };
 

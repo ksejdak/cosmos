@@ -19,7 +19,6 @@ class AM335x_Clock {
 public:
     AM335x_Clock();
 
-private:
     bool initUart(AM335x_UARTId_t id);
 
 private:

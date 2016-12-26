@@ -10,10 +10,11 @@
 
 #include "am335x_clock.h"
 #include "am335x_clock_peripheral.h"
+#include "am335x_clock_wakeup.h"
 
 namespace Device {
 
-static bool AM335x_Clock::m_initialized = false;
+bool AM335x_Clock::m_initialized = false;
 
 AM335x_Clock::AM335x_Clock()
 {
@@ -78,6 +79,8 @@ bool AM335x_Clock::initUart(AM335x_UARTId_t id)
     // Wait for necessary register values.
     while (CM_WKUP_CLKSTCTRL->CLKACTIVITY_UART0_GFCLK != CM_WKUP_CLK_ACTIVE);
     while (CM_WKUP_UART0_CLKCTRL->IDLEST != CM_WKUP_IDLEST_FUNCTIONAL);
+
+    return true;
 }
 
 } // namespace Device

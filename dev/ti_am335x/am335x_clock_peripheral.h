@@ -62,7 +62,7 @@ typedef union {
         uint32_t CLKTRCTRL : 2;
         uint32_t CLKACTIVITY_EMIF_GCLK : 1;
         uint32_t CLKACTIVITY_MMC_FCLK : 1;
-        uint32_t CLKACTIVITY_L3_GCLK : 1
+        uint32_t CLKACTIVITY_L3_GCLK : 1;
         uint32_t : 1;
         uint32_t CLKACTIVITY_CPTS_RFT_GCLK : 1;
         uint32_t CLKACTIVITY_MCASP_GCLK : 1;
