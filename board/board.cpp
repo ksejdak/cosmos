@@ -18,6 +18,9 @@ bool IBoard::init()
 }
 
 IBoard::IBoard()
+    : m_name(nullptr)
+    , m_vendor(nullptr)
+    , m_version(nullptr)
 {
 }
 
