@@ -15,10 +15,10 @@ namespace Board {
 
 class IBoard {
 public:
-    static IBoard& instance()
+    static IBoard* instance()
     {
         static IBoard* object = create();
-        return *object;
+        return object;
     }
     static bool init();
 

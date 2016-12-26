@@ -14,7 +14,7 @@ namespace Board {
 
 bool IBoard::init()
 {
-    return instance().initDevice();
+    return instance()->initDevice();
 }
 
 IBoard::IBoard()
