@@ -20,4 +20,5 @@ Console::Console()
 bool Console::init()
 {
     // @todo Implement.
+    return true;
 }
