@@ -8,8 +8,8 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-#ifndef AM335X_CLOCK_WAKEUP_H
-#define AM335X_CLOCK_WAKEUP_H
+#ifndef AM335X_CLOCK_REGS_WKUP_H
+#define AM335X_CLOCK_REGS_WKUP_H
 
 #include <os/stdint.h>
 #include <os/utils.h>
