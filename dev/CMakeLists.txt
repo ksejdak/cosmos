@@ -1,4 +1,5 @@
 set(SOURCES
+    gpio.cpp
 	uart.cpp
 )
 
