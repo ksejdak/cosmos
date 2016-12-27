@@ -11,6 +11,8 @@
 #ifndef AM335X_GPIO_H
 #define AM335X_GPIO_H
 
+#include "am335x_gpio_regs.h"
+
 #include <dev/gpio.h>
 
 namespace Device {
@@ -26,6 +28,7 @@ class AM335x_GPIOPort : public IGPIOPort {
 public:
     AM335x_GPIOPort(AM335x_GPIOPortId_t id);
 
+    virtual void init();
     virtual int getPinsCount();
     virtual uint32_t read();
     virtual void write(uint32_t value);
@@ -42,10 +45,10 @@ public:
 
     virtual int getPortsCount();
     virtual IGPIOPort* getPort(int id);
+    virtual int getPortBaseAddress(int id);
 
 private:
     void init();
-    int getPortBaseAddress(AM335x_GPIOPortId_t id);
 
 private:
     static const int AM335x_GPIO_PORTS_COUNT = 4;

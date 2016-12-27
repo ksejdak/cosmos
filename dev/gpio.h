@@ -20,11 +20,12 @@ class IGPIOPort {
 public:
     IGPIOPort(int id);
 
+    virtual void init() = 0;
     virtual int getPinsCount() = 0;
     virtual uint32_t read() = 0;
     virtual void write(uint32_t value) = 0;
 
-private:
+protected:
     int m_id;
 };
 
@@ -37,6 +38,7 @@ public:
 
     virtual int getPortsCount() = 0;
     virtual IGPIOPort* getPort(int id) = 0;
+    virtual int getPortBaseAddress(int id) = 0;
 
 protected:
     static IGPIOManager* create();
