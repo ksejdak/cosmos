@@ -22,6 +22,7 @@ public:
 
     virtual int getPinsCount() = 0;
     virtual uint32_t read() = 0;
+    virtual void write(uint32_t value) = 0;
 
 private:
     int m_id;

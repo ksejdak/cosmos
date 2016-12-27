@@ -28,9 +28,12 @@ public:
 
     virtual int getPinsCount();
     virtual uint32_t read();
+    virtual void write(uint32_t value);
 
 private:
     static const int AM335x_GPIO_PINS_COUNT = 32;
+
+    int m_base;
 };
 
 class AM335x_GPIOManager : public IGPIOManager {
@@ -42,6 +45,7 @@ public:
 
 private:
     void init();
+    int getPortBaseAddress(AM335x_GPIOPortId_t id);
 
 private:
     static const int AM335x_GPIO_PORTS_COUNT = 4;

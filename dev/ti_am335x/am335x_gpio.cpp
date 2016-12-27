@@ -9,6 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "am335x_gpio.h"
+#include "am335x_gpio_regs.h"
 
 namespace Device {
 
@@ -19,6 +20,7 @@ IGPIOManager* IGPIOManager::create()
 
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOPortId_t id)
     : IGPIOPort(id)
+    , m_base(IGPIOManager::instance()->getPortBaseAddress(id))
 {
     // TODO:
     // - register IRQ handler for given port
@@ -31,8 +33,13 @@ int AM335x_GPIOPort::getPinsCount()
 
 uint32_t AM335x_GPIOPort::read()
 {
-    // TODO: implement.
-    return 0;
+    volatile uint32_t value = (GPIO_DATAIN(m_base)->DATAINn & GPIO_OE(m_base));
+    return value;
+}
+
+void AM335x_GPIOPort::write(uint32_t value)
+{
+    GPIO_DATAOUT(m_base)->DATAOUTn |= (value & ~(GPIO_OE(m_base)));
 }
 
 AM335x_GPIOManager::AM335x_GPIOManager()
@@ -43,6 +50,7 @@ AM335x_GPIOManager::AM335x_GPIOManager()
 {
     // TODO:
     // - check REVISION register.
+    // - register /dev/gpio-control device.
 }
 
 int AM335x_GPIOManager::getPortsCount()
@@ -60,6 +68,16 @@ IGPIOPort* AM335x_GPIOManager::getPort(int id)
 
 void AM335x_GPIOManager::init()
 {
+}
+
+int AM335x_GPIOManager::getPortBaseAddress(AM335x_GPIOPortId_t id)
+{
+    switch (id) {
+        case AM335x_GPIO_0:     return GPIO_0_BASE;
+        case AM335x_GPIO_1:     return GPIO_1_BASE;
+        case AM335x_GPIO_2:     return GPIO_2_BASE;
+        case AM335x_GPIO_3:     return GPIO_3_BASE;
+    }
 }
 
 } // namespace Device
