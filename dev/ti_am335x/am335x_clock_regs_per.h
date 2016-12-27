@@ -717,6 +717,7 @@ typedef union {
 
 // Define peripheral clock module registers.
 #define CM_PER_REGISTERS_BASE           0x44e00000
+
 #define CM_PER_L4LS_CLKSTCTRL           REGISTER(CM_PER_L4LS_CLKSTCTRL_t, (CM_PER_REGISTERS_BASE + 0x0))
 #define CM_PER_L3S_CLKSTCTRL            REGISTER(CM_PER_L3S_CLKSTCTRL_t, (CM_PER_REGISTERS_BASE + 0x4))
 #define CM_PER_L3_CLKSTCTRL             REGISTER(CM_PER_L3_CLKSTCTRL_t, (CM_PER_REGISTERS_BASE + 0xc))
