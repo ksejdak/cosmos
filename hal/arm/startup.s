@@ -21,10 +21,10 @@ _start:
     ldr     r1, =_bssStart_pa
     ldr     r2, =_bssEnd_pa
 
-_bssClear:
+bssClear:
     cmp     r1, r2
     strlo   r0, [r1], #4
-    blo     _bssClear
+    blo     bssClear
 
     blx     mmu_init
 
