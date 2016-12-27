@@ -9,8 +9,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "am335x_clock.h"
-#include "am335x_clock_regs_per.h"
-#include "am335x_clock_regs_wkup.h"
 
 namespace Device {
 

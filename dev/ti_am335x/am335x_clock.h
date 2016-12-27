@@ -12,6 +12,8 @@
 #define AM335X_CLOCK_H
 
 #include "am335x_uart.h"
+#include "am335x_clock_regs_per.h"
+#include "am335x_clock_regs_wkup.h"
 
 namespace Device {
 
