@@ -28,9 +28,9 @@ protected:
     IBoard();
 
 protected:
-    char *m_name;
-    char *m_vendor;
-    char *m_version;
+    const char *m_name;
+    const char *m_vendor;
+    const char *m_version;
 };
 
 } // namespace Board
