@@ -16,6 +16,10 @@
 
 namespace Device {
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// REGISTER DEFINITIONS
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
@@ -696,26 +700,42 @@ typedef union {
     uint32_t value;
 } CM_PER_CLK_24MHZ_CLKSTCTRL_t;
 
-// Define common field values.
-#define CM_PER_MODULEMODE_DISABLE       0x0
-#define CM_PER_MODULEMODE_ENABLE        0x2
+////////////////////////////////////////////////////////////////////////////////////////////////
+// FIELD VALUES
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define CM_PER_CLKTRCTRL_NO_SLEEP       0x0
-#define CM_PER_CLKTRCTRL_SW_SLEEP       0x1
-#define CM_PER_CLKTRCTRL_SW_WKUP        0x2
+typedef enum {
+    CM_PER_MODULEMODE_DISABLE = 0x0,
+    CM_PER_MODULEMODE_ENABLE  = 0x2
+} AM335x_ClockPerModulemode_t;
 
-#define CM_PER_CLK_INACTIVE             0x0
-#define CM_PER_CLK_ACTIVE               0x1
+typedef enum {
+    CM_PER_CLKTRCTRL_NO_SLEEP = 0x0,
+    CM_PER_CLKTRCTRL_SW_SLEEP = 0x1,
+    CM_PER_CLKTRCTRL_SW_WKUP  = 0x2
+} AM335x_ClockPerClktrctrl_t;
 
-#define CM_PER_IDLEST_FUNCTIONAL        0x0
-#define CM_PER_IDLEST_TRANSITION        0x1
-#define CM_PER_IDLEST_IDLE              0x2
-#define CM_PER_IDLEST_DISABLED          0x3
+typedef enum {
+    CM_PER_CLK_INACTIVE = 0x0,
+    CM_PER_CLK_ACTIVE   = 0x1
+} AM335x_ClockPerClk_t;
 
-#define CM_PER_STBYST_FUNCTIONAL        0x0
-#define CM_PER_STBYST_STANDBY           0x1
+typedef enum {
+    CM_PER_IDLEST_FUNCTIONAL = 0x0,
+    CM_PER_IDLEST_TRANSITION = 0x1,
+    CM_PER_IDLEST_IDLE       = 0x2,
+    CM_PER_IDLEST_DISABLED   = 0x3
+} AM335x_ClockPerIdlest_t;
 
-// Define peripheral clock module registers.
+typedef enum {
+    CM_PER_STBYST_FUNCTIONAL = 0x0,
+    CM_PER_STBYST_STANDBY    = 0x1
+} AM335x_ClockPerStbyst_t;
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// REGISTER ADDRESSES
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define CM_PER_REGISTERS_BASE           0x44e00000
 
 #define CM_PER_L4LS_CLKSTCTRL           REGISTER(CM_PER_L4LS_CLKSTCTRL_t, (CM_PER_REGISTERS_BASE + 0x0))

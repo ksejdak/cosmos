@@ -16,6 +16,10 @@
 
 namespace Device {
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// REGISTER DEFINITIONS
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
@@ -675,26 +679,42 @@ typedef union {
     uint32_t value;
 } CM_DIV_M6_DPLL_CORE_t;
 
-// Define common field values.
-#define CM_WKUP_MODULEMODE_DISABLE      0x0
-#define CM_WKUP_MODULEMODE_ENABLE       0x2
+////////////////////////////////////////////////////////////////////////////////////////////////
+// FIELD VALUES
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define CM_WKUP_CLKTRCTRL_NO_SLEEP      0x0
-#define CM_WKUP_CLKTRCTRL_SW_SLEEP      0x1
-#define CM_WKUP_CLKTRCTRL_SW_WKUP       0x2
+typedef enum {
+    CM_WKUP_MODULEMODE_DISABLE = 0x0,
+    CM_WKUP_MODULEMODE_ENABLE  = 0x2
+} AM335x_ClockWkupModulemode_t;
 
-#define CM_WKUP_CLK_INACTIVE            0x0
-#define CM_WKUP_CLK_ACTIVE              0x1
+typedef enum {
+    CM_WKUP_CLKTRCTRL_NO_SLEEP = 0x0,
+    CM_WKUP_CLKTRCTRL_SW_SLEEP = 0x1,
+    CM_WKUP_CLKTRCTRL_SW_WKUP  = 0x2
+} AM335x_ClockWkupClktrctrl_t;
 
-#define CM_WKUP_IDLEST_FUNCTIONAL       0x0
-#define CM_WKUP_IDLEST_TRANSITION       0x1
-#define CM_WKUP_IDLEST_IDLE             0x2
-#define CM_WKUP_IDLEST_DISABLED         0x3
+typedef enum {
+    CM_WKUP_CLK_INACTIVE = 0x0,
+    CM_WKUP_CLK_ACTIVE   = 0x1
+} AM335x_ClockWkupClk_t;
 
-#define CM_WKUP_STBYST_FUNCTIONAL       0x0
-#define CM_WKUP_STBYST_STANDBY          0x1
+typedef enum {
+    CM_WKUP_IDLEST_FUNCTIONAL = 0x0,
+    CM_WKUP_IDLEST_TRANSITION = 0x1,
+    CM_WKUP_IDLEST_IDLE       = 0x2,
+    CM_WKUP_IDLEST_DISABLED   = 0x3
+} AM335x_ClockWkupIdlest_t;
 
-// Define wakeup clock module registers.
+typedef enum {
+    CM_PER_STBYST_FUNCTIONAL = 0x0,
+    CM_PER_STBYST_STANDBY    = 0x1
+} AM335x_ClockWkupStbyst_t;
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// REGISTER ADDRESSES
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 #define CM_WKUP_REGISTERS_BASE          0x44e00400
 
 #define CM_WKUP_CLKSTCTRL               REGISTER(CM_WKUP_CLKSTCTRL_t, (CM_WKUP_REGISTERS_BASE + 0x0))

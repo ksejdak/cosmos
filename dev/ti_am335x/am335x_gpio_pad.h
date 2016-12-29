@@ -73,6 +73,7 @@ typedef enum {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define GPIO_PAD_REGS_BASE                  0x44e10800
+
 #define GPIO_PAD(PIN_NUM)                   REGISTER(PAD_t, (GPIO_PAD_REGS_BASE + PIN_NUM * 4))
 
 } // namespace Device
