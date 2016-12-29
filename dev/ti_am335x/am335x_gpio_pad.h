@@ -51,7 +51,7 @@ typedef enum {
 typedef enum {
     AM335X_PAD_PULL_ENABLED  = 0x0,
     AM335X_PAD_PULL_DISABLED = 0x1
-} AM335x_PadPull_t
+} AM335x_PadPull_t;
 
 typedef enum {
     AM335X_PAD_PULLDOWN = 0x0,

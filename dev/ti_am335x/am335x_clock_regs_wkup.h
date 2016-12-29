@@ -707,8 +707,8 @@ typedef enum {
 } AM335x_ClockWkupIdlest_t;
 
 typedef enum {
-    CM_PER_STBYST_FUNCTIONAL = 0x0,
-    CM_PER_STBYST_STANDBY    = 0x1
+    CM_WKUP_STBYST_FUNCTIONAL = 0x0,
+    CM_WKUP_STBYST_STANDBY    = 0x1
 } AM335x_ClockWkupStbyst_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
