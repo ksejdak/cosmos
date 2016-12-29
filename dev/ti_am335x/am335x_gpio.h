@@ -31,9 +31,10 @@ public:
 
     virtual void init();
     virtual int getPinsCount();
+
     virtual uint32_t read();
-    virtual void write(uint32_t value);
-    virtual void writePin(int pinNo, bool state);
+    virtual bool write(uint32_t value);
+    virtual bool writePin(int pinNo, bool state);
 
 private:
     static const int AM335x_GPIO_PINS_COUNT = 32;
@@ -46,8 +47,9 @@ public:
     AM335x_GPIOManager();
 
     virtual int getPortsCount();
-    virtual IGPIOPort& getPort(int portNo);
     virtual int getPortBaseAddress(int portNo);
+
+    virtual IGPIOPort& getPort(int portNo);
 
 private:
     void init();

@@ -12,8 +12,6 @@
 
 namespace Device {
 
-#define PIN_MASK(x)     (1 << x)
-
 IGPIOPort::IGPIOPort(int portNo)
     : m_portNo(portNo)
 {
@@ -35,9 +33,9 @@ bool GPIOPin::read()
     return (m_port.read() & PIN_MASK(m_pinNo));
 }
 
-void GPIOPin::write(bool state)
+bool GPIOPin::write(bool state)
 {
-    m_port.writePin(m_pinNo, state);
+    return m_port.writePin(m_pinNo, state);
 }
 
 void GPIOPin::toogle()

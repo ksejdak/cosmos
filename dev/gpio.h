@@ -16,6 +16,8 @@
 
 namespace Device {
 
+#define PIN_MASK(x)     (1 << x)
+
 typedef struct {
     int port;
     int pin;
@@ -29,9 +31,10 @@ public:
 
     virtual void init() = 0;
     virtual int getPinsCount() = 0;
+
     virtual uint32_t read() = 0;
-    virtual void write(uint32_t value) = 0;
-    virtual void writePin(int pinNo, bool state) = 0;
+    virtual bool write(uint32_t value) = 0;
+    virtual bool writePin(int pinNo, bool state) = 0;
 
 protected:
     int m_portNo;
@@ -43,7 +46,7 @@ public:
     GPIOPin(int gpioPortNo, int gpioPinNo);
 
     bool read();
-    void write(bool state);
+    bool write(bool state);
     void toogle();
 
 private:
@@ -59,8 +62,9 @@ public:
     }
 
     virtual int getPortsCount() = 0;
-    virtual IGPIOPort& getPort(int portNo) = 0;
     virtual int getPortBaseAddress(int portNo) = 0;
+
+    virtual IGPIOPort& getPort(int portNo) = 0;
 
 protected:
     static IGPIOManager* create();

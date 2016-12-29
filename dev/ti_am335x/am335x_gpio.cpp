@@ -68,14 +68,28 @@ uint32_t AM335x_GPIOPort::read()
     return value;
 }
 
-void AM335x_GPIOPort::write(uint32_t value)
+bool AM335x_GPIOPort::write(uint32_t value)
 {
-    GPIO_DATAOUT(m_base)->DATAOUTn |= (value & ~(GPIO_OE(m_base)->OUTPUTENn));
+    if (value & GPIO_OE(m_base)->OUTPUTENn) {
+        // Attempt to write to input pin.
+        return false;
+    }
+
+    GPIO_DATAOUT(m_base)->DATAOUTn = value;
+    return true;
 }
 
-void AM335x_GPIOPort::writePin(int pinNo, bool state)
+bool AM335x_GPIOPort::writePin(int pinNo, bool state)
 {
-    // TODO: implement using set/clear register.
+    if (pinNo < 0 || pinNo >= getPinsCount())
+        return false;
+
+    if (state)
+        GPIO_SETDATAOUT(m_base)->INTLINEn = PIN_MASK(pinNo);
+    else
+        GPIO_CLEARDATAOUT(m_base)->INTLINEn = PIN_MASK(pinNo);
+
+    return true;
 }
 
 AM335x_GPIOManager::AM335x_GPIOManager()
@@ -94,12 +108,6 @@ int AM335x_GPIOManager::getPortsCount()
     return AM335x_GPIO_PORTS_COUNT;
 }
 
-IGPIOPort& AM335x_GPIOManager::getPort(int portNo)
-{
-    assert(portNo > 0 && portNo < AM335x_GPIO_PORTS_COUNT);
-    return m_ports[portNo];
-}
-
 int AM335x_GPIOManager::getPortBaseAddress(int portNo)
 {
     switch (portNo) {
@@ -110,6 +118,12 @@ int AM335x_GPIOManager::getPortBaseAddress(int portNo)
     }
 
     return -1;
+}
+
+IGPIOPort& AM335x_GPIOManager::getPort(int portNo)
+{
+    assert(portNo > 0 && portNo < AM335x_GPIO_PORTS_COUNT);
+    return m_ports[portNo];
 }
 
 void AM335x_GPIOManager::init()
