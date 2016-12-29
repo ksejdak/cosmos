@@ -44,6 +44,7 @@ public:
 
     bool read();
     void write(bool state);
+    void toogle();
 
 private:
     IGPIOPort& m_port;

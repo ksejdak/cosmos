@@ -40,4 +40,10 @@ void GPIOPin::write(bool state)
     m_port.writePin(m_pinNo, state);
 }
 
+void GPIOPin::toogle()
+{
+    volatile bool state = read();
+    write(!state);
+}
+
 } // namespace Device
