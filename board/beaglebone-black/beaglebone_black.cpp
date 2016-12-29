@@ -9,8 +9,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "beaglebone_black.h"
+#include "beaglebone_black_pinmux.h"
 
 #include <core/console.h>
+#include <dev/gpio.h>
+#include <dev/ti_am335x/am335x_gpio.h>
+
+using namespace Device;
 
 namespace Board {
 
@@ -28,9 +33,12 @@ BeagleBoneBlack::BeagleBoneBlack()
 
 bool BeagleBoneBlack::initDevice()
 {
-    // Initialize console on UART0.
-    // - init GPIO1 (// tx=1.11  rx=1.10)
-    // GPIO::init(GPIO_1)
+    // Initialize console on UART1.
+    GPIOPin consoleTx(PIN_P9_24, AM335X_PAD_FUNC_0);
+    GPIOPin consoleRx(PIN_P9_26, AM335X_PAD_FUNC_0);
+
+    if (!console.init())
+        return false;
 
     return true;
 }

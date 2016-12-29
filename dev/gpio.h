@@ -14,44 +14,54 @@
 #include <fs/device.h>
 #include <os/stdint.h>
 
+#define PIN_MASK(gpioPinNo)     (1 << gpioPinNo)
+
 namespace Device {
 
-#define PIN_MASK(x)     (1 << x)
-
+// Each pin has following description:
+// - pinId      - unique number defining processor pin (ex. sequence number)
+// - gpioPortNo - corresponding GPIO port number
+// - gpioPinNo  - pin number within corresponding GPIO port
 typedef struct {
-    int port;
-    int pin;
+    int gpioPortNo;
+    int gpioPinNo;
 } PinMux_t;
 
 extern PinMux_t pinmux[];
+extern int pinmuxSize;
 
 class IGPIOPort {
 public:
-    IGPIOPort(int portNo);
+    IGPIOPort(int gpioPortNo);
 
     virtual void init() = 0;
     virtual int getPinsCount() = 0;
 
     virtual uint32_t read() = 0;
     virtual bool write(uint32_t value) = 0;
-    virtual bool writePin(int pinNo, bool state) = 0;
+    virtual bool writePin(int gpioPinNo, bool state) = 0;
+
+    virtual bool setPinFunction(int pinId, int function) = 0;
 
 protected:
-    int m_portNo;
+    int m_gpioPortNo;
 };
 
 class GPIOPin {
 public:
-    GPIOPin(int pinNo);
-    GPIOPin(int gpioPortNo, int gpioPinNo);
+    GPIOPin(int pinId, int function = 0);
+    GPIOPin(int gpioPortNo, int gpioPinNo, int function);
+
+    bool setFunction(int function);
 
     bool read();
     bool write(bool state);
     void toogle();
 
 private:
-    IGPIOPort& m_port;
-    int m_pinNo;
+    IGPIOPort& m_gpioPort;
+    int m_gpioPinNo;
+    int m_pinId;
 };
 
 class IGPIOManager : public Filesystem::Device {
@@ -62,9 +72,9 @@ public:
     }
 
     virtual int getPortsCount() = 0;
-    virtual int getPortBaseAddress(int portNo) = 0;
+    virtual int getPortBaseAddress(int gpioPortNo) = 0;
 
-    virtual IGPIOPort& getPort(int portNo) = 0;
+    virtual IGPIOPort& getPort(int gpioPortNo) = 0;
 
 protected:
     static IGPIOManager* create();

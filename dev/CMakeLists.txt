@@ -8,3 +8,4 @@ set(MODULES
 )
 
 register_component()
+link_target(${COSMOS_FS_PATH})

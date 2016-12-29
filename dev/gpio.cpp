@@ -12,30 +12,47 @@
 
 namespace Device {
 
-IGPIOPort::IGPIOPort(int portNo)
-    : m_portNo(portNo)
+static int getPinId(int gpioPortNo, int gpioPinNo)
+{
+    for (int i = 0; i < pinmuxSize; ++i) {
+        if (pinmux[i].gpioPortNo == gpioPortNo && pinmux[i].gpioPinNo == gpioPinNo)
+            return i;
+    }
+
+    return -1;
+}
+
+IGPIOPort::IGPIOPort(int gpioPortNo)
+    : m_gpioPortNo(gpioPortNo)
 {
 }
 
-GPIOPin::GPIOPin(int pinNo)
-    : GPIOPin(pinmux[pinNo].port, pinmux[pinNo].pin)
+GPIOPin::GPIOPin(int pinId, int function)
+    : GPIOPin(pinmux[pinId].gpioPortNo, pinmux[pinId].gpioPinNo, function)
 {
 }
 
-GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo)
-    : m_port(IGPIOManager::instance()->getPort(gpioPortNo))
-    , m_pinNo(gpioPinNo)
+GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo, int function)
+    : m_gpioPort(IGPIOManager::instance()->getPort(gpioPortNo))
+    , m_gpioPinNo(gpioPinNo)
+    , m_pinId(getPinId(gpioPortNo, gpioPinNo))
 {
+    setFunction(function);
+}
+
+bool GPIOPin::setFunction(int function)
+{
+    return m_gpioPort.setPinFunction(m_pinId, function);
 }
 
 bool GPIOPin::read()
 {
-    return (m_port.read() & PIN_MASK(m_pinNo));
+    return (m_gpioPort.read() & PIN_MASK(m_gpioPinNo));
 }
 
 bool GPIOPin::write(bool state)
 {
-    return m_port.writePin(m_pinNo, state);
+    return m_gpioPort.writePin(m_gpioPinNo, state);
 }
 
 void GPIOPin::toogle()
