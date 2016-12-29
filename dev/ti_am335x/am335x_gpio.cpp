@@ -108,7 +108,9 @@ AM335x_GPIOManager::AM335x_GPIOManager()
                AM335x_GPIO_2,
                AM335x_GPIO_3 }
 {
-    init();
+    // TODO:
+    // - check REVISION register.
+    // - register /dev/gpio-control device.
 }
 
 int AM335x_GPIOManager::getPortsCount()
@@ -132,13 +134,6 @@ IGPIOPort& AM335x_GPIOManager::getPort(int gpioPortNo)
 {
     assert(gpioPortNo >= AM335x_GPIO_0 && gpioPortNo <= AM335x_GPIO_3);
     return m_ports[gpioPortNo];
-}
-
-void AM335x_GPIOManager::init()
-{
-    // TODO:
-    // - check REVISION register.
-    // - register /dev/gpio-control device.
 }
 
 } // namespace Device

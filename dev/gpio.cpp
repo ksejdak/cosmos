@@ -12,16 +12,6 @@
 
 namespace Device {
 
-static int getPinId(int gpioPortNo, int gpioPinNo)
-{
-    for (int i = 0; i < pinmuxSize; ++i) {
-        if (pinmux[i].gpioPortNo == gpioPortNo && pinmux[i].gpioPinNo == gpioPinNo)
-            return i;
-    }
-
-    return -1;
-}
-
 IGPIOPort::IGPIOPort(int gpioPortNo)
     : m_gpioPortNo(gpioPortNo)
 {
@@ -35,8 +25,15 @@ GPIOPin::GPIOPin(int pinId, int function)
 GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo, int function)
     : m_gpioPort(IGPIOManager::instance()->getPort(gpioPortNo))
     , m_gpioPinNo(gpioPinNo)
-    , m_pinId(getPinId(gpioPortNo, gpioPinNo))
+    , m_pinId(-1)
 {
+    for (int i = 0; i < pinmuxSize; ++i) {
+        if (pinmux[i].gpioPortNo == gpioPortNo && pinmux[i].gpioPinNo == gpioPinNo) {
+            m_pinId = i;
+            break;
+        }
+    }
+
     setFunction(function);
 }
 

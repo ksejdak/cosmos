@@ -54,9 +54,6 @@ public:
     virtual IGPIOPort& getPort(int gpioPortNo);
 
 private:
-    void init();
-
-private:
     static const int AM335x_GPIO_PORTS_COUNT = 4;
 
     AM335x_GPIOPort m_ports[AM335x_GPIO_PORTS_COUNT];
