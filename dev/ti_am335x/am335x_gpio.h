@@ -11,6 +11,7 @@
 #ifndef AM335X_GPIO_H
 #define AM335X_GPIO_H
 
+#include "am335x_gpio_pad.h"
 #include "am335x_gpio_regs.h"
 
 #include <dev/gpio.h>
