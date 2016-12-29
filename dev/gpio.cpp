@@ -12,9 +12,32 @@
 
 namespace Device {
 
-IGPIOPort::IGPIOPort(int id)
-    : m_id(id)
+#define PIN_MASK(x)     (1 << x)
+
+IGPIOPort::IGPIOPort(int portNo)
+    : m_portNo(portNo)
 {
+}
+
+GPIOPin::GPIOPin(int pinNo)
+    : GPIOPin(pinmux[pinNo].port, pinmux[pinNo].pin)
+{
+}
+
+GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo)
+    : m_port(IGPIOManager::instance()->getPort(gpioPortNo))
+    , m_pinNo(gpioPinNo)
+{
+}
+
+bool GPIOPin::read()
+{
+    return (m_port.read() & PIN_MASK(m_pinNo));
+}
+
+void GPIOPin::write(bool state)
+{
+    m_port.writePin(m_pinNo, state);
 }
 
 } // namespace Device

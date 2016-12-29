@@ -11,16 +11,20 @@
 #include "am335x_gpio.h"
 #include "am335x_clock.h"
 
+#include <os/assert.h>
+
 namespace Device {
+
+PinMux_t pinmux[] = AM335X_PINMUX;
 
 IGPIOManager* IGPIOManager::create()
 {
     return new AM335x_GPIOManager();
 }
 
-AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOPortId_t id)
-    : IGPIOPort(id)
-    , m_base(IGPIOManager::instance()->getPortBaseAddress(id))
+AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOPortId_t portNo)
+    : IGPIOPort(portNo)
+    , m_base(IGPIOManager::instance()->getPortBaseAddress(portNo))
 {
     // TODO:
     // - register IRQ handler for given port
@@ -30,7 +34,7 @@ AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOPortId_t id)
 void AM335x_GPIOPort::init()
 {
     // Enable interface clock.
-    switch (m_id) {
+    switch (m_portNo) {
         case AM335x_GPIO_0:
             CM_WKUP_GPIO0_CLKCTRL->MODULEMODE = CM_WKUP_MODULEMODE_ENABLE;
             while (CM_WKUP_GPIO0_CLKCTRL->IDLEST != CM_WKUP_IDLEST_FUNCTIONAL);
@@ -69,6 +73,11 @@ void AM335x_GPIOPort::write(uint32_t value)
     GPIO_DATAOUT(m_base)->DATAOUTn |= (value & ~(GPIO_OE(m_base)->OUTPUTENn));
 }
 
+void AM335x_GPIOPort::writePin(int pinNo, bool state)
+{
+    // TODO: implement using set/clear register.
+}
+
 AM335x_GPIOManager::AM335x_GPIOManager()
     : m_ports{ AM335x_GPIO_0,
                AM335x_GPIO_1,
@@ -85,17 +94,15 @@ int AM335x_GPIOManager::getPortsCount()
     return AM335x_GPIO_PORTS_COUNT;
 }
 
-IGPIOPort* AM335x_GPIOManager::getPort(int id)
+IGPIOPort& AM335x_GPIOManager::getPort(int portNo)
 {
-    if (id < 0 || id >= AM335x_GPIO_PORTS_COUNT)
-        return nullptr;
-
-    return &m_ports[id];
+    assert(portNo > 0 && portNo < AM335x_GPIO_PORTS_COUNT);
+    return m_ports[portNo];
 }
 
-int AM335x_GPIOManager::getPortBaseAddress(int id)
+int AM335x_GPIOManager::getPortBaseAddress(int portNo)
 {
-    switch (id) {
+    switch (portNo) {
         case AM335x_GPIO_0:     return GPIO_0_BASE;
         case AM335x_GPIO_1:     return GPIO_1_BASE;
         case AM335x_GPIO_2:     return GPIO_2_BASE;

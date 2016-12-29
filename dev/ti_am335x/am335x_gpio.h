@@ -27,12 +27,13 @@ typedef enum {
 
 class AM335x_GPIOPort : public IGPIOPort {
 public:
-    AM335x_GPIOPort(AM335x_GPIOPortId_t id);
+    AM335x_GPIOPort(AM335x_GPIOPortId_t portNo);
 
     virtual void init();
     virtual int getPinsCount();
     virtual uint32_t read();
     virtual void write(uint32_t value);
+    virtual void writePin(int pinNo, bool state);
 
 private:
     static const int AM335x_GPIO_PINS_COUNT = 32;
@@ -45,8 +46,8 @@ public:
     AM335x_GPIOManager();
 
     virtual int getPortsCount();
-    virtual IGPIOPort* getPort(int id);
-    virtual int getPortBaseAddress(int id);
+    virtual IGPIOPort& getPort(int portNo);
+    virtual int getPortBaseAddress(int portNo);
 
 private:
     void init();
