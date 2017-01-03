@@ -102,6 +102,11 @@ bool AM335x_GPIOPort::setPinFunction(int pinId, int function)
     return true;
 }
 
+void AM335x_GPIOPort::setPinDirection(int gpioPinNo, GPIODirection_t direction)
+{
+    GPIO_PAD(pinId)->PAD_INPUT_ACTIVE = (direction == GPIO_INPUT);
+}
+
 AM335x_GPIOManager::AM335x_GPIOManager()
     : m_ports{ AM335x_GPIO_0,
                AM335x_GPIO_1,

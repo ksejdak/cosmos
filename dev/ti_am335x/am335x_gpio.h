@@ -37,6 +37,7 @@ public:
     virtual bool writePin(int gpioPinNo, bool state);
 
     virtual bool setPinFunction(int pinId, int function);
+    virtual bool setPinDirection(int gpioPinNo, GPIODirection_t direction);
 
 private:
     static const int AM335x_GPIO_PINS_COUNT = 32;

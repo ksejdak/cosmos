@@ -17,12 +17,12 @@ IGPIOPort::IGPIOPort(int gpioPortNo)
 {
 }
 
-GPIOPin::GPIOPin(int pinId, int function)
-    : GPIOPin(pinmux[pinId].gpioPortNo, pinmux[pinId].gpioPinNo, function)
+GPIOPin::GPIOPin(int pinId)
+    : GPIOPin(pinmux[pinId].gpioPortNo, pinmux[pinId].gpioPinNo)
 {
 }
 
-GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo, int function)
+GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo)
     : m_gpioPort(IGPIOManager::instance()->getPort(gpioPortNo))
     , m_gpioPinNo(gpioPinNo)
     , m_pinId(-1)
@@ -33,13 +33,16 @@ GPIOPin::GPIOPin(int gpioPortNo, int gpioPinNo, int function)
             break;
         }
     }
-
-    setFunction(function);
 }
 
 bool GPIOPin::setFunction(int function)
 {
     return m_gpioPort.setPinFunction(m_pinId, function);
+}
+
+void GPIOPin::setDirection(GPIODirection_t direction)
+{
+    m_gpioPort.setPinDirection(m_gpioPinNo, direction);
 }
 
 bool GPIOPin::read()

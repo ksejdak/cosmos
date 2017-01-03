@@ -30,6 +30,11 @@ typedef struct {
 extern PinMux_t pinmux[];
 extern int pinmuxSize;
 
+typedef enum {
+    GPIO_INPUT,
+    GPIO_OUTPUT
+} GPIODirection_t;
+
 class IGPIOPort {
 public:
     IGPIOPort(int gpioPortNo);
@@ -42,6 +47,7 @@ public:
     virtual bool writePin(int gpioPinNo, bool state) = 0;
 
     virtual bool setPinFunction(int pinId, int function) = 0;
+    virtual void setPinDirection(int gpioPinNo, GPIODirection_t direction) = 0;
 
 protected:
     int m_gpioPortNo;
@@ -49,10 +55,11 @@ protected:
 
 class GPIOPin {
 public:
-    GPIOPin(int pinId, int function = 0);
-    GPIOPin(int gpioPortNo, int gpioPinNo, int function);
+    GPIOPin(int pinId);
+    GPIOPin(int gpioPortNo, int gpioPinNo);
 
     bool setFunction(int function);
+    void setDirection(GPIODirection_t direction);
 
     bool read();
     bool write(bool state);
