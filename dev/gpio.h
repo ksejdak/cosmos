@@ -19,12 +19,12 @@
 namespace Device {
 
 // Each pin has following description:
-// - pinId      - unique number defining processor pin (ex. sequence number)
-// - gpioPortNo - corresponding GPIO port number
-// - gpioPinNo  - pin number within corresponding GPIO port
+// - id      - unique number defining processor pin (ex. sequence number)
+// - portNo  - corresponding GPIO port number
+// - pinNo   - pin number within corresponding GPIO port
 typedef struct {
-    int gpioPortNo;
-    int gpioPinNo;
+    int portNo;
+    int pinNo;
 } PinMux_t;
 
 extern PinMux_t pinmux[];
@@ -37,26 +37,26 @@ typedef enum {
 
 class IGPIOPort {
 public:
-    IGPIOPort(int gpioPortNo);
+    IGPIOPort(int portNo);
 
     virtual void init() = 0;
-    virtual int getPinsCount() = 0;
+    virtual int getPinCount() = 0;
 
     virtual uint32_t read() = 0;
     virtual bool write(uint32_t value) = 0;
-    virtual bool writePin(int gpioPinNo, bool state) = 0;
+    virtual bool writePin(int pinNo, bool state) = 0;
 
-    virtual bool setPinFunction(int pinId, int function) = 0;
-    virtual void setPinDirection(int gpioPinNo, GPIODirection_t direction) = 0;
+    virtual bool setFunction(int id, int function) = 0;
+    virtual void setDirection(int id, GPIODirection_t direction) = 0;
 
 protected:
-    int m_gpioPortNo;
+    int m_portNo;
 };
 
 class GPIOPin {
 public:
-    GPIOPin(int pinId);
-    GPIOPin(int gpioPortNo, int gpioPinNo);
+    GPIOPin(int id);
+    GPIOPin(int portNo, int pinNo);
 
     bool setFunction(int function);
     void setDirection(GPIODirection_t direction);
@@ -66,9 +66,9 @@ public:
     void toogle();
 
 private:
-    IGPIOPort& m_gpioPort;
-    int m_gpioPinNo;
-    int m_pinId;
+    IGPIOPort& m_port;
+    int m_pinNo;
+    int m_id;
 };
 
 class IGPIOManager : public Filesystem::Device {
@@ -78,10 +78,10 @@ public:
         return object;
     }
 
-    virtual int getPortsCount() = 0;
-    virtual int getPortBaseAddress(int gpioPortNo) = 0;
+    virtual int getPortCount() = 0;
+    virtual int getPortBaseAddress(int portNo) = 0;
 
-    virtual IGPIOPort& getPort(int gpioPortNo) = 0;
+    virtual IGPIOPort& getPort(int portNo) = 0;
 
 protected:
     static IGPIOManager* create();

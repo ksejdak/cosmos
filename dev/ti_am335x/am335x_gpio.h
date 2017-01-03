@@ -23,24 +23,24 @@ typedef enum {
     AM335x_GPIO_1,
     AM335x_GPIO_2,
     AM335x_GPIO_3
-} AM335x_GPIOPortId_t;
+} AM335x_GPIOId_t;
 
 class AM335x_GPIOPort : public IGPIOPort {
 public:
-    AM335x_GPIOPort(AM335x_GPIOPortId_t gpioPortNo);
+    AM335x_GPIOPort(AM335x_GPIOId_t portNo);
 
     virtual void init();
-    virtual int getPinsCount();
+    virtual int getPinCount();
 
     virtual uint32_t read();
     virtual bool write(uint32_t value);
-    virtual bool writePin(int gpioPinNo, bool state);
+    virtual bool writePin(int pinNo, bool state);
 
-    virtual bool setPinFunction(int pinId, int function);
-    virtual bool setPinDirection(int gpioPinNo, GPIODirection_t direction);
+    virtual bool setFunction(int id, int function);
+    virtual void setDirection(int id, GPIODirection_t direction);
 
 private:
-    static const int AM335x_GPIO_PINS_COUNT = 32;
+    static const int AM335x_GPIO_PIN_COUNT = 32;
 
     int m_base;
 };
@@ -49,15 +49,15 @@ class AM335x_GPIOManager : public IGPIOManager {
 public:
     AM335x_GPIOManager();
 
-    virtual int getPortsCount();
-    virtual int getPortBaseAddress(int gpioPortNo);
+    virtual int getPortCount();
+    virtual int getPortBaseAddress(int portNo);
 
-    virtual IGPIOPort& getPort(int gpioPortNo);
+    virtual IGPIOPort& getPort(int portNo);
 
 private:
-    static const int AM335x_GPIO_PORTS_COUNT = 4;
+    static const int AM335x_GPIO_PORT_COUNT = 4;
 
-    AM335x_GPIOPort m_ports[AM335x_GPIO_PORTS_COUNT];
+    AM335x_GPIOPort m_ports[AM335x_GPIO_PORT_COUNT];
 };
 
 } // namespace Device
