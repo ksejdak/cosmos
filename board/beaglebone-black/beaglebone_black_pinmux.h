@@ -123,10 +123,10 @@ typedef enum {
 // OTHER
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    USER_LED0 = 21,
-    USER_LED1 = 22,
-    USER_LED2 = 23,
-    USER_LED3 = 24
+    PIN_USER_LED0 = 21,
+    PIN_USER_LED1 = 22,
+    PIN_USER_LED2 = 23,
+    PIN_USER_LED3 = 24
 
 } BeagleBoneBlackPin_t;
 
