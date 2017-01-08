@@ -116,12 +116,22 @@ bool AM335x_GPIOPort::setFunction(int id, int function)
         return false;
 
     GPIO_PAD(id)->PAD_FUNC = function;
+    GPIO_PAD(id)->PAD_SLEW_RATE = 0;
     return true;
 }
 
 void AM335x_GPIOPort::setDirection(int id, GPIODirection_t direction)
 {
     GPIO_PAD(id)->PAD_INPUT_ACTIVE = (direction == GPIO_INPUT);
+}
+
+void AM335x_GPIOPort::setResistor(int id, GPIOResitor_t resistor)
+{
+    GPIO_PAD(id)->PAD_PULLUP_ENABLE = (resistor != GPIO_RESISTOR_NONE);
+    if (resistor == GPIO_RESISTOR_NONE)
+        return;
+
+    GPIO_PAD(id)->PAD_PULLUP_SELECT = (resistor == GPIO_RESISTOR_PULLUP);
 }
 
 AM335x_GPIOManager::AM335x_GPIOManager()

@@ -35,6 +35,12 @@ typedef enum {
     GPIO_OUTPUT
 } GPIODirection_t;
 
+typedef enum {
+    GPIO_RESISTOR_NONE,
+    GPIO_RESISTOR_PULLUP,
+    GPIO_RESISTOR_PULLDOWN
+} GPIOResitor_t;
+
 class IGPIOPort {
 public:
     IGPIOPort(int portNo);
@@ -48,6 +54,7 @@ public:
 
     virtual bool setFunction(int id, int function) = 0;
     virtual void setDirection(int id, GPIODirection_t direction) = 0;
+    virtual void setResistor(int id, GPIOResitor_t resistor) = 0;
 
 protected:
     int m_portNo;
@@ -60,6 +67,7 @@ public:
 
     bool setFunction(int function);
     void setDirection(GPIODirection_t direction);
+    void setResistor(GPIOResitor_t resistor);
 
     bool read();
     bool write(bool state);

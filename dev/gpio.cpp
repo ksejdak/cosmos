@@ -47,6 +47,11 @@ void GPIOPin::setDirection(GPIODirection_t direction)
     m_port.setDirection(m_id, direction);
 }
 
+void GPIOPin::setResistor(GPIOResitor_t resistor)
+{
+    m_port.setResistor(m_id, resistor);
+}
+
 bool GPIOPin::read()
 {
     return (m_port.read() & PIN_MASK(m_pinNo));

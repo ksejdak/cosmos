@@ -38,6 +38,7 @@ public:
 
     virtual bool setFunction(int id, int function);
     virtual void setDirection(int id, GPIODirection_t direction);
+    virtual void setResistor(int id, GPIOResitor_t resistor);
 
 private:
     static const int AM335x_GPIO_PIN_COUNT = 32;
