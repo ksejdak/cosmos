@@ -23,9 +23,22 @@ IGPIOManager* IGPIOManager::create()
     return new AM335x_GPIOManager();
 }
 
+int IGPIOManager::getPortBaseAddress(int portNo)
+{
+    switch (portNo) {
+        case AM335x_GPIO_0:     return GPIO_0_BASE;
+        case AM335x_GPIO_1:     return GPIO_1_BASE;
+        case AM335x_GPIO_2:     return GPIO_2_BASE;
+        case AM335x_GPIO_3:     return GPIO_3_BASE;
+    }
+
+    return -1;
+}
+
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     : IGPIOPort(portNo)
     , m_base(IGPIOManager::getPortBaseAddress(portNo))
+    , m_initialized(false)
 {
     // TODO:
     // - register IRQ handler for given port
@@ -34,6 +47,9 @@ AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
 
 void AM335x_GPIOPort::init()
 {
+    if (m_initialized)
+        return;
+
     // Enable interface clock.
     switch (m_portNo) {
         case AM335x_GPIO_0:
@@ -56,6 +72,7 @@ void AM335x_GPIOPort::init()
 
     // Enable module.
     GPIO_CTRL(m_base)->DISABLEMODULE = 0;
+    m_initialized = true;
 }
 
 int AM335x_GPIOPort::getPinCount()
@@ -105,18 +122,6 @@ bool AM335x_GPIOPort::setFunction(int id, int function)
 void AM335x_GPIOPort::setDirection(int id, GPIODirection_t direction)
 {
     GPIO_PAD(id)->PAD_INPUT_ACTIVE = (direction == GPIO_INPUT);
-}
-
-int IGPIOManager::getPortBaseAddress(int portNo)
-{
-    switch (portNo) {
-        case AM335x_GPIO_0:     return GPIO_0_BASE;
-        case AM335x_GPIO_1:     return GPIO_1_BASE;
-        case AM335x_GPIO_2:     return GPIO_2_BASE;
-        case AM335x_GPIO_3:     return GPIO_3_BASE;
-    }
-
-    return -1;
 }
 
 AM335x_GPIOManager::AM335x_GPIOManager()

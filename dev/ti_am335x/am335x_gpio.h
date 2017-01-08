@@ -43,6 +43,7 @@ private:
     static const int AM335x_GPIO_PIN_COUNT = 32;
 
     int m_base;
+    bool m_initialized;
 };
 
 class AM335x_GPIOManager : public IGPIOManager {

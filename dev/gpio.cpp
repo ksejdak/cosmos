@@ -33,6 +33,8 @@ GPIOPin::GPIOPin(int portNo, int pinNo)
             break;
         }
     }
+
+    m_port.init();
 }
 
 bool GPIOPin::setFunction(int function)
