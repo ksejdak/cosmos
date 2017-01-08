@@ -78,9 +78,9 @@ public:
         return object;
     }
 
-    virtual int getPortCount() = 0;
-    virtual int getPortBaseAddress(int portNo) = 0;
+    static int getPortBaseAddress(int portNo);
 
+    virtual int getPortCount() = 0;
     virtual IGPIOPort& getPort(int portNo) = 0;
 
 protected:

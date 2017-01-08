@@ -50,8 +50,6 @@ public:
     AM335x_GPIOManager();
 
     virtual int getPortCount();
-    virtual int getPortBaseAddress(int portNo);
-
     virtual IGPIOPort& getPort(int portNo);
 
 private:

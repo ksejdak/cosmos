@@ -25,7 +25,7 @@ IGPIOManager* IGPIOManager::create()
 
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     : IGPIOPort(portNo)
-    , m_base(IGPIOManager::instance()->getPortBaseAddress(portNo))
+    , m_base(IGPIOManager::getPortBaseAddress(portNo))
 {
     // TODO:
     // - register IRQ handler for given port
@@ -107,6 +107,18 @@ void AM335x_GPIOPort::setDirection(int id, GPIODirection_t direction)
     GPIO_PAD(id)->PAD_INPUT_ACTIVE = (direction == GPIO_INPUT);
 }
 
+int IGPIOManager::getPortBaseAddress(int portNo)
+{
+    switch (portNo) {
+        case AM335x_GPIO_0:     return GPIO_0_BASE;
+        case AM335x_GPIO_1:     return GPIO_1_BASE;
+        case AM335x_GPIO_2:     return GPIO_2_BASE;
+        case AM335x_GPIO_3:     return GPIO_3_BASE;
+    }
+
+    return -1;
+}
+
 AM335x_GPIOManager::AM335x_GPIOManager()
     : m_ports{ AM335x_GPIO_0,
                AM335x_GPIO_1,
@@ -121,18 +133,6 @@ AM335x_GPIOManager::AM335x_GPIOManager()
 int AM335x_GPIOManager::getPortCount()
 {
     return AM335x_GPIO_PORT_COUNT;
-}
-
-int AM335x_GPIOManager::getPortBaseAddress(int portNo)
-{
-    switch (portNo) {
-        case AM335x_GPIO_0:     return GPIO_0_BASE;
-        case AM335x_GPIO_1:     return GPIO_1_BASE;
-        case AM335x_GPIO_2:     return GPIO_2_BASE;
-        case AM335x_GPIO_3:     return GPIO_3_BASE;
-    }
-
-    return -1;
 }
 
 IGPIOPort& AM335x_GPIOManager::getPort(int portNo)
