@@ -33,7 +33,14 @@ BeagleBoneBlack::BeagleBoneBlack()
 
 bool BeagleBoneBlack::initDevice()
 {
-    // Initialize console on UART1.
+    // Init user led0.
+    GPIOPin led0(PIN_USER_LED0);
+    led0.setFunction(AM335X_PAD_FUNC_0);
+    led0.setDirection(GPIO_OUTPUT);
+    led0.setResistor(GPIO_RESISTOR_NONE);
+    led0.write(true);
+
+    // Init console on UART1.
     GPIOPin consoleTx(PIN_P9_24);
     consoleTx.setFunction(AM335X_PAD_FUNC_0);
     consoleTx.setDirection(GPIO_OUTPUT);
