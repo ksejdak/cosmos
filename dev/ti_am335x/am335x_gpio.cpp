@@ -40,9 +40,17 @@ AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     , m_base(IGPIOManager::getPortBaseAddress(portNo))
     , m_initialized(false)
 {
+    reset();
+
     // TODO:
     // - register IRQ handler for given port
     // - register /dev/gpioX device.
+}
+
+void AM335x_GPIOPort::reset()
+{
+    GPIO_SYSCONFIG(m_base)->SOFTRESET = 1;
+    while (!GPIO_SYSSTATUS(m_base)->RESETDONE);
 }
 
 void AM335x_GPIOPort::init()

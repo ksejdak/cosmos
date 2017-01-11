@@ -29,6 +29,7 @@ class AM335x_GPIOPort : public IGPIOPort {
 public:
     AM335x_GPIOPort(AM335x_GPIOId_t portNo);
 
+    void reset();
     virtual void init();
     virtual int getPinCount();
 
