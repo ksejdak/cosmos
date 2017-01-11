@@ -48,6 +48,9 @@ public:
     virtual void init() = 0;
     virtual int getPinCount() = 0;
 
+    virtual void enable() = 0;
+    virtual void disable() = 0;
+
     virtual uint32_t read() = 0;
     virtual bool write(uint32_t value) = 0;
     virtual bool writePin(int pinNo, bool state) = 0;
