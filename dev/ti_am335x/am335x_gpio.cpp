@@ -120,7 +120,7 @@ int AM335x_GPIOPort::getPinCount()
 
 uint32_t AM335x_GPIOPort::read()
 {
-    volatile uint32_t value = (GPIO_DATAIN(m_base)->DATAINn & GPIO_OE(m_base)->OUTPUTENn);
+    volatile uint32_t value = GPIO_DATAIN(m_base)->DATAINn;
     return value;
 }
 
