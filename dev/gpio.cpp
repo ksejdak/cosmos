@@ -62,7 +62,7 @@ bool GPIOPin::write(bool state)
     return m_port.writePin(m_pinNo, state);
 }
 
-void GPIOPin::toogle()
+void GPIOPin::toggle()
 {
     volatile bool state = read();
     write(!state);
