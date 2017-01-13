@@ -56,7 +56,7 @@ public:
     virtual bool writePin(int pinNo, bool state) = 0;
 
     virtual bool setFunction(int id, int function) = 0;
-    virtual void setDirection(int id, GPIODirection_t direction) = 0;
+    virtual void setDirection(int pinNo, GPIODirection_t direction) = 0;
     virtual void setResistor(int id, GPIOResitor_t resistor) = 0;
 
 protected:

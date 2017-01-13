@@ -44,7 +44,7 @@ bool GPIOPin::setFunction(int function)
 
 void GPIOPin::setDirection(GPIODirection_t direction)
 {
-    m_port.setDirection(m_id, direction);
+    m_port.setDirection(m_pinNo, direction);
 }
 
 void GPIOPin::setResistor(GPIOResitor_t resistor)

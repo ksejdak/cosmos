@@ -40,8 +40,6 @@ AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     , m_base(IGPIOManager::getPortBaseAddress(portNo))
     , m_initialized(false)
 {
-    reset();
-
     // TODO:
     // - register IRQ handler for given port
     // - register /dev/gpioX device.
@@ -57,8 +55,6 @@ void AM335x_GPIOPort::init()
 {
     if (m_initialized)
         return;
-
-    enable();
 
     // Enable interface and functional clocks.
     switch (m_portNo) {
@@ -99,6 +95,9 @@ void AM335x_GPIOPort::init()
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_GPIO_3_GDBCLK != CM_PER_CLK_ACTIVE);
             break;
     }
+
+    enable();
+    reset();
 
     m_initialized = true;
 }
@@ -158,9 +157,12 @@ bool AM335x_GPIOPort::setFunction(int id, int function)
     return true;
 }
 
-void AM335x_GPIOPort::setDirection(int id, GPIODirection_t direction)
+void AM335x_GPIOPort::setDirection(int pinNo, GPIODirection_t direction)
 {
-    GPIO_PAD(id)->PAD_INPUT_ACTIVE = (direction == GPIO_INPUT);
+    if (direction == GPIO_INPUT)
+        GPIO_OE(m_base)->OUTPUTENn |= PIN_MASK(pinNo);
+    else
+        GPIO_OE(m_base)->OUTPUTENn &= ~PIN_MASK(pinNo);
 }
 
 void AM335x_GPIOPort::setResistor(int id, GPIOResitor_t resistor)

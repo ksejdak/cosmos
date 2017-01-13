@@ -41,7 +41,7 @@ public:
     virtual bool writePin(int pinNo, bool state);
 
     virtual bool setFunction(int id, int function);
-    virtual void setDirection(int id, GPIODirection_t direction);
+    virtual void setDirection(int pinNo, GPIODirection_t direction);
     virtual void setResistor(int id, GPIOResitor_t resistor);
 
 private:
