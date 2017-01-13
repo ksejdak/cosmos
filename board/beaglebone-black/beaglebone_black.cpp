@@ -35,7 +35,7 @@ bool BeagleBoneBlack::initDevice()
 {
     // Init user led0.
     GPIOPin led0(PIN_USER_LED0);
-    led0.setFunction(AM335X_PAD_FUNC_0);
+    led0.setFunction(AM335X_PAD_FUNC_7);
     led0.setDirection(GPIO_OUTPUT);
     led0.setResistor(GPIO_RESISTOR_NONE);
     led0.write(true);
