@@ -41,13 +41,12 @@ typedef enum {
     GPIO_RESISTOR_PULLDOWN
 } GPIOResitor_t;
 
-class IGPIOPort {
+class IGPIOPort : public Filesystem::Device {
 public:
     IGPIOPort(int portNo);
 
     virtual void init() = 0;
-    virtual int getPinCount() = 0;
-
+    virtual void reset() = 0;
     virtual void enable() = 0;
     virtual void disable() = 0;
 
@@ -89,9 +88,8 @@ public:
         return object;
     }
 
-    static int getPortBaseAddress(int portNo);
+    static int getBaseAddress(int portNo);
 
-    virtual int getPortCount() = 0;
     virtual IGPIOPort& getPort(int portNo) = 0;
 
 protected:

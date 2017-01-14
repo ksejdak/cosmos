@@ -29,10 +29,8 @@ class AM335x_GPIOPort : public IGPIOPort {
 public:
     AM335x_GPIOPort(AM335x_GPIOId_t portNo);
 
-    void reset();
     virtual void init();
-    virtual int getPinCount();
-
+    virtual void reset();
     virtual void enable();
     virtual void disable();
 
@@ -48,14 +46,12 @@ private:
     static const int AM335x_GPIO_PIN_COUNT = 32;
 
     int m_base;
-    bool m_initialized;
 };
 
 class AM335x_GPIOManager : public IGPIOManager {
 public:
     AM335x_GPIOManager();
 
-    virtual int getPortCount();
     virtual IGPIOPort& getPort(int portNo);
 
 private:

@@ -9,7 +9,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "am335x_gpio.h"
-#include "am335x_clock.h"
+#include "am335x_clock_regs_per.h"
+#include "am335x_clock_regs_wkup.h"
 
 #include <os/assert.h>
 
@@ -23,7 +24,7 @@ IGPIOManager* IGPIOManager::create()
     return new AM335x_GPIOManager();
 }
 
-int IGPIOManager::getPortBaseAddress(int portNo)
+int IGPIOManager::getBaseAddress(int portNo)
 {
     switch (portNo) {
         case AM335x_GPIO_0:     return GPIO_0_BASE;
@@ -37,18 +38,11 @@ int IGPIOManager::getPortBaseAddress(int portNo)
 
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     : IGPIOPort(portNo)
-    , m_base(IGPIOManager::getPortBaseAddress(portNo))
-    , m_initialized(false)
+    , m_base(IGPIOManager::getBaseAddress(portNo))
 {
     // TODO:
     // - register IRQ handler for given port
     // - register /dev/gpioX device.
-}
-
-void AM335x_GPIOPort::reset()
-{
-    GPIO_SYSCONFIG(m_base)->SOFTRESET = 1;
-    while (!GPIO_SYSSTATUS(m_base)->RESETDONE);
 }
 
 void AM335x_GPIOPort::init()
@@ -103,6 +97,12 @@ void AM335x_GPIOPort::init()
     m_initialized = true;
 }
 
+void AM335x_GPIOPort::reset()
+{
+    GPIO_SYSCONFIG(m_base)->SOFTRESET = 1;
+    while (!GPIO_SYSSTATUS(m_base)->RESETDONE);
+}
+
 void AM335x_GPIOPort::enable()
 {
     GPIO_CTRL(m_base)->DISABLEMODULE = 0;
@@ -111,11 +111,6 @@ void AM335x_GPIOPort::enable()
 void AM335x_GPIOPort::disable()
 {
     GPIO_CTRL(m_base)->DISABLEMODULE = 1;
-}
-
-int AM335x_GPIOPort::getPinCount()
-{
-    return AM335x_GPIO_PIN_COUNT;
 }
 
 uint32_t AM335x_GPIOPort::read()
@@ -137,7 +132,7 @@ bool AM335x_GPIOPort::write(uint32_t value)
 
 bool AM335x_GPIOPort::writePin(int pinNo, bool state)
 {
-    if (pinNo < 0 || pinNo >= getPinCount())
+    if (pinNo < 0 || pinNo >= AM335x_GPIO_PIN_COUNT)
         return false;
 
     if (state)
@@ -184,11 +179,6 @@ AM335x_GPIOManager::AM335x_GPIOManager()
     // TODO:
     // - check REVISION register.
     // - register /dev/gpio-control device.
-}
-
-int AM335x_GPIOManager::getPortCount()
-{
-    return AM335x_GPIO_PORT_COUNT;
 }
 
 IGPIOPort& AM335x_GPIOManager::getPort(int portNo)

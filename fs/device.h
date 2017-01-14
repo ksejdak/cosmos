@@ -23,7 +23,8 @@ public:
 
     bool ioctl(uint32_t command, void* arg);
 
-private:
+protected:
+    bool m_initialized;
 };
 
 } // namespace Filesystem;

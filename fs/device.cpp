@@ -14,6 +14,7 @@ namespace Filesystem {
 
 Device::Device()
     : File(DEVICE_FILE)
+    , m_initialized(false)
 {
 }
 
