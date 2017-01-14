@@ -12,7 +12,8 @@
 
 namespace Device {
 
-IUART::IUART()
+IUART::IUART(int uartNo)
+    : m_uartNo(uartNo)
 {
 }
 
