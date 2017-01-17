@@ -37,7 +37,7 @@ int IGPIOManager::getBaseAddress(int portNo)
 }
 
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
-    : IGPIOPort(portNo)
+    : m_portNo(portNo)
     , m_base(IGPIOManager::getBaseAddress(portNo))
 {
     // TODO:

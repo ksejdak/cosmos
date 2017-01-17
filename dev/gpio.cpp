@@ -12,11 +12,6 @@
 
 namespace Device {
 
-IGPIOPort::IGPIOPort(int portNo)
-    : m_portNo(portNo)
-{
-}
-
 GPIOPin::GPIOPin(int id)
     : GPIOPin(pinmux[id].portNo, pinmux[id].pinNo)
 {

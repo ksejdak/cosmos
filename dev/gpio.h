@@ -43,8 +43,6 @@ typedef enum {
 
 class IGPIOPort : public Filesystem::Device {
 public:
-    IGPIOPort(int portNo);
-
     virtual void init() = 0;
     virtual void reset() = 0;
     virtual void enable() = 0;
@@ -57,9 +55,6 @@ public:
     virtual bool setFunction(int id, int function) = 0;
     virtual void setDirection(int pinNo, GPIODirection_t direction) = 0;
     virtual void setResistor(int id, GPIOResitor_t resistor) = 0;
-
-protected:
-    int m_portNo;
 };
 
 class GPIOPin {

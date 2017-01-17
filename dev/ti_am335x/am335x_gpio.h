@@ -45,6 +45,7 @@ public:
 private:
     static const int AM335x_GPIO_PIN_COUNT = 32;
 
+    AM335x_GPIOId_t m_portNo;
     int m_base;
 };
 
