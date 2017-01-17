@@ -41,7 +41,8 @@ AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     , m_base(IGPIOManager::getBaseAddress(portNo))
 {
     // TODO:
-    // - register IRQ handler for given port
+    // - check REVISION register.
+    // - register IRQ handler for given port.
     // - register /dev/gpioX device.
 }
 
@@ -176,9 +177,6 @@ AM335x_GPIOManager::AM335x_GPIOManager()
                AM335x_GPIO_2,
                AM335x_GPIO_3 }
 {
-    // TODO:
-    // - check REVISION register.
-    // - register /dev/gpio-control device.
 }
 
 IGPIOPort& AM335x_GPIOManager::getPort(int portNo)
