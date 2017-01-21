@@ -31,6 +31,7 @@ public:
     AM335x_UART(AM335x_UARTId_t uartNo);
 
     virtual void init() override;
+
     virtual void reset();
     virtual void enable();
     virtual void disable();
