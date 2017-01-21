@@ -9,6 +9,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "gpio.h"
+#include "device_manager.h"
 
 namespace Device {
 
@@ -18,7 +19,7 @@ GPIOPin::GPIOPin(int id)
 }
 
 GPIOPin::GPIOPin(int portNo, int pinNo)
-    : m_port(IGPIOManager::instance()->getPort(portNo))
+    : m_port(DeviceManager<IGPIOPort>::getDevice(portNo))
     , m_pinNo(pinNo)
     , m_id(-1)
 {
@@ -29,7 +30,7 @@ GPIOPin::GPIOPin(int portNo, int pinNo)
         }
     }
 
-    m_port.init();
+    //m_port.init();
 }
 
 bool GPIOPin::setFunction(int function)

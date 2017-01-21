@@ -12,6 +12,7 @@
 #include "beaglebone_black_pinmux.h"
 
 #include <core/console.h>
+#include <dev/device_manager.h>
 #include <dev/gpio.h>
 #include <dev/ti_am335x/am335x_gpio.h>
 
@@ -33,6 +34,8 @@ BeagleBoneBlack::BeagleBoneBlack()
 
 bool BeagleBoneBlack::initDevice()
 {
+    DeviceManager<IGPIOPort>::init();
+
     // Init user led0.
     GPIOPin led0(PIN_USER_LED0);
     led0.setFunction(AM335X_PAD_FUNC_7);

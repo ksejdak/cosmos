@@ -18,6 +18,11 @@ Device::Device()
 {
 }
 
+void Device::init()
+{
+    // Empty.
+}
+
 bool Device::ioctl(uint32_t, void*)
 {
     return true;

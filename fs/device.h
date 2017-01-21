@@ -20,8 +20,9 @@ namespace Filesystem {
 class Device : public File {
 public:
     Device();
+    virtual void init();
 
-    bool ioctl(uint32_t command, void* arg);
+    virtual bool ioctl(uint32_t command, void* arg);
 
 protected:
     bool m_initialized;

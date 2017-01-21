@@ -30,25 +30,19 @@ class AM335x_UART : public IUART {
 public:
     AM335x_UART(AM335x_UARTId_t uartNo);
 
-    virtual void init();
+    virtual void init() override;
     virtual void reset();
     virtual void enable();
     virtual void disable();
 
+public:
+    static constexpr int AM335x_UART_COUNT = 6;
+
+private:
+    static int getBaseAddress(int portNo);
+
 private:
     int m_base;
-};
-
-class AM335x_UARTManager : public IUARTManager {
-public:
-    AM335x_UARTManager();
-
-    virtual IUART& getUART(int uartNo);
-
-private:
-    static const int AM335x_UART_COUNT = 6;
-
-    AM335x_UART m_uarts[AM335x_UART_COUNT];
 };
 
 } // namespace Device

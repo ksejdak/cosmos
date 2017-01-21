@@ -43,7 +43,6 @@ typedef enum {
 
 class IGPIOPort : public Filesystem::Device {
 public:
-    virtual void init() = 0;
     virtual void reset() = 0;
     virtual void enable() = 0;
     virtual void disable() = 0;
@@ -74,23 +73,6 @@ private:
     IGPIOPort& m_port;
     int m_pinNo;
     int m_id;
-};
-
-class IGPIOManager : public Filesystem::Device {
-public:
-    static IGPIOManager* instance() {
-        static IGPIOManager* object = create();
-        return object;
-    }
-
-    static int getBaseAddress(int portNo);
-
-    virtual IGPIOPort& getPort(int portNo) = 0;
-
-protected:
-    static IGPIOManager* create();
-
-    IGPIOManager() {}
 };
 
 } // namespace Device

@@ -12,32 +12,36 @@
 #include "am335x_clock_regs_per.h"
 #include "am335x_clock_regs_wkup.h"
 
+#include <dev/device_manager.h>
 #include <os/assert.h>
 
 namespace Device {
 
-IUARTManager* IUARTManager::create()
+template<>
+int DeviceManager<IUART>::getDeviceCount()
 {
-    return new AM335x_UARTManager();
+    return AM335x_UART::AM335x_UART_COUNT;
 }
 
-int IUARTManager::getBaseAddress(int uartNo)
+template<>
+IUART& DeviceManager<IUART>::getDevice(int id)
 {
-    switch (uartNo) {
-        case AM335x_UART_0:     return UART_0_BASE;
-        case AM335x_UART_1:     return UART_1_BASE;
-        case AM335x_UART_2:     return UART_2_BASE;
-        case AM335x_UART_3:     return UART_3_BASE;
-        case AM335x_UART_4:     return UART_4_BASE;
-        case AM335x_UART_5:     return UART_5_BASE;
-    }
+    static AM335x_UART m_uarts[AM335x_UART::AM335x_UART_COUNT] {
+        AM335x_UART_0,
+        AM335x_UART_1,
+        AM335x_UART_2,
+        AM335x_UART_3,
+        AM335x_UART_4,
+        AM335x_UART_5
+    };
 
-    return -1;
+    assert(id >= 0 && id < getDeviceCount());
+    return m_uarts[id];
 }
 
 AM335x_UART::AM335x_UART(AM335x_UARTId_t uartNo)
     : IUART(uartNo)
-    , m_base(IUARTManager::getBaseAddress(uartNo))
+    , m_base(getBaseAddress(uartNo))
 {
     // TODO:
     // - register IRQ handler for given UART
@@ -62,23 +66,18 @@ void AM335x_UART::disable()
 {
 }
 
-AM335x_UARTManager::AM335x_UARTManager()
-    : m_uarts{ AM335x_UART_0,
-               AM335x_UART_1,
-               AM335x_UART_2,
-               AM335x_UART_3,
-               AM335x_UART_4,
-               AM335x_UART_5 }
+int AM335x_UART::getBaseAddress(int uartNo)
 {
-    // TODO:
-    // - check MVR register.
-    // - register /dev/uart-control device.
-}
+    switch (uartNo) {
+        case AM335x_UART_0:     return UART_0_BASE;
+        case AM335x_UART_1:     return UART_1_BASE;
+        case AM335x_UART_2:     return UART_2_BASE;
+        case AM335x_UART_3:     return UART_3_BASE;
+        case AM335x_UART_4:     return UART_4_BASE;
+        case AM335x_UART_5:     return UART_5_BASE;
+    }
 
-IUART& AM335x_UARTManager::getUART(int uartNo)
-{
-    assert(uartNo >= AM335x_UART_0 && uartNo <= AM335x_UART_5);
-    return m_uarts[uartNo];
+    return -1;
 }
 
 } // namespace Device

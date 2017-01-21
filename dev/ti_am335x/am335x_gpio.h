@@ -29,7 +29,8 @@ class AM335x_GPIOPort : public IGPIOPort {
 public:
     AM335x_GPIOPort(AM335x_GPIOId_t portNo);
 
-    virtual void init();
+    virtual void init() override;
+
     virtual void reset();
     virtual void enable();
     virtual void disable();
@@ -42,23 +43,16 @@ public:
     virtual void setDirection(int pinNo, GPIODirection_t direction);
     virtual void setResistor(int id, GPIOResitor_t resistor);
 
-private:
-    static const int AM335x_GPIO_PIN_COUNT = 32;
+public:
+    static constexpr int AM335x_GPIO_PORT_COUNT = 4;
+    static constexpr int AM335x_GPIO_PIN_COUNT = 32;
 
+private:
+    static int getBaseAddress(int portNo);
+
+private:
     AM335x_GPIOId_t m_portNo;
     int m_base;
-};
-
-class AM335x_GPIOManager : public IGPIOManager {
-public:
-    AM335x_GPIOManager();
-
-    virtual IGPIOPort& getPort(int portNo);
-
-private:
-    static const int AM335x_GPIO_PORT_COUNT = 4;
-
-    AM335x_GPIOPort m_ports[AM335x_GPIO_PORT_COUNT];
 };
 
 } // namespace Device

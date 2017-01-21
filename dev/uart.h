@@ -55,30 +55,12 @@ class IUART : public Filesystem::Device {
 public:
     IUART(int uartNo);
 
-    virtual void init() = 0;
     virtual void reset() = 0;
     virtual void enable() = 0;
     virtual void disable() = 0;
 
 protected:
     int m_uartNo;
-};
-
-class IUARTManager : public Filesystem::Device {
-public:
-    static IUARTManager* instance() {
-        static IUARTManager* object = create();
-        return object;
-    }
-
-    static int getBaseAddress(int uartNo);
-
-    virtual IUART& getUART(int uartNo) = 0;
-
-protected:
-    static IUARTManager* create();
-
-    IUARTManager() {}
 };
 
 } // namespace Device

@@ -12,6 +12,7 @@
 #include "am335x_clock_regs_per.h"
 #include "am335x_clock_regs_wkup.h"
 
+#include <dev/device_manager.h>
 #include <os/assert.h>
 
 namespace Device {
@@ -19,26 +20,29 @@ namespace Device {
 PinMux_t pinmux[] = AM335X_PINMUX;
 int pinmuxSize = sizeof(pinmux) / sizeof(PinMux_t);
 
-IGPIOManager* IGPIOManager::create()
+template<>
+int DeviceManager<IGPIOPort>::getDeviceCount()
 {
-    return new AM335x_GPIOManager();
+    return AM335x_GPIOPort::AM335x_GPIO_PORT_COUNT;
 }
 
-int IGPIOManager::getBaseAddress(int portNo)
+template<>
+IGPIOPort& DeviceManager<IGPIOPort>::getDevice(int id)
 {
-    switch (portNo) {
-        case AM335x_GPIO_0:     return GPIO_0_BASE;
-        case AM335x_GPIO_1:     return GPIO_1_BASE;
-        case AM335x_GPIO_2:     return GPIO_2_BASE;
-        case AM335x_GPIO_3:     return GPIO_3_BASE;
-    }
+    static AM335x_GPIOPort m_ports[AM335x_GPIOPort::AM335x_GPIO_PORT_COUNT] {
+        AM335x_GPIO_0,
+        AM335x_GPIO_1,
+        AM335x_GPIO_2,
+        AM335x_GPIO_3
+    };
 
-    return -1;
+    assert(id >= 0 && id < getDeviceCount());
+    return m_ports[id];
 }
 
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)
     : m_portNo(portNo)
-    , m_base(IGPIOManager::getBaseAddress(portNo))
+    , m_base(getBaseAddress(portNo))
 {
     // TODO:
     // - check REVISION register.
@@ -171,18 +175,16 @@ void AM335x_GPIOPort::setResistor(int id, GPIOResitor_t resistor)
     GPIO_PAD(id)->PAD_PULLUP_SELECT = (resistor == GPIO_RESISTOR_PULLUP);
 }
 
-AM335x_GPIOManager::AM335x_GPIOManager()
-    : m_ports{ AM335x_GPIO_0,
-               AM335x_GPIO_1,
-               AM335x_GPIO_2,
-               AM335x_GPIO_3 }
+int AM335x_GPIOPort::getBaseAddress(int portNo)
 {
-}
+    switch (portNo) {
+        case AM335x_GPIO_0:     return GPIO_0_BASE;
+        case AM335x_GPIO_1:     return GPIO_1_BASE;
+        case AM335x_GPIO_2:     return GPIO_2_BASE;
+        case AM335x_GPIO_3:     return GPIO_3_BASE;
+    }
 
-IGPIOPort& AM335x_GPIOManager::getPort(int portNo)
-{
-    assert(portNo >= AM335x_GPIO_0 && portNo <= AM335x_GPIO_3);
-    return m_ports[portNo];
+    return -1;
 }
 
 } // namespace Device
