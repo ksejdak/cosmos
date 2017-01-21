@@ -20,7 +20,7 @@ Device::Device()
 
 void Device::init()
 {
-    // Empty.
+    m_initialized = true;
 }
 
 bool Device::ioctl(uint32_t, void*)
