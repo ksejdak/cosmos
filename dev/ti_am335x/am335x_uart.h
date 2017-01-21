@@ -13,6 +13,7 @@
 
 #include "am335x_uart_regs.h"
 
+#include <dev/device_manager.h>
 #include <dev/uart.h>
 
 namespace Device {
@@ -45,6 +46,12 @@ private:
 private:
     int m_base;
 };
+
+template<>
+constexpr int DeviceManager<IUART>::getDeviceCount()
+{
+    return AM335x_UART::AM335x_UART_COUNT;
+}
 
 } // namespace Device
 

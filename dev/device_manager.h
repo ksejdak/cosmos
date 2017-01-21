@@ -16,11 +16,12 @@ namespace Device {
 template <typename T>
 class DeviceManager {
 public:
-    static int getDeviceCount();
+    static constexpr int getDeviceCount();
     static T& getDevice(int id);
 
     static void init() {
-        for (int i = 0; i < getDeviceCount(); ++i)
+        constexpr int count = getDeviceCount();
+        for (int i = 0; i < count; ++i)
             getDevice(i).init();
     }
 };

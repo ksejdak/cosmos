@@ -12,7 +12,6 @@
 #include "am335x_clock_regs_per.h"
 #include "am335x_clock_regs_wkup.h"
 
-#include <dev/device_manager.h>
 #include <os/assert.h>
 
 namespace Device {
@@ -21,15 +20,9 @@ PinMux_t pinmux[] = AM335X_PINMUX;
 int pinmuxSize = sizeof(pinmux) / sizeof(PinMux_t);
 
 template<>
-int DeviceManager<IGPIOPort>::getDeviceCount()
-{
-    return AM335x_GPIOPort::AM335x_GPIO_PORT_COUNT;
-}
-
-template<>
 IGPIOPort& DeviceManager<IGPIOPort>::getDevice(int id)
 {
-    static AM335x_GPIOPort m_ports[AM335x_GPIOPort::AM335x_GPIO_PORT_COUNT] {
+    static AM335x_GPIOPort ports[getDeviceCount()] {
         AM335x_GPIO_0,
         AM335x_GPIO_1,
         AM335x_GPIO_2,
@@ -37,7 +30,7 @@ IGPIOPort& DeviceManager<IGPIOPort>::getDevice(int id)
     };
 
     assert(id >= 0 && id < getDeviceCount());
-    return m_ports[id];
+    return ports[id];
 }
 
 AM335x_GPIOPort::AM335x_GPIOPort(AM335x_GPIOId_t portNo)

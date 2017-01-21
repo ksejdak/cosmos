@@ -12,21 +12,14 @@
 #include "am335x_clock_regs_per.h"
 #include "am335x_clock_regs_wkup.h"
 
-#include <dev/device_manager.h>
 #include <os/assert.h>
 
 namespace Device {
 
 template<>
-int DeviceManager<IUART>::getDeviceCount()
-{
-    return AM335x_UART::AM335x_UART_COUNT;
-}
-
-template<>
 IUART& DeviceManager<IUART>::getDevice(int id)
 {
-    static AM335x_UART m_uarts[AM335x_UART::AM335x_UART_COUNT] {
+    static AM335x_UART uarts[AM335x_UART::AM335x_UART_COUNT] {
         AM335x_UART_0,
         AM335x_UART_1,
         AM335x_UART_2,
@@ -36,7 +29,7 @@ IUART& DeviceManager<IUART>::getDevice(int id)
     };
 
     assert(id >= 0 && id < getDeviceCount());
-    return m_uarts[id];
+    return uarts[id];
 }
 
 AM335x_UART::AM335x_UART(AM335x_UARTId_t uartNo)

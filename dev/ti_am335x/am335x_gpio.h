@@ -14,6 +14,7 @@
 #include "am335x_gpio_pad.h"
 #include "am335x_gpio_regs.h"
 
+#include <dev/device_manager.h>
 #include <dev/gpio.h>
 
 namespace Device {
@@ -54,6 +55,12 @@ private:
     AM335x_GPIOId_t m_portNo;
     int m_base;
 };
+
+template<>
+constexpr int DeviceManager<IGPIOPort>::getDeviceCount()
+{
+    return AM335x_GPIOPort::AM335x_GPIO_PORT_COUNT;
+}
 
 } // namespace Device
 
