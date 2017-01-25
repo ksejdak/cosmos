@@ -47,7 +47,7 @@ void AM335x_UART::init()
         return;
     
     // Enable interface and functional clocks.
-    switch (m_portNo) {
+    switch (m_uartNo) {
         case AM335x_UART_0:
             CM_PER_L3_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_L3_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
