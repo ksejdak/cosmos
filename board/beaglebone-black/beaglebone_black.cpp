@@ -48,10 +48,6 @@ bool BeagleBoneBlack::initDevice()
     consoleTx.setFunction(AM335X_PAD_FUNC_0);
     consoleTx.setDirection(GPIO_OUTPUT);
 
-    GPIOPin consoleRx(PIN_P9_26);
-    consoleRx.setFunction(AM335X_PAD_FUNC_0);
-    consoleTx.setDirection(GPIO_INPUT);
-
     if (!console.init())
         return false;
 
