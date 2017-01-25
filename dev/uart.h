@@ -53,14 +53,9 @@ typedef enum {
 
 class IUART : public Filesystem::Device {
 public:
-    IUART(int uartNo);
-
     virtual void reset() = 0;
     virtual void enable() = 0;
     virtual void disable() = 0;
-
-protected:
-    int m_uartNo;
 };
 
 } // namespace Device

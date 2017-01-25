@@ -34,8 +34,8 @@ public:
     virtual void init() override;
 
     virtual void reset();
-    virtual void enable();
-    virtual void disable();
+    virtual void enable() {}
+    virtual void disable() {}
 
 public:
     static constexpr int AM335x_UART_COUNT = 6;
@@ -44,6 +44,7 @@ private:
     static int getBaseAddress(int portNo);
 
 private:
+    AM335x_UARTId_t m_uartNo;
     int m_base;
 };
 
