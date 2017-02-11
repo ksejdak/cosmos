@@ -56,6 +56,8 @@ public:
     virtual void reset() = 0;
     virtual void enable() = 0;
     virtual void disable() = 0;
+
+    virtual void setBaudRate(unsigned int baudRate) = 0;
 };
 
 } // namespace Device

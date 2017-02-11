@@ -19,7 +19,7 @@ namespace Device {
 template<>
 IUART& DeviceManager<IUART>::getDevice(int id)
 {
-    static AM335x_UART uarts[AM335x_UART::AM335x_UART_COUNT] {
+    static AM335x_UART uarts[getDeviceCount()] {
         AM335x_UART_0,
         AM335x_UART_1,
         AM335x_UART_2,
@@ -119,8 +119,17 @@ void AM335x_UART::init()
 
 void AM335x_UART::reset()
 {
-    UART_SYSC(m_base)->SOFTRESET = 1;
+    UART_SYSC(m_base)->SOFTRESET = true;
     while (!UART_SYSS(m_base)->RESETDONE);
+}
+
+void AM335x_UART::setBaudRate(unsigned int baudRate)
+{
+    if (baudRate == 0) {
+        UART_DLL(m_base)->CLOCK_LSB = 0;
+        UART_DLH(m_base)->CLOCK_MSB = 0;
+        return;
+    }
 }
 
 int AM335x_UART::getBaseAddress(int uartNo)
@@ -135,6 +144,77 @@ int AM335x_UART::getBaseAddress(int uartNo)
     }
 
     return -1;
+}
+
+bool AM335x_UART::setEnhancements(bool value)
+{
+    // Enable access to EFR register.
+    uint32_t savedLCR = setConfigMode(UART_CONFIG_MODE_B);
+
+    volatile bool savedEnhancements = UART_EFR(m_base)->ENHANCEDEN;
+    UART_EFR(m_base)->ENHANCEDEN = value;
+
+    // Restore LCR register.
+    UART_LCR(m_base)->value = savedLCR;
+    
+    return savedEnhancements;
+}
+
+bool AM335x_UART::setTCRTLRAccess(bool value)
+{
+    // Enable access to MCR register.
+    uint32_t savedLCR = setConfigMode(UART_CONFIG_MODE_A);
+
+    volatile bool savedTCRTLC = UART_MCR(m_base)->TCRTLR;
+    UART_MCR(m_base)->TCRTLR = value;
+
+    // Restore LCR register.
+    UART_LCR(m_base)->value = savedLCR;
+
+    return savedTCRTLC;
+}
+
+uint32_t AM335x_UART::setConfigMode(AM335x_UARTConfigMode_t mode)
+{
+    uint32_t result = UART_LCR(m_base)->value;
+
+    switch (mode) {
+        case UART_CONFIG_MODE_A:
+        case UART_CONFIG_MODE_B:
+            UART_LCR(m_base)->value = mode;
+            break;
+
+        case UART_CONFIG_MODE_OPERATIONAL:
+            UART_LCR(m_base)->value &= mode;
+            break;
+    }
+
+    return result;
+}
+
+void AM335x_UART::initFIFO()
+{
+    bool savedEnhancements = setEnhancements(true);
+    bool savedTCRTLC = setTCRTLRAccess(true);
+
+    //UART_FCR(m_base)->RX_FIFO_TRIG = xxx;
+    //UART_FCR(m_base)->TX_FIFO_TRIG = xxx;
+    //UART_FCR(m_base)->DMA_MODE = xxx;
+
+    // Disable baud clock before enabling FIFO.
+    setBaudRate(0);
+    UART_FCR(m_base)->FIFO_EN = true;
+
+    //UART_TLR(m_base)->RX_FIFO_TRIG_DMA = xxx;
+    //UART_TLR(m_base)->TX_FIFO_TRIG_DMA = xxx;
+
+    //UART_SCR(m_base)->RXTRIGGRANU1 = xxx;
+    //UART_SCR(m_base)->TXTRIGGRANU1 = xxx;
+    //UART_SCR(m_base)->DMAMODE2 = xxx;
+    //UART_SCR(m_base)->DMAMODECTL = xxx;
+
+    setTCRTLRAccess(savedTCRTLC);
+    setEnhancements(savedEnhancements);
 }
 
 } // namespace Device
