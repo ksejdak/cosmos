@@ -97,18 +97,18 @@ void AM335x_GPIOPort::init()
 
 void AM335x_GPIOPort::reset()
 {
-    GPIO_SYSCONFIG(m_base)->SOFTRESET = 1;
+    GPIO_SYSCONFIG(m_base)->SOFTRESET = true;
     while (!GPIO_SYSSTATUS(m_base)->RESETDONE);
 }
 
 void AM335x_GPIOPort::enable()
 {
-    GPIO_CTRL(m_base)->DISABLEMODULE = 0;
+    GPIO_CTRL(m_base)->DISABLEMODULE = false;
 }
 
 void AM335x_GPIOPort::disable()
 {
-    GPIO_CTRL(m_base)->DISABLEMODULE = 1;
+    GPIO_CTRL(m_base)->DISABLEMODULE = true;
 }
 
 uint32_t AM335x_GPIOPort::read()
@@ -147,7 +147,7 @@ bool AM335x_GPIOPort::setFunction(int id, int function)
         return false;
 
     GPIO_PAD(id)->PAD_FUNC = function;
-    GPIO_PAD(id)->PAD_SLEW_RATE = 0;
+    GPIO_PAD(id)->PAD_SLEW_RATE = false;
     return true;
 }
 
