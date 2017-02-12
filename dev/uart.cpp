@@ -11,5 +11,7 @@
 #include "uart.h"
 
 namespace Device {
+namespace UART {
 
+} // namespace UART
 } // namespace Device

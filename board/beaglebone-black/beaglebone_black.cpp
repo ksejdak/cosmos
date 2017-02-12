@@ -17,7 +17,8 @@
 #include <dev/ti_am335x/am335x_gpio.h>
 
 using namespace Device;
-using namespace AM335x;
+using namespace Device::GPIO;
+using namespace Device::GPIO::AM335x;
 
 namespace Board {
 

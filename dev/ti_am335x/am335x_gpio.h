@@ -18,6 +18,7 @@
 #include <dev/gpio.h>
 
 namespace Device {
+namespace GPIO {
 namespace AM335x {
 
 typedef enum {
@@ -57,11 +58,12 @@ private:
 };
 
 } // namespace AM335x
+} // namespace GPIO
 
 template<>
-constexpr int DeviceManager<IGPIOPort>::getDeviceCount()
+constexpr int DeviceManager<GPIO::IGPIOPort>::getDeviceCount()
 {
-    return AM335x::AM335x_GPIOPort::GPIO_PORT_COUNT;
+    return GPIO::AM335x::AM335x_GPIOPort::GPIO_PORT_COUNT;
 }
 
 } // namespace Device

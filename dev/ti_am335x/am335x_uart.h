@@ -17,6 +17,7 @@
 #include <dev/uart.h>
 
 namespace Device {
+namespace UART {
 namespace AM335x {
 
 typedef enum {
@@ -67,7 +68,7 @@ public:
     void enableFIFO(bool enabled);
 
 public:
-    static constexpr int AM335x_UART_COUNT = 6;
+    static constexpr int UART_COUNT = 6;
 
 private:
     static int getBaseAddress(int portNo);
@@ -84,11 +85,12 @@ private:
 };
 
 } // namespace AM335x
+} // namespace UART
 
 template<>
-constexpr int DeviceManager<IUART>::getDeviceCount()
+constexpr int DeviceManager<UART::IUART>::getDeviceCount()
 {
-    return AM335x::AM335x_UART::AM335x_UART_COUNT;
+    return UART::AM335x::AM335x_UART::UART_COUNT;
 }
 
 } // namespace Device

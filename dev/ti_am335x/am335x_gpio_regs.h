@@ -15,6 +15,7 @@
 #include <os/utils.h>
 
 namespace Device {
+namespace GPIO {
 namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,6 +282,7 @@ typedef union {
 #define GPIO_SETDATAOUT(GPIO_BASE)          REGISTER(GPIO_SETDATAOUT_t, (GPIO_BASE + 0x194))
 
 } // namespace AM335x
+} // namespace GPIO
 } // namespace Device
 
 #endif

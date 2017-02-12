@@ -15,6 +15,7 @@
 #include <os/utils.h>
 
 namespace Device {
+namespace GPIO {
 namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,6 +197,7 @@ typedef enum {
 }
 
 } // namespace AM335x
+} // namespace GPIO
 } // namespace Device
 
 #endif

@@ -17,6 +17,7 @@
 #define PIN_MASK(gpioPinNo)     (1 << gpioPinNo)
 
 namespace Device {
+namespace GPIO {
 
 // Each pin has following description:
 // - id      - unique number defining processor pin (ex. sequence number)
@@ -75,6 +76,7 @@ private:
     int m_id;
 };
 
+} // namespace GPIO
 } // namespace Device
 
 #endif

@@ -17,21 +17,24 @@
 namespace Device {
 
 template<>
-IUART& DeviceManager<IUART>::getDevice(int id)
+UART::IUART& DeviceManager<UART::IUART>::getDevice(int id)
 {
-    static AM335x::AM335x_UART uarts[getDeviceCount()] {
-        AM335x::UART_0,
-        AM335x::UART_1,
-        AM335x::UART_2,
-        AM335x::UART_3,
-        AM335x::UART_4,
-        AM335x::UART_5
+    using namespace UART::AM335x;
+
+    static AM335x_UART uarts[getDeviceCount()] {
+        UART_0,
+        UART_1,
+        UART_2,
+        UART_3,
+        UART_4,
+        UART_5
     };
 
     assert(id >= 0 && id < getDeviceCount());
     return uarts[id];
 }
 
+namespace UART {
 namespace AM335x {
 
 int AM335x_UART::getBaseAddress(int uartNo)
@@ -59,6 +62,8 @@ AM335x_UART::AM335x_UART(UARTId_t uartNo)
 
 void AM335x_UART::init()
 {
+    using namespace Clock::AM335x;
+
     if (m_initialized)
         return;
     
@@ -243,4 +248,5 @@ void AM335x_UART::initFIFO()
 }
 
 } // namespace AM335x
+} // namespace UART
 } // namespace Device

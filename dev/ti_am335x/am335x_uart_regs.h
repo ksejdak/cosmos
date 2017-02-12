@@ -15,6 +15,7 @@
 #include <os/utils.h>
 
 namespace Device {
+namespace UART {
 namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -694,6 +695,7 @@ typedef union {
 #define UART_TX_DMA_THRESHOLD(UART_BASE) REGISTER(UART_TX_DMA_THRESHOLD_t, (UART_BASE + 0x84))
 
 } // namespace AM335x
+} // namespace UART
 } // namespace Device
 
 #endif
