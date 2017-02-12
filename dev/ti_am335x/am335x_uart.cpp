@@ -19,34 +19,36 @@ namespace Device {
 template<>
 IUART& DeviceManager<IUART>::getDevice(int id)
 {
-    static AM335x_UART uarts[getDeviceCount()] {
-        AM335x_UART_0,
-        AM335x_UART_1,
-        AM335x_UART_2,
-        AM335x_UART_3,
-        AM335x_UART_4,
-        AM335x_UART_5
+    static AM335x::AM335x_UART uarts[getDeviceCount()] {
+        AM335x::UART_0,
+        AM335x::UART_1,
+        AM335x::UART_2,
+        AM335x::UART_3,
+        AM335x::UART_4,
+        AM335x::UART_5
     };
 
     assert(id >= 0 && id < getDeviceCount());
     return uarts[id];
 }
 
+namespace AM335x {
+
 int AM335x_UART::getBaseAddress(int uartNo)
 {
     switch (uartNo) {
-        case AM335x_UART_0:     return UART_0_BASE;
-        case AM335x_UART_1:     return UART_1_BASE;
-        case AM335x_UART_2:     return UART_2_BASE;
-        case AM335x_UART_3:     return UART_3_BASE;
-        case AM335x_UART_4:     return UART_4_BASE;
-        case AM335x_UART_5:     return UART_5_BASE;
+        case UART_0:     return UART_0_BASE;
+        case UART_1:     return UART_1_BASE;
+        case UART_2:     return UART_2_BASE;
+        case UART_3:     return UART_3_BASE;
+        case UART_4:     return UART_4_BASE;
+        case UART_5:     return UART_5_BASE;
     }
 
     return -1;
 }
 
-AM335x_UART::AM335x_UART(AM335x_UARTId_t uartNo)
+AM335x_UART::AM335x_UART(UARTId_t uartNo)
     : m_uartNo(uartNo)
     , m_base(getBaseAddress(uartNo))
 {
@@ -62,7 +64,7 @@ void AM335x_UART::init()
     
     // Enable interface and functional clocks.
     switch (m_uartNo) {
-        case AM335x_UART_0:
+        case UART_0:
             CM_PER_L3_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_L3_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             CM_PER_L3_INSTR_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
@@ -94,31 +96,31 @@ void AM335x_UART::init()
             while (CM_WKUP_CLKSTCTRL->CLKACTIVITY_UART0_GFCLK != CM_WKUP_CLK_ACTIVE);
             while (CM_WKUP_UART0_CLKCTRL->IDLEST != CM_WKUP_IDLEST_FUNCTIONAL);
             break;
-        case AM335x_UART_1:
+        case UART_1:
             CM_PER_UART1_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_UART1_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_L4LS_GCLK != CM_PER_CLK_ACTIVE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_UART_GFCLK != CM_PER_CLK_ACTIVE);
             break;
-        case AM335x_UART_2:
+        case UART_2:
             CM_PER_UART2_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_UART2_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_L4LS_GCLK != CM_PER_CLK_ACTIVE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_UART_GFCLK != CM_PER_CLK_ACTIVE);
             break;
-        case AM335x_UART_3:
+        case UART_3:
             CM_PER_UART3_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_UART3_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_L4LS_GCLK != CM_PER_CLK_ACTIVE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_UART_GFCLK != CM_PER_CLK_ACTIVE);
             break;
-        case AM335x_UART_4:
+        case UART_4:
             CM_PER_UART4_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_UART4_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_L4LS_GCLK != CM_PER_CLK_ACTIVE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_UART_GFCLK != CM_PER_CLK_ACTIVE);
             break;
-        case AM335x_UART_5:
+        case UART_5:
             CM_PER_UART5_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_UART5_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_L4LS_GCLK != CM_PER_CLK_ACTIVE);
@@ -146,13 +148,13 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
     }
 }
 
-void AM335x_UART::setTriggerGranularity(AM335x_UARTTrigGranularity_t rxGranulatiry, AM335x_UARTTrigGranularity_t txGranulatiry)
+void AM335x_UART::setTriggerGranularity(UARTTrigGranularity_t rxGranulatiry, UARTTrigGranularity_t txGranulatiry)
 {
     UART_SCR(m_base)->RXTRIGGRANU1 = rxGranulatiry;
     UART_SCR(m_base)->TXTRIGGRANU1 = txGranulatiry;
 }
 
-void AM335x_UART::setTriggerLevels(AM335x_UARTFIFOTrigLevel_t rxLevel, AM335x_UARTFIFOTrigLevel_t txLevel)
+void AM335x_UART::setTriggerLevels(UARTFIFOTrigLevel_t rxLevel, UARTFIFOTrigLevel_t txLevel)
 {
     // Enable access to FCR[5:4].
     bool savedEnhancements = enableEnhancements(true);
@@ -208,7 +210,7 @@ bool AM335x_UART::enableTCRTLRAccess(bool enable)
     return savedTCRTLC;
 }
 
-uint32_t AM335x_UART::setConfigMode(AM335x_UARTConfigMode_t mode)
+uint32_t AM335x_UART::setConfigMode(UARTConfigMode_t mode)
 {
     uint32_t result = UART_LCR(m_base)->value;
 
@@ -240,4 +242,5 @@ void AM335x_UART::initFIFO()
     //enableTCRTLRAccess(savedTCRTLC);
 }
 
+} // namespace AM335x
 } // namespace Device

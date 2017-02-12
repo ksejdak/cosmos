@@ -15,6 +15,7 @@
 #include <os/utils.h>
 
 namespace Device {
+namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -797,6 +798,7 @@ typedef enum {
 #define CM_PER_CLKDIV32K_CLKCTRL        REGISTER(CM_PER_CLKDIV32K_CLKCTRL_t, (CM_PER_REGISTERS_BASE + 0x14c))
 #define CM_PER_CLK_24MHZ_CLKSTCTRL      REGISTER(CM_PER_CLK_24MHZ_CLKSTCTRL_t, (CM_PER_REGISTERS_BASE + 0x150))
 
+} // namespace AM335x
 } // namespace Device
 
 #endif
