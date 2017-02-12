@@ -33,17 +33,37 @@ typedef enum {
     UART_CONFIG_MODE_OPERATIONAL = 0x7f
 } AM335x_UARTConfigMode_t;
 
+typedef enum {
+    UART_TRIG_GRANULARITY_4 = 0x0,
+    UART_TRIG_GRANULARITY_1 = 0x1
+} AM335x_UARTTrigGranularity_t;
+
+typedef enum {
+    UART_FIFO_TRIG_LEVEL_8  = 0x0,
+    UART_FIFO_TRIG_LEVEL_16 = 0x1,
+    UART_FIFO_TRIG_LEVEL_56 = 0x2,
+    UART_FIFO_TRIG_LEVEL_60 = 0x3
+} AM335x_UARTFIFOTrigLevel_t;
+
+typedef enum {
+    UART_DMA_DISABLED = 0x0,
+    UART_DMA_MODE_1   = 0x1
+} AM335x_UARTDMAMode_t;
+
 class AM335x_UART : public IUART {
 public:
     AM335x_UART(AM335x_UARTId_t uartNo);
 
     virtual void init() override;
-
     virtual void reset();
     virtual void enable() {}
     virtual void disable() {}
 
-    virtual void setBaudRate(unsigned int baudRate);
+    void setBaudRate(unsigned int baudRate);
+    void setTriggerGranularity(AM335x_UARTTrigGranularity_t rxGranulatiry, AM335x_UARTTrigGranularity_t txGranulatiry);
+    void setTriggerLevels(AM335x_UARTFIFOTrigLevel_t rxLevel, AM335x_UARTFIFOTrigLevel_t txLevel);
+    void enableDMA(bool enabled);
+    void enableFIFO(bool enabled);
 
 public:
     static constexpr int AM335x_UART_COUNT = 6;
@@ -51,8 +71,8 @@ public:
 private:
     static int getBaseAddress(int portNo);
 
-    bool setEnhancements(bool value);
-    bool setTCRTLRAccess(bool value);
+    bool enableEnhancements(bool enable);
+    bool enableTCRTLRAccess(bool enable);
     uint32_t setConfigMode(AM335x_UARTConfigMode_t mode);
 
     void initFIFO();
