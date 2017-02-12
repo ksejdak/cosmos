@@ -15,6 +15,7 @@
 #include <os/utils.h>
 
 namespace Device {
+namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -194,6 +195,7 @@ typedef enum {
     { 3, 20 }           \
 }
 
+} // namespace AM335x
 } // namespace Device
 
 #endif

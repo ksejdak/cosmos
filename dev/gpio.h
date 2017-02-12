@@ -47,13 +47,13 @@ public:
     virtual void enable() = 0;
     virtual void disable() = 0;
 
-    virtual uint32_t read() = 0;
-    virtual bool write(uint32_t value) = 0;
-    virtual bool writePin(int pinNo, bool state) = 0;
-
     virtual bool setFunction(int id, int function) = 0;
     virtual void setDirection(int pinNo, GPIODirection_t direction) = 0;
     virtual void setResistor(int id, GPIOResitor_t resistor) = 0;
+
+    virtual uint32_t read() = 0;
+    virtual bool write(uint32_t value) = 0;
+    virtual bool writePin(int pinNo, bool state) = 0;
 };
 
 class GPIOPin {

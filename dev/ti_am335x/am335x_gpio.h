@@ -18,48 +18,50 @@
 #include <dev/gpio.h>
 
 namespace Device {
+namespace AM335x {
 
 typedef enum {
-    AM335x_GPIO_0,
-    AM335x_GPIO_1,
-    AM335x_GPIO_2,
-    AM335x_GPIO_3
-} AM335x_GPIOId_t;
+    GPIO_0,
+    GPIO_1,
+    GPIO_2,
+    GPIO_3
+} GPIOId_t;
 
 class AM335x_GPIOPort : public IGPIOPort {
 public:
-    AM335x_GPIOPort(AM335x_GPIOId_t portNo);
+    AM335x_GPIOPort(GPIOId_t portNo);
 
     virtual void init() override;
-
     virtual void reset();
     virtual void enable();
     virtual void disable();
-
-    virtual uint32_t read();
-    virtual bool write(uint32_t value);
-    virtual bool writePin(int pinNo, bool state);
 
     virtual bool setFunction(int id, int function);
     virtual void setDirection(int pinNo, GPIODirection_t direction);
     virtual void setResistor(int id, GPIOResitor_t resistor);
 
+    virtual uint32_t read();
+    virtual bool write(uint32_t value);
+    virtual bool writePin(int pinNo, bool state);
+
 public:
-    static constexpr int AM335x_GPIO_PORT_COUNT = 4;
-    static constexpr int AM335x_GPIO_PIN_COUNT = 32;
+    static constexpr int GPIO_PORT_COUNT = 4;
+    static constexpr int GPIO_PIN_COUNT = 32;
 
 private:
     static int getBaseAddress(int portNo);
 
 private:
-    AM335x_GPIOId_t m_portNo;
+    GPIOId_t m_portNo;
     int m_base;
 };
+
+} // namespace AM335x
 
 template<>
 constexpr int DeviceManager<IGPIOPort>::getDeviceCount()
 {
-    return AM335x_GPIOPort::AM335x_GPIO_PORT_COUNT;
+    return AM335x::AM335x_GPIOPort::GPIO_PORT_COUNT;
 }
 
 } // namespace Device
