@@ -111,6 +111,33 @@ void AM335x_GPIOPort::disable()
     GPIO_CTRL(m_base)->DISABLEMODULE = true;
 }
 
+bool AM335x_GPIOPort::setFunction(int id, int function)
+{
+    if (function < AM335X_PAD_FUNC_0 || function > AM335X_PAD_FUNC_7)
+        return false;
+
+    GPIO_PAD(id)->PAD_FUNC = function;
+    GPIO_PAD(id)->PAD_SLEW_RATE = false;
+    return true;
+}
+
+void AM335x_GPIOPort::setDirection(int pinNo, GPIODirection_t direction)
+{
+    if (direction == GPIO_INPUT)
+        GPIO_OE(m_base)->OUTPUTENn |= PIN_MASK(pinNo);
+    else
+        GPIO_OE(m_base)->OUTPUTENn &= ~PIN_MASK(pinNo);
+}
+
+void AM335x_GPIOPort::setResistor(int id, GPIOResitor_t resistor)
+{
+    GPIO_PAD(id)->PAD_PULLUP_ENABLE = (resistor != GPIO_RESISTOR_NONE);
+    if (resistor == GPIO_RESISTOR_NONE)
+        return;
+
+    GPIO_PAD(id)->PAD_PULLUP_SELECT = (resistor == GPIO_RESISTOR_PULLUP);
+}
+
 uint32_t AM335x_GPIOPort::read()
 {
     volatile uint32_t value = GPIO_DATAIN(m_base)->DATAINn;
@@ -139,33 +166,6 @@ bool AM335x_GPIOPort::writePin(int pinNo, bool state)
         GPIO_CLEARDATAOUT(m_base)->INTLINEn = PIN_MASK(pinNo);
 
     return true;
-}
-
-bool AM335x_GPIOPort::setFunction(int id, int function)
-{
-    if (function < AM335X_PAD_FUNC_0 || function > AM335X_PAD_FUNC_7)
-        return false;
-
-    GPIO_PAD(id)->PAD_FUNC = function;
-    GPIO_PAD(id)->PAD_SLEW_RATE = false;
-    return true;
-}
-
-void AM335x_GPIOPort::setDirection(int pinNo, GPIODirection_t direction)
-{
-    if (direction == GPIO_INPUT)
-        GPIO_OE(m_base)->OUTPUTENn |= PIN_MASK(pinNo);
-    else
-        GPIO_OE(m_base)->OUTPUTENn &= ~PIN_MASK(pinNo);
-}
-
-void AM335x_GPIOPort::setResistor(int id, GPIOResitor_t resistor)
-{
-    GPIO_PAD(id)->PAD_PULLUP_ENABLE = (resistor != GPIO_RESISTOR_NONE);
-    if (resistor == GPIO_RESISTOR_NONE)
-        return;
-
-    GPIO_PAD(id)->PAD_PULLUP_SELECT = (resistor == GPIO_RESISTOR_PULLUP);
 }
 
 int AM335x_GPIOPort::getBaseAddress(int portNo)

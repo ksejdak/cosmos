@@ -31,18 +31,17 @@ public:
     AM335x_GPIOPort(AM335x_GPIOId_t portNo);
 
     virtual void init() override;
-
     virtual void reset();
     virtual void enable();
     virtual void disable();
 
-    virtual uint32_t read();
-    virtual bool write(uint32_t value);
-    virtual bool writePin(int pinNo, bool state);
-
     virtual bool setFunction(int id, int function);
     virtual void setDirection(int pinNo, GPIODirection_t direction);
     virtual void setResistor(int id, GPIOResitor_t resistor);
+
+    virtual uint32_t read();
+    virtual bool write(uint32_t value);
+    virtual bool writePin(int pinNo, bool state);
 
 public:
     static constexpr int AM335x_GPIO_PORT_COUNT = 4;
