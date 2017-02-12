@@ -38,16 +38,16 @@ public:
     virtual void disable();
 
     virtual bool setFunction(int id, int function);
-    virtual void setDirection(int pinNo, GPIODirection_t direction);
-    virtual void setResistor(int id, GPIOResitor_t resistor);
+    virtual void setDirection(int pinNo, Direction_t direction);
+    virtual void setResistor(int id, Resitor_t resistor);
 
     virtual uint32_t read();
     virtual bool write(uint32_t value);
     virtual bool writePin(int pinNo, bool state);
 
 public:
-    static constexpr int GPIO_PORT_COUNT = 4;
-    static constexpr int GPIO_PIN_COUNT = 32;
+    static constexpr int PORT_COUNT = 4;
+    static constexpr int PIN_COUNT = 32;
 
 private:
     static int getBaseAddress(int portNo);
@@ -63,7 +63,7 @@ private:
 template<>
 constexpr int DeviceManager<GPIO::IGPIOPort>::getDeviceCount()
 {
-    return GPIO::AM335x::AM335x_GPIOPort::GPIO_PORT_COUNT;
+    return GPIO::AM335x::AM335x_GPIOPort::PORT_COUNT;
 }
 
 } // namespace Device

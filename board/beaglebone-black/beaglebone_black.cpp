@@ -18,7 +18,6 @@
 
 using namespace Device;
 using namespace Device::GPIO;
-using namespace Device::GPIO::AM335x;
 
 namespace Board {
 
@@ -40,15 +39,15 @@ bool BeagleBoneBlack::initDevice()
 
     // Init user led0.
     GPIOPin led0(PIN_USER_LED0);
-    led0.setFunction(AM335X_PAD_FUNC_7);
-    led0.setDirection(GPIO_OUTPUT);
-    led0.setResistor(GPIO_RESISTOR_NONE);
+    led0.setFunction(AM335x::PAD_FUNC_7);
+    led0.setDirection(DIRECTION_OUTPUT);
+    led0.setResistor(RESISTOR_NONE);
     led0.write(true);
 
     // Init console on UART1.
     GPIOPin consoleTx(PIN_P9_24);
-    consoleTx.setFunction(AM335X_PAD_FUNC_0);
-    consoleTx.setDirection(GPIO_OUTPUT);
+    consoleTx.setFunction(AM335x::PAD_FUNC_0);
+    consoleTx.setDirection(DIRECTION_OUTPUT);
 
     if (!console.init())
         return false;

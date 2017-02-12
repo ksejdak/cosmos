@@ -30,27 +30,27 @@ typedef enum {
 } UARTId_t;
 
 typedef enum {
-    UART_CONFIG_MODE_A           = 0x80,
-    UART_CONFIG_MODE_B           = 0xbf,
-    UART_CONFIG_MODE_OPERATIONAL = 0x7f
-} UARTConfigMode_t;
+    CONFIG_MODE_A           = 0x80,
+    CONFIG_MODE_B           = 0xbf,
+    CONFIG_MODE_OPERATIONAL = 0x7f
+} ConfigMode_t;
 
 typedef enum {
-    UART_TRIG_GRANULARITY_4 = 0x0,
-    UART_TRIG_GRANULARITY_1 = 0x1
-} UARTTrigGranularity_t;
+    TRIG_GRANULARITY_4 = 0x0,
+    TRIG_GRANULARITY_1 = 0x1
+} TrigGranularity_t;
 
 typedef enum {
-    UART_FIFO_TRIG_LEVEL_8  = 0x0,
-    UART_FIFO_TRIG_LEVEL_16 = 0x1,
-    UART_FIFO_TRIG_LEVEL_56 = 0x2,
-    UART_FIFO_TRIG_LEVEL_60 = 0x3
-} UARTFIFOTrigLevel_t;
+    FIFO_TRIG_LEVEL_8  = 0x0,
+    FIFO_TRIG_LEVEL_16 = 0x1,
+    FIFO_TRIG_LEVEL_56 = 0x2,
+    FIFO_TRIG_LEVEL_60 = 0x3
+} FIFOTrigLevel_t;
 
 typedef enum {
-    UART_DMA_DISABLED = 0x0,
-    UART_DMA_MODE_1   = 0x1
-} UARTDMAMode_t;
+    DMA_DISABLED = 0x0,
+    DMA_MODE_1   = 0x1
+} DMAMode_t;
 
 class AM335x_UART : public IUART {
 public:
@@ -62,20 +62,20 @@ public:
     virtual void disable() {}
 
     void setBaudRate(unsigned int baudRate);
-    void setTriggerGranularity(UARTTrigGranularity_t rxGranulatiry, UARTTrigGranularity_t txGranulatiry);
-    void setTriggerLevels(UARTFIFOTrigLevel_t rxLevel, UARTFIFOTrigLevel_t txLevel);
+    void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
+    void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
     void enableDMA(bool enabled);
     void enableFIFO(bool enabled);
 
 public:
-    static constexpr int UART_COUNT = 6;
+    static constexpr int PORT_COUNT = 6;
 
 private:
     static int getBaseAddress(int portNo);
 
     bool enableEnhancements(bool enable);
     bool enableTCRTLRAccess(bool enable);
-    uint32_t setConfigMode(UARTConfigMode_t mode);
+    uint32_t setConfigMode(ConfigMode_t mode);
 
     void initFIFO();
 
@@ -90,7 +90,7 @@ private:
 template<>
 constexpr int DeviceManager<UART::IUART>::getDeviceCount()
 {
-    return UART::AM335x::AM335x_UART::UART_COUNT;
+    return UART::AM335x::AM335x_UART::PORT_COUNT;
 }
 
 } // namespace Device

@@ -32,15 +32,15 @@ extern PinMux_t pinmux[];
 extern int pinmuxSize;
 
 typedef enum {
-    GPIO_INPUT,
-    GPIO_OUTPUT
-} GPIODirection_t;
+    DIRECTION_INPUT,
+    DIRECTION_OUTPUT
+} Direction_t;
 
 typedef enum {
-    GPIO_RESISTOR_NONE,
-    GPIO_RESISTOR_PULLUP,
-    GPIO_RESISTOR_PULLDOWN
-} GPIOResitor_t;
+    RESISTOR_NONE,
+    RESISTOR_PULLUP,
+    RESISTOR_PULLDOWN
+} Resitor_t;
 
 class IGPIOPort : public Filesystem::Device {
 public:
@@ -49,8 +49,8 @@ public:
     virtual void disable() = 0;
 
     virtual bool setFunction(int id, int function) = 0;
-    virtual void setDirection(int pinNo, GPIODirection_t direction) = 0;
-    virtual void setResistor(int id, GPIOResitor_t resistor) = 0;
+    virtual void setDirection(int pinNo, Direction_t direction) = 0;
+    virtual void setResistor(int id, Resitor_t resistor) = 0;
 
     virtual uint32_t read() = 0;
     virtual bool write(uint32_t value) = 0;
@@ -63,8 +63,8 @@ public:
     GPIOPin(int portNo, int pinNo);
 
     bool setFunction(int function);
-    void setDirection(GPIODirection_t direction);
-    void setResistor(GPIOResitor_t resistor);
+    void setDirection(Direction_t direction);
+    void setResistor(Resitor_t resistor);
 
     bool read();
     bool write(bool state);

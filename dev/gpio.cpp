@@ -37,12 +37,12 @@ bool GPIOPin::setFunction(int function)
     return m_port.setFunction(m_id, function);
 }
 
-void GPIOPin::setDirection(GPIODirection_t direction)
+void GPIOPin::setDirection(Direction_t direction)
 {
     m_port.setDirection(m_pinNo, direction);
 }
 
-void GPIOPin::setResistor(GPIOResitor_t resistor)
+void GPIOPin::setResistor(Resitor_t resistor)
 {
     m_port.setResistor(m_id, resistor);
 }

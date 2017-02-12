@@ -14,42 +14,43 @@
 #include <fs/device.h>
 
 namespace Device {
+namespace UART {
 
 typedef enum {
-    UART_DATA_BITS_7,
-    UART_DATA_BITS_8,
-    UART_DATA_BITS_9
-} UARTDataBits_t;
+    DATA_BITS_7,
+    DATA_BITS_8,
+    DATA_BITS_9
+} DataBits_t;
 
 typedef enum {
-    UART_STOP_BITS_0_5,
-    UART_STOP_BITS_1,
-    UART_STOP_BITS_1_5,
-    UART_STOP_BITS_2
-} UARTStopBits_t;
+    STOP_BITS_0_5,
+    STOP_BITS_1,
+    STOP_BITS_1_5,
+    STOP_BITS_2
+} StopBits_t;
 
 typedef enum {
-    UART_PARTITY_NONE,
-    UART_PARTITY_EVEN,
-    UART_PARTITY_ODD
-} UARTPartity_t;
+    PARTITY_NONE,
+    PARTITY_EVEN,
+    PARTITY_ODD
+} Partity_t;
 
 typedef enum {
-    UART_FLOW_CONTROL_NONE,
-    UART_FLOW_CONTROL_RTS_CTS,
-    UART_FLOW_CONTROL_XON_XOFF
-} UARTFlowControl_t;
+    FLOW_CONTROL_NONE,
+    FLOW_CONTROL_RTS_CTS,
+    FLOW_CONTROL_XON_XOFF
+} FlowControl_t;
 
 typedef enum {
-    UART_DIRECTION_READ,
-    UART_DIRECTION_WRITE,
-    UART_DIRECTION_BIDIRECTIONAL
-} UARTDirection_t;
+    DIRECTION_READ,
+    DIRECTION_WRITE,
+    DIRECTION_BIDIRECTIONAL
+} Direction_t;
 
 typedef enum {
-    UART_MODE_SYNCHRONOUS,
-    UART_MODE_ASYNCHRONOUS
-} UARTMode_t;
+    MODE_SYNCHRONOUS,
+    MODE_ASYNCHRONOUS
+} TransmissionMode_t;
 
 class IUART : public Filesystem::Device {
 public:
@@ -58,6 +59,7 @@ public:
     virtual void disable() = 0;
 };
 
+} // namespace UART
 } // namespace Device
 
 #endif

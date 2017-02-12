@@ -688,30 +688,30 @@ typedef union {
 typedef enum {
     CM_WKUP_MODULEMODE_DISABLE = 0x0,
     CM_WKUP_MODULEMODE_ENABLE  = 0x2
-} AM335x_ClockWkupModulemode_t;
+} WkupModulemode_t;
 
 typedef enum {
     CM_WKUP_CLKTRCTRL_NO_SLEEP = 0x0,
     CM_WKUP_CLKTRCTRL_SW_SLEEP = 0x1,
     CM_WKUP_CLKTRCTRL_SW_WKUP  = 0x2
-} AM335x_ClockWkupClktrctrl_t;
+} WkupClktrctrl_t;
 
 typedef enum {
     CM_WKUP_CLK_INACTIVE = 0x0,
     CM_WKUP_CLK_ACTIVE   = 0x1
-} AM335x_ClockWkupClk_t;
+} WkupClk_t;
 
 typedef enum {
     CM_WKUP_IDLEST_FUNCTIONAL = 0x0,
     CM_WKUP_IDLEST_TRANSITION = 0x1,
     CM_WKUP_IDLEST_IDLE       = 0x2,
     CM_WKUP_IDLEST_DISABLED   = 0x3
-} AM335x_ClockWkupIdlest_t;
+} WkupIdlest_t;
 
 typedef enum {
     CM_WKUP_STBYST_FUNCTIONAL = 0x0,
     CM_WKUP_STBYST_STANDBY    = 0x1
-} AM335x_ClockWkupStbyst_t;
+} WkupStbyst_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER ADDRESSES

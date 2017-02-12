@@ -40,35 +40,25 @@ typedef union {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 typedef enum {
-    AM335X_PAD_FUNC_0 = 0x0,
-    AM335X_PAD_FUNC_1 = 0x1,
-    AM335X_PAD_FUNC_2 = 0x2,
-    AM335X_PAD_FUNC_3 = 0x3,
-    AM335X_PAD_FUNC_4 = 0x4,
-    AM335X_PAD_FUNC_5 = 0x5,
-    AM335X_PAD_FUNC_6 = 0x6,
-    AM335X_PAD_FUNC_7 = 0x7
-} AM335x_PadFunc_t;
+    PAD_FUNC_0 = 0x0,
+    PAD_FUNC_1 = 0x1,
+    PAD_FUNC_2 = 0x2,
+    PAD_FUNC_3 = 0x3,
+    PAD_FUNC_4 = 0x4,
+    PAD_FUNC_5 = 0x5,
+    PAD_FUNC_6 = 0x6,
+    PAD_FUNC_7 = 0x7
+} PadFunc_t;
 
 typedef enum {
-    AM335X_PAD_PULL_ENABLED  = 0x0,
-    AM335X_PAD_PULL_DISABLED = 0x1
-} AM335x_PadPull_t;
+    PAD_OUTPUT = 0x0,
+    PAD_INPUT  = 0x1
+} PadDir_t;
 
 typedef enum {
-    AM335X_PAD_PULLDOWN = 0x0,
-    AM335X_PAD_PULLUP   = 0x1
-} AM335x_PadPullType_t;
-
-typedef enum {
-    AM335X_PAD_OUTPUT = 0x0,
-    AM335X_PAD_INPUT  = 0x1
-} AM335x_PadDir_t;
-
-typedef enum {
-    AM335X_PAD_SLEW_FAST = 0x0,
-    AM335X_PAD_SLEW_SLOW = 0x1
-} AM335x_PadSlewRate_t;
+    PAD_SLEW_FAST = 0x0,
+    PAD_SLEW_SLOW = 0x1
+} PadSlewRate_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER ADDRESSES

@@ -153,13 +153,13 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
     }
 }
 
-void AM335x_UART::setTriggerGranularity(UARTTrigGranularity_t rxGranulatiry, UARTTrigGranularity_t txGranulatiry)
+void AM335x_UART::setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry)
 {
     UART_SCR(m_base)->RXTRIGGRANU1 = rxGranulatiry;
     UART_SCR(m_base)->TXTRIGGRANU1 = txGranulatiry;
 }
 
-void AM335x_UART::setTriggerLevels(UARTFIFOTrigLevel_t rxLevel, UARTFIFOTrigLevel_t txLevel)
+void AM335x_UART::setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel)
 {
     // Enable access to FCR[5:4].
     bool savedEnhancements = enableEnhancements(true);
@@ -174,7 +174,7 @@ void AM335x_UART::enableDMA(bool enabled)
 {
     // Set SCR as DMA mode control register.
     UART_SCR(m_base)->DMAMODECTL = 0x1;
-    UART_SCR(m_base)->DMAMODE2 = (enabled ? UART_DMA_MODE_1 : UART_DMA_DISABLED);
+    UART_SCR(m_base)->DMAMODE2 = (enabled ? DMA_MODE_1 : DMA_DISABLED);
 }
 
 void AM335x_UART::enableFIFO(bool enabled)
@@ -188,7 +188,7 @@ void AM335x_UART::enableFIFO(bool enabled)
 bool AM335x_UART::enableEnhancements(bool enable)
 {
     // Enable access to EFR register.
-    uint32_t savedLCR = setConfigMode(UART_CONFIG_MODE_B);
+    uint32_t savedLCR = setConfigMode(CONFIG_MODE_B);
 
     volatile bool savedEnhancements = UART_EFR(m_base)->ENHANCEDEN;
     UART_EFR(m_base)->ENHANCEDEN = enable;
@@ -203,7 +203,7 @@ bool AM335x_UART::enableTCRTLRAccess(bool enable)
 {
     // Enable access to MCR[7:5].
     bool savedEnhancements = enableEnhancements(true);
-    uint32_t savedLCR = setConfigMode(UART_CONFIG_MODE_A);
+    uint32_t savedLCR = setConfigMode(CONFIG_MODE_A);
 
     volatile bool savedTCRTLC = UART_MCR(m_base)->TCRTLR;
     UART_MCR(m_base)->TCRTLR = enable;
@@ -215,17 +215,17 @@ bool AM335x_UART::enableTCRTLRAccess(bool enable)
     return savedTCRTLC;
 }
 
-uint32_t AM335x_UART::setConfigMode(UARTConfigMode_t mode)
+uint32_t AM335x_UART::setConfigMode(ConfigMode_t mode)
 {
     uint32_t result = UART_LCR(m_base)->value;
 
     switch (mode) {
-        case UART_CONFIG_MODE_A:
-        case UART_CONFIG_MODE_B:
+        case CONFIG_MODE_A:
+        case CONFIG_MODE_B:
             UART_LCR(m_base)->value = mode;
             break;
 
-        case UART_CONFIG_MODE_OPERATIONAL:
+        case CONFIG_MODE_OPERATIONAL:
             UART_LCR(m_base)->value &= mode;
             break;
     }
@@ -235,8 +235,8 @@ uint32_t AM335x_UART::setConfigMode(UARTConfigMode_t mode)
 
 void AM335x_UART::initFIFO()
 {
-    setTriggerGranularity(UART_TRIG_GRANULARITY_1, UART_TRIG_GRANULARITY_1);
-    setTriggerLevels(UART_FIFO_TRIG_LEVEL_8, UART_FIFO_TRIG_LEVEL_8);
+    setTriggerGranularity(TRIG_GRANULARITY_1, TRIG_GRANULARITY_1);
+    setTriggerLevels(FIFO_TRIG_LEVEL_8, FIFO_TRIG_LEVEL_8);
 
     enableDMA(false);
     enableFIFO(true);
