@@ -47,7 +47,7 @@ public:
 
 public:
     static constexpr int PORT_COUNT = 4;
-    static constexpr int PIN_COUNT = 32;
+    static constexpr int PIN_COUNT  = 32;
 
 private:
     static int getBaseAddress(int portNo);
