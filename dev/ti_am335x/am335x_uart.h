@@ -48,9 +48,15 @@ typedef enum {
 } FIFOTrigLevel_t;
 
 typedef enum {
-    DMA_DISABLED = 0x0,
-    DMA_MODE_1   = 0x1
-} DMAMode_t;
+    MODE_UART_16x,
+    MODE_SIR,
+    MODE_UART_16x_AUTOBAUD,
+    MODE_UART_13x,
+    MODE_MIR,
+    MODE_FIR,
+    MODE_CIR,
+    MODE_DISABLE
+} OperatingMode_t;
 
 class AM335x_UART : public IUART {
 public:
@@ -68,7 +74,8 @@ public:
     void enableFIFO(bool enabled);
 
 public:
-    static constexpr int PORT_COUNT = 6;
+    static constexpr int PORT_COUNT     = 6;
+    static constexpr int INPUT_CLOCK_HZ = 48 * 1000 * 1000;
 
 private:
     static int getBaseAddress(int portNo);
@@ -76,6 +83,7 @@ private:
     bool enableEnhancements(bool enable);
     bool enableTCRTLRAccess(bool enable);
     uint32_t setConfigMode(ConfigMode_t mode);
+    uint32_t setOperatingMode(OperatingMode_t mode);
 
     void initFIFO();
 

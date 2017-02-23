@@ -37,6 +37,11 @@ UART::IUART& DeviceManager<UART::IUART>::getDevice(int id)
 namespace UART {
 namespace AM335x {
 
+typedef enum {
+    DMA_DISABLED
+    DMA_MODE_1
+} DMAMode_t;
+
 int AM335x_UART::getBaseAddress(int uartNo)
 {
     switch (uartNo) {
@@ -146,11 +151,40 @@ void AM335x_UART::reset()
 
 void AM335x_UART::setBaudRate(unsigned int baudRate)
 {
+    // Enable access to IER[4] (SLEEPMODE).
+    bool savedEnhancements = enableEnhancements(true);
+    uint32_t savedLCR = setConfigMode(CONFIG_MODE_OPERATIONAL);
+
+    // Disable sleep mode.
+    volatile bool savedSleepmode = UART_IER(m_base)->SLEEPMODE;
+    UART_IER(m_base)->SLEEPMODE = 0;
+
+    // Enable access to DLL and DLH.
+    setConfigMode(CONFIG_MODE_B);
+    uint8_t savedMode = setOperatingMode(MODE_DISABLE);
+
+    // Write to divisor latch.
     if (baudRate == 0) {
-        UART_DLL(m_base)->CLOCK_LSB = 0x0;
-        UART_DLH(m_base)->CLOCK_MSB = 0x0;
-        return;
+        UART_DLL(m_base)->CLOCK_LSB = 0;
+        UART_DLH(m_base)->CLOCK_MSB = 0;
     }
+    else {
+        uint32_t divisorValue = INPUT_CLOCK_HZ / (16 * baudRate);
+        UART_DLL(m_base)->CLOCK_LSB = (divisorValue & 0xff);
+        UART_DLH(m_base)->CLOCK_MSB = ((divisorValue >> 8) & 0xff);
+    }
+
+    // Restore operating mode. 
+    setOperatingMode(savedMode);
+
+    // Restore sleep mode.
+    setConfigMode(CONFIG_MODE_OPERATIONAL)
+    UART_IER(m_base)->SLEEPMODE = savedSleepmode;
+
+
+    // Restore LCR register and enhancements.
+    UART_LCR(m_base)->value = savedLCR;
+    enableEnhancements(savedEnhancements);
 }
 
 void AM335x_UART::setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry)
@@ -161,7 +195,7 @@ void AM335x_UART::setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGra
 
 void AM335x_UART::setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel)
 {
-    // Enable access to FCR[5:4].
+    // Enable access to FCR[5:4] (TX_FIFO_TRIG).
     bool savedEnhancements = enableEnhancements(true);
 
     UART_FCR(m_base)->RX_FIFO_TRIG = rxLevel;
@@ -195,13 +229,13 @@ bool AM335x_UART::enableEnhancements(bool enable)
 
     // Restore LCR register.
     UART_LCR(m_base)->value = savedLCR;
-    
+
     return savedEnhancements;
 }
 
 bool AM335x_UART::enableTCRTLRAccess(bool enable)
 {
-    // Enable access to MCR[7:5].
+    // Enable access to MCR[6] (TCRTLR).
     bool savedEnhancements = enableEnhancements(true);
     uint32_t savedLCR = setConfigMode(CONFIG_MODE_A);
 
@@ -217,7 +251,7 @@ bool AM335x_UART::enableTCRTLRAccess(bool enable)
 
 uint32_t AM335x_UART::setConfigMode(ConfigMode_t mode)
 {
-    uint32_t result = UART_LCR(m_base)->value;
+    volatile uint32_t result = UART_LCR(m_base)->value;
 
     switch (mode) {
         case CONFIG_MODE_A:
@@ -229,6 +263,14 @@ uint32_t AM335x_UART::setConfigMode(ConfigMode_t mode)
             UART_LCR(m_base)->value &= mode;
             break;
     }
+
+    return result;
+}
+
+uint8_t setOperatingMode(OperatingMode_t mode)
+{
+    volatile uint8_t result = UART_MDR1(m_base)->MODESELECT;
+    UART_MDR1(m_base)->MODESELECT = mode;
 
     return result;
 }
