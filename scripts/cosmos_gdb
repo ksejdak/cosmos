@@ -4,4 +4,5 @@ COSMOS_PATH="$PROJECTS_PATH/cosmos"
 COSMOS_IMAGE_PATH="$COSMOS_PATH/bin/arm-beaglebone-black/cosmos.elf"
 COSMOS_GDBINIT_PATH="$COSMOS_PATH/scripts/cosmos.gdbinit"
 
-arm-none-eabi-gdb --tui $COSMOS_IMAGE_PATH -x $COSMOS_GDBINIT_PATH
+cgdb -d arm-none-eabi-gdb -- $COSMOS_IMAGE_PATH -x $COSMOS_GDBINIT_PATH
+#arm-none-eabi-gdb --tui $COSMOS_IMAGE_PATH -x $COSMOS_GDBINIT_PATH
