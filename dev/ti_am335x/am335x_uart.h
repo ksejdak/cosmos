@@ -83,7 +83,7 @@ private:
     bool enableEnhancements(bool enable);
     bool enableTCRTLRAccess(bool enable);
     uint32_t setConfigMode(ConfigMode_t mode);
-    uint32_t setOperatingMode(OperatingMode_t mode);
+    OperatingMode_t setOperatingMode(OperatingMode_t mode);
 
     void initFIFO();
 

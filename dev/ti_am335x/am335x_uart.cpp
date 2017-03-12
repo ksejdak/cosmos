@@ -38,7 +38,7 @@ namespace UART {
 namespace AM335x {
 
 typedef enum {
-    DMA_DISABLED
+    DMA_DISABLED,
     DMA_MODE_1
 } DMAMode_t;
 
@@ -161,7 +161,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
 
     // Enable access to DLL and DLH.
     setConfigMode(CONFIG_MODE_B);
-    uint8_t savedMode = setOperatingMode(MODE_DISABLE);
+    OperatingMode_t savedMode = setOperatingMode(MODE_DISABLE);
 
     // Write to divisor latch.
     if (baudRate == 0) {
@@ -178,7 +178,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
     setOperatingMode(savedMode);
 
     // Restore sleep mode.
-    setConfigMode(CONFIG_MODE_OPERATIONAL)
+    setConfigMode(CONFIG_MODE_OPERATIONAL);
     UART_IER(m_base)->SLEEPMODE = savedSleepmode;
 
 
@@ -267,9 +267,9 @@ uint32_t AM335x_UART::setConfigMode(ConfigMode_t mode)
     return result;
 }
 
-uint8_t setOperatingMode(OperatingMode_t mode)
+OperatingMode_t AM335x_UART::setOperatingMode(OperatingMode_t mode)
 {
-    volatile uint8_t result = UART_MDR1(m_base)->MODESELECT;
+    volatile OperatingMode_t result = (OperatingMode_t) UART_MDR1(m_base)->MODESELECT;
     UART_MDR1(m_base)->MODESELECT = mode;
 
     return result;
