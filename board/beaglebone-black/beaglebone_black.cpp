@@ -14,10 +14,13 @@
 #include <core/console.h>
 #include <dev/device_manager.h>
 #include <dev/gpio.h>
+#include <dev/uart.h>
 #include <dev/ti_am335x/am335x_gpio.h>
+#include <dev/ti_am335x/am335x_uart.h>
 
 using namespace Device;
 using namespace Device::GPIO;
+using namespace Device::UART;
 
 namespace Board {
 
@@ -36,17 +39,18 @@ BeagleBoneBlack::BeagleBoneBlack()
 bool BeagleBoneBlack::initDevice()
 {
     DeviceManager<IGPIOPort>::init();
+    DeviceManager<IUART>::init();
 
     // Init user led0.
     GPIOPin led0(PIN_USER_LED0);
-    led0.setFunction(AM335x::PAD_FUNC_7);
+    led0.setFunction(GPIO::AM335x::PAD_FUNC_7);
     led0.setDirection(DIRECTION_OUTPUT);
     led0.setResistor(RESISTOR_NONE);
     led0.write(true);
 
     // Init console on UART1.
     GPIOPin consoleTx(PIN_P9_24);
-    consoleTx.setFunction(AM335x::PAD_FUNC_0);
+    consoleTx.setFunction(GPIO::AM335x::PAD_FUNC_0);
     consoleTx.setDirection(DIRECTION_OUTPUT);
 
     if (!console.init())
