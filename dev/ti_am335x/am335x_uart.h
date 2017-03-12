@@ -67,9 +67,21 @@ public:
     virtual void enable() {}
     virtual void disable() {}
 
+    virtual bool setDataBits(DataBits_t dataBits);
+    virtual bool setStopBits(StopBits_t stopBits);
+    virtual bool setPartity(Partity_t partity);
+    virtual bool setFlowControl(FlowControl_t flowControl);
+    virtual bool setDirection(Direction_t direction);
+    virtual bool setTransmissionMode(TransmissionMode_t transmissionMode);
+
+    virtual uint8_t read();
+    virtual bool write(uint8_t value);
+
     void setBaudRate(unsigned int baudRate);
     void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
     void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
+    void enableDivisorLatches(bool enabled);
+    void enableBreakControl(bool enabled);
     void enableDMA(bool enabled);
     void enableFIFO(bool enabled);
 

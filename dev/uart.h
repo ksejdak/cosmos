@@ -17,9 +17,10 @@ namespace Device {
 namespace UART {
 
 typedef enum {
+    DATA_BITS_5,
+    DATA_BITS_6,
     DATA_BITS_7,
     DATA_BITS_8,
-    DATA_BITS_9
 } DataBits_t;
 
 typedef enum {
@@ -57,6 +58,16 @@ public:
     virtual void reset() = 0;
     virtual void enable() = 0;
     virtual void disable() = 0;
+
+    virtual bool setDataBits(DataBits_t dataBits) = 0;
+    virtual bool setStopBits(StopBits_t stopBits) = 0;
+    virtual bool setPartity(Partity_t partity) = 0;
+    virtual bool setFlowControl(FlowControl_t flowControl) = 0;
+    virtual bool setDirection(Direction_t direction) = 0;
+    virtual bool setTransmissionMode(TransmissionMode_t transmissionMode) = 0;
+
+    virtual uint8_t read() = 0;
+    virtual bool write(uint8_t value) = 0;
 };
 
 } // namespace UART

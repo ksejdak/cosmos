@@ -37,11 +37,6 @@ UART::IUART& DeviceManager<UART::IUART>::getDevice(int id)
 namespace UART {
 namespace AM335x {
 
-typedef enum {
-    DMA_DISABLED,
-    DMA_MODE_1
-} DMAMode_t;
-
 int AM335x_UART::getBaseAddress(int uartNo)
 {
     switch (uartNo) {
@@ -149,6 +144,113 @@ void AM335x_UART::reset()
     while (!UART_SYSS(m_base)->RESETDONE);
 }
 
+bool AM335x_UART::setDataBits(DataBits_t dataBits)
+{
+    switch (dataBits) {
+        case DATA_BITS_5:
+            UART_LCR(m_base)->CHAR_LENGTH = 0x0;
+            break;
+        case DATA_BITS_6:
+            UART_LCR(m_base)->CHAR_LENGTH = 0x1;
+            break;
+        case DATA_BITS_7:
+            UART_LCR(m_base)->CHAR_LENGTH = 0x2;
+            break;
+        case DATA_BITS_8:
+            UART_LCR(m_base)->CHAR_LENGTH = 0x3;
+            break;
+        default:
+            return false;
+    }
+
+    return true;
+}
+
+bool AM335x_UART::setStopBits(StopBits_t stopBits)
+{
+    switch (stopBits) {
+        case STOP_BITS_1:
+            UART_LCR(m_base)->NB_STOP = 0x0;
+            break;
+        case STOP_BITS_1_5:
+        case STOP_BITS_2:
+            UART_LCR(m_base)->NB_STOP = 0x1;
+            break;
+        default:
+            return false;
+    }
+
+    return true;
+}
+
+bool AM335x_UART::setPartity(Partity_t partity)
+{
+    switch (partity) {
+        case PARTITY_NONE:
+            UART_LCR(m_base)->PARITY_EN = 0x0;
+            break;
+        case PARTITY_EVEN:
+            UART_LCR(m_base)->PARITY_EN = 0x1;
+            UART_LCR(m_base)->PARITY_TYPE1 = 0x1;
+            break;
+        case PARTITY_ODD:
+            UART_LCR(m_base)->PARITY_EN = 0x1;
+            UART_LCR(m_base)->PARITY_TYPE1 = 0x0;
+            break;
+        default:
+            return false;
+    }
+
+    return true;
+}
+
+bool AM335x_UART::setFlowControl(FlowControl_t flowControl)
+{
+    uint32_t savedLCR = setConfigMode(CONFIG_MODE_B);
+    bool result = true;
+
+    switch (flowControl) {
+        case FLOW_CONTROL_NONE:
+            UART_EFR(m_base)->AUTORTSEN = 0x0;
+            UART_EFR(m_base)->AUTOCTSEN = 0x0;
+            break;
+        case FLOW_CONTROL_RTS_CTS:
+            UART_EFR(m_base)->AUTORTSEN = 0x1;
+            UART_EFR(m_base)->AUTOCTSEN = 0x1;
+            break;
+        default:
+            result =  false;
+            break;
+    }
+
+    UART_LCR(m_base)->value = savedLCR;
+    return result;
+}
+
+bool AM335x_UART::setDirection(Direction_t direction __attribute__((unused)))
+{
+    // AM335x doesn't support setting direction.
+    return true;
+}
+
+bool AM335x_UART::setTransmissionMode(TransmissionMode_t transmissionMode)
+{
+    // AM335x supports only asynchonous transmission mode.
+    return (transmissionMode == MODE_ASYNCHRONOUS);
+}
+
+uint8_t AM335x_UART::read()
+{
+    // TODO: Implement.
+    return 0;
+}
+
+bool AM335x_UART::write(uint8_t value)
+{
+    // TODO: Implement.
+    return false;
+}
+
 void AM335x_UART::setBaudRate(unsigned int baudRate)
 {
     // Enable access to IER[4] (SLEEPMODE).
@@ -204,11 +306,21 @@ void AM335x_UART::setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLe
     enableEnhancements(savedEnhancements);
 }
 
+void AM335x_UART::enableDivisorLatches(bool enabled)
+{
+    UART_LCR(m_base)->DIV_EN = enabled;
+}
+
+void AM335x_UART::enableBreakControl(bool enabled)
+{
+    UART_LCR(m_base)->BREAK_EN = enabled;
+}
+
 void AM335x_UART::enableDMA(bool enabled)
 {
     // Set SCR as DMA mode control register.
     UART_SCR(m_base)->DMAMODECTL = 0x1;
-    UART_SCR(m_base)->DMAMODE2 = (enabled ? DMA_MODE_1 : DMA_DISABLED);
+    UART_SCR(m_base)->DMAMODE2 = (enabled ? 0x1 : 0x0);
 }
 
 void AM335x_UART::enableFIFO(bool enabled)
