@@ -134,6 +134,7 @@ void AM335x_UART::init()
     }
 
     reset();
+    initFIFO();
 
     m_initialized = true;
 }
