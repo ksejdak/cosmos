@@ -20,6 +20,10 @@ public:
     BeagleBoneBlack();
 
     virtual bool initDevice();
+
+private:
+    bool initUserLED();
+    bool initConsole();
 };
 
 } // namespace Board
