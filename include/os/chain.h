@@ -91,7 +91,7 @@ const T* chain<T>::operator[](const unsigned int index) const
     T* it = m_head;
     for (unsigned int i = 0; i != index; ++i, it = it->next);
 	
-	return it;
+    return it;
 }
 
 template <typename T>
