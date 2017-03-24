@@ -14,11 +14,11 @@ Console console;
 
 Console::Console()
 {
-    // @todo Implement.
+    // TODO: Implement.
 }
 
 bool Console::init()
 {
-    // @todo Implement.
+    // TODO: Implement.
     return true;
 }

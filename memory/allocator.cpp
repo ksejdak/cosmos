@@ -25,6 +25,11 @@ void operator delete(void* memoryChunk)
     Memory::kernelAllocator->release(memoryChunk);
 }
 
+void operator delete(void*, unsigned int)
+{
+    // TODO: Implement.
+}
+
 namespace Memory {
 
 IAllocator* kernelAllocator = nullptr;
