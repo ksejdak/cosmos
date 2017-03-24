@@ -19,7 +19,7 @@ namespace Device {
 template<>
 GPIO::IGPIOPort& DeviceManager<GPIO::IGPIOPort>::getDevice(int id)
 {
-    using namespace GPIO::AM335x;
+    using namespace GPIO;
 
     static AM335x_GPIOPort ports[getDeviceCount()] {
         GPIO_0,
@@ -37,8 +37,6 @@ namespace GPIO {
 PinMux_t pinmux[] = AM335X_PINMUX;
 int pinmuxSize = sizeof(pinmux) / sizeof(PinMux_t);
 
-namespace AM335x {
-
 AM335x_GPIOPort::AM335x_GPIOPort(GPIOId_t portNo)
     : m_portNo(portNo)
     , m_base(getBaseAddress(portNo))
@@ -51,7 +49,7 @@ AM335x_GPIOPort::AM335x_GPIOPort(GPIOId_t portNo)
 
 void AM335x_GPIOPort::init()
 {
-    using namespace Clock::AM335x;
+    using namespace Clock;
 
     if (m_initialized)
         return;
@@ -188,6 +186,5 @@ int AM335x_GPIOPort::getBaseAddress(int portNo)
     return -1;
 }
 
-} // namespace AM335x
 } // namespace GPIO
 } // namespace Device

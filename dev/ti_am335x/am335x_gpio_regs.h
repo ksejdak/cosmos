@@ -16,7 +16,6 @@
 
 namespace Device {
 namespace GPIO {
-namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -281,7 +280,6 @@ typedef union {
 #define GPIO_CLEARDATAOUT(GPIO_BASE)        REGISTER(GPIO_CLEARDATAOUT_t, (GPIO_BASE + 0x190))
 #define GPIO_SETDATAOUT(GPIO_BASE)          REGISTER(GPIO_SETDATAOUT_t, (GPIO_BASE + 0x194))
 
-} // namespace AM335x
 } // namespace GPIO
 } // namespace Device
 

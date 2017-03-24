@@ -18,7 +18,6 @@
 
 namespace Device {
 namespace UART {
-namespace AM335x {
 
 typedef enum {
     UART_0,
@@ -104,13 +103,12 @@ private:
     int m_base;
 };
 
-} // namespace AM335x
 } // namespace UART
 
 template<>
 constexpr int DeviceManager<UART::IUART>::getDeviceCount()
 {
-    return UART::AM335x::AM335x_UART::PORT_COUNT;
+    return UART::AM335x_UART::PORT_COUNT;
 }
 
 } // namespace Device

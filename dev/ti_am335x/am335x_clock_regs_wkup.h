@@ -16,7 +16,6 @@
 
 namespace Device {
 namespace Clock {
-namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -774,7 +773,6 @@ typedef enum {
 #define CM_WKUP_WDT1_CLKCTRL            REGISTER(CM_WKUP_WDT1_CLKCTRL_t, (CM_WKUP_REGISTERS_BASE + 0xd4))
 #define CM_DIV_M6_DPLL_CORE             REGISTER(CM_DIV_M6_DPLL_CORE_t, (CM_WKUP_REGISTERS_BASE + 0xd8))
 
-} // namespace AM335x
 } // namespace Clock
 } // namespace Device
 

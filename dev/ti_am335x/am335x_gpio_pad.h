@@ -16,7 +16,6 @@
 
 namespace Device {
 namespace GPIO {
-namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -186,7 +185,6 @@ typedef enum {
     { 3, 20 }           \
 }
 
-} // namespace AM335x
 } // namespace GPIO
 } // namespace Device
 

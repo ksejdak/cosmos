@@ -16,7 +16,6 @@
 
 namespace Device {
 namespace UART {
-namespace AM335x {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -694,7 +693,6 @@ typedef union {
 #define UART_MDR3(UART_BASE)             REGISTER(UART_MDR3_t, (UART_BASE + 0x80))
 #define UART_TX_DMA_THRESHOLD(UART_BASE) REGISTER(UART_TX_DMA_THRESHOLD_t, (UART_BASE + 0x84))
 
-} // namespace AM335x
 } // namespace UART
 } // namespace Device
 

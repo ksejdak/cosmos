@@ -19,7 +19,6 @@
 
 namespace Device {
 namespace GPIO {
-namespace AM335x {
 
 typedef enum {
     GPIO_0,
@@ -57,13 +56,12 @@ private:
     int m_base;
 };
 
-} // namespace AM335x
 } // namespace GPIO
 
 template<>
 constexpr int DeviceManager<GPIO::IGPIOPort>::getDeviceCount()
 {
-    return GPIO::AM335x::AM335x_GPIOPort::PORT_COUNT;
+    return GPIO::AM335x_GPIOPort::PORT_COUNT;
 }
 
 } // namespace Device
