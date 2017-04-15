@@ -1,3 +1,5 @@
+
+
 macro(set_toolchain ARCH)
     if(${ARCH} STREQUAL "arm")
         # Set toolchain for target.
@@ -25,11 +27,18 @@ macro(set_toolchain ARCH)
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
         set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -Werror")
 
-        # Set linker flags.
+        # Adjust for macOS.
         if (APPLE)
+            # CLion has some problems in accessing /usr/local/bin.
+            set(CMAKE_C_COMPILER "/usr/local/bin/${CMAKE_C_COMPILER}")
+            set(CMAKE_CXX_COMPILER "/usr/local/bin/${CMAKE_CXX_COMPILER}")
+            set(CMAKE_ASM_COMPILER "/usr/local/bin/${CMAKE_ASM_COMPILER}")
+            set(CMAKE_RANLIB "/usr/local/bin/${CMAKE_RANLIB}")
+            set(CMAKE_AR "/usr/local/bin/${CMAKE_AR}")
+
             # On macOS -search_paths_first linker flag breaks the build.
-            string(REPLACE "-Wl,-search_paths_first" "" CMAKE_C_LINK_FLAGS ${CMAKE_C_LINK_FLAGS} )
-            string(REPLACE "-Wl,-search_paths_first" "" CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS} )
+            string(REPLACE "-Wl,-search_paths_first" "" CMAKE_C_LINK_FLAGS ${CMAKE_C_LINK_FLAGS})
+            string(REPLACE "-Wl,-search_paths_first" "" CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS})
         endif()
 
         # Set linker flags for creating executable.
