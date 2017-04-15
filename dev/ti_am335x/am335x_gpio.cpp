@@ -181,6 +181,7 @@ int AM335x_GPIOPort::getBaseAddress(int portNo)
         case GPIO_1:     return GPIO_1_BASE;
         case GPIO_2:     return GPIO_2_BASE;
         case GPIO_3:     return GPIO_3_BASE;
+        default:         break;
     }
 
     return -1;

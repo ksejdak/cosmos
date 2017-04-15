@@ -14,7 +14,7 @@
 #include <fs/device.h>
 #include <os/stdint.h>
 
-#define PIN_MASK(gpioPinNo)     (1 << gpioPinNo)
+#define PIN_MASK(gpioPinNo)     ((uint32_t) (1 << gpioPinNo))
 
 namespace Device {
 namespace GPIO {

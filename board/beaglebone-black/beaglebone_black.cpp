@@ -69,10 +69,8 @@ bool BeagleBoneBlack::initConsole()
     AM335x_UART consoleUart(UART_1);
     consoleUart.setBaudRate(115200);
 
-    if (!console.init())
-        return false;
+    return console.init();
 
-    return true;
 }
 
 } // namespace Board

@@ -49,7 +49,7 @@ void GPIOPin::setResistor(Resitor_t resistor)
 
 bool GPIOPin::read()
 {
-    return (m_port.read() & PIN_MASK(m_pinNo));
+    return (bool) (m_port.read() & PIN_MASK(m_pinNo));
 }
 
 bool GPIOPin::write(bool state)
