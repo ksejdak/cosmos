@@ -11,6 +11,7 @@
 #include "am335x_uart.h"
 #include "am335x_clock_regs_per.h"
 #include "am335x_clock_regs_wkup.h"
+#include "am335x_uart_regs.h"
 
 #include <os/assert.h>
 
@@ -135,6 +136,8 @@ void AM335x_UART::init()
 
     reset();
     initFIFO();
+    enableFIFO(false);
+    enableDMA(false);
 
     m_initialized = true;
 }
@@ -149,7 +152,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
 {
     // Enable access to IER[4] (SLEEPMODE).
     bool savedEnhancements = enableEnhancements(true);
-    uint32_t savedLCR = setConfigMode(CONFIG_MODE_OPERATIONAL);
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_OPERATIONAL);
 
     // Disable sleep mode.
     volatile bool savedSleepmode = UART_IER(m_base)->SLEEPMODE;
@@ -177,9 +180,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
     setConfigMode(CONFIG_MODE_OPERATIONAL);
     UART_IER(m_base)->SLEEPMODE = savedSleepmode;
 
-
-    // Restore LCR register and enhancements.
-    UART_LCR(m_base)->value = savedLCR;
+    restoreLCR(savedLCR);
     enableEnhancements(savedEnhancements);
 }
 
@@ -245,7 +246,7 @@ bool AM335x_UART::setPartity(Partity_t partity)
 
 bool AM335x_UART::setFlowControl(FlowControl_t flowControl)
 {
-    uint32_t savedLCR = setConfigMode(CONFIG_MODE_B);
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
     bool result = true;
 
     switch (flowControl) {
@@ -262,7 +263,7 @@ bool AM335x_UART::setFlowControl(FlowControl_t flowControl)
             break;
     }
 
-    UART_LCR(m_base)->value = savedLCR;
+    restoreLCR(savedLCR);
     return result;
 }
 
@@ -290,7 +291,23 @@ void AM335x_UART::enableFIFO(bool enabled)
     // Disable baud clock before enabling/disabling FIFO.
     setBaudRate(0);
 
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
     UART_FCR(m_base)->FIFO_EN = enabled;
+    restoreLCR(savedLCR);
+}
+
+void AM335x_UART::clearRxFIFO()
+{
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
+    UART_FCR(m_base)->RX_FIFO_CLEAR = 0x1;
+    restoreLCR(savedLCR);
+}
+
+void AM335x_UART::clearTxFIFO()
+{
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
+    UART_FCR(m_base)->TX_FIFO_CLEAR = 0x1;
+    restoreLCR(savedLCR);
 }
 
 size_t AM335x_UART::read(void* buff __attribute__((unused)), size_t size __attribute__((unused)))
@@ -317,9 +334,9 @@ bool AM335x_UART::writeChar(uint8_t value __attribute__((unused)))
     return false;
 }
 
-uint32_t AM335x_UART::setConfigMode(ConfigMode_t mode)
+uint16_t AM335x_UART::setConfigMode(ConfigMode_t mode)
 {
-    volatile uint32_t result = UART_LCR(m_base)->value;
+    volatile uint16_t result = UART_LCR(m_base)->value;
 
     switch (mode) {
         case CONFIG_MODE_A:
@@ -343,16 +360,20 @@ OperatingMode_t AM335x_UART::setOperatingMode(OperatingMode_t mode)
     return result;
 }
 
+void AM335x_UART::restoreLCR(uint16_t value)
+{
+    UART_LCR(m_base)->value = value;
+}
+
 bool AM335x_UART::enableEnhancements(bool enable)
 {
     // Enable access to EFR register.
-    uint32_t savedLCR = setConfigMode(CONFIG_MODE_B);
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
 
     volatile bool savedEnhancements = UART_EFR(m_base)->ENHANCEDEN;
     UART_EFR(m_base)->ENHANCEDEN = enable;
 
-    // Restore LCR register.
-    UART_LCR(m_base)->value = savedLCR;
+    restoreLCR(savedLCR);
 
     return savedEnhancements;
 }
@@ -361,13 +382,12 @@ bool AM335x_UART::enableTCRTLRAccess(bool enable)
 {
     // Enable access to MCR[6] (TCRTLR).
     bool savedEnhancements = enableEnhancements(true);
-    uint32_t savedLCR = setConfigMode(CONFIG_MODE_A);
+    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
 
     volatile bool savedTCRTLC = UART_MCR(m_base)->TCRTLR;
     UART_MCR(m_base)->TCRTLR = enable;
 
-    // Restore LCR register and enhancements.
-    UART_LCR(m_base)->value = savedLCR;
+    restoreLCR(savedLCR);
     enableEnhancements(savedEnhancements);
 
     return savedTCRTLC;
@@ -390,28 +410,18 @@ void AM335x_UART::setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLe
     enableEnhancements(savedEnhancements);
 }
 
-void AM335x_UART::enableDivisorLatches(bool enabled)
-{
-    UART_LCR(m_base)->DIV_EN = enabled;
-}
-
-void AM335x_UART::enableBreakControl(bool enabled)
-{
-    UART_LCR(m_base)->BREAK_EN = enabled;
-}
-
 void AM335x_UART::initFIFO()
 {
     setTriggerGranularity(TRIG_GRANULARITY_1, TRIG_GRANULARITY_1);
     setTriggerLevels(FIFO_TRIG_LEVEL_8, FIFO_TRIG_LEVEL_8);
 
-    enableDMA(false);
-    enableFIFO(true);
-
     //bool savedTCRTLC = enableTCRTLRAccess(true);
     //UART_TLR(m_base)->RX_FIFO_TRIG_DMA = xxx;
     //UART_TLR(m_base)->TX_FIFO_TRIG_DMA = xxx;
     //enableTCRTLRAccess(savedTCRTLC);
+
+    clearRxFIFO();
+    clearTxFIFO();
 }
 
 } // namespace UART

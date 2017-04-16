@@ -11,8 +11,6 @@
 #ifndef AM335X_UART_H
 #define AM335X_UART_H
 
-#include "am335x_uart_regs.h"
-
 #include <dev/device_manager.h>
 #include <dev/uart.h>
 
@@ -77,6 +75,8 @@ public:
     virtual bool setTransmissionMode(TransmissionMode_t transmissionMode);
     void enableDMA(bool enabled);
     void enableFIFO(bool enabled);
+    void clearRxFIFO();
+    void clearTxFIFO();
 
     // I/O operations.
     virtual size_t read(void* buff, size_t size) override;
@@ -91,14 +91,13 @@ public:
 private:
     static int getBaseAddress(int portNo);
 
-    uint32_t setConfigMode(ConfigMode_t mode);
+    uint16_t setConfigMode(ConfigMode_t mode);
     OperatingMode_t setOperatingMode(OperatingMode_t mode);
+    void restoreLCR(uint16_t value);
     bool enableEnhancements(bool enable);
     bool enableTCRTLRAccess(bool enable);
     void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
     void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
-    void enableDivisorLatches(bool enabled);
-    void enableBreakControl(bool enabled);
     void initFIFO();
 
 private:
