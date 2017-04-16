@@ -95,7 +95,6 @@ private:
     OperatingMode_t setOperatingMode(OperatingMode_t mode);
     void restoreLCR(uint16_t value);
     bool enableEnhancements(bool enable);
-    bool enableTCRTLRAccess(bool enable);
     void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
     void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
     void initFIFO();

@@ -378,21 +378,6 @@ bool AM335x_UART::enableEnhancements(bool enable)
     return savedEnhancements;
 }
 
-bool AM335x_UART::enableTCRTLRAccess(bool enable)
-{
-    // Enable access to MCR[6] (TCRTLR).
-    bool savedEnhancements = enableEnhancements(true);
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
-
-    volatile bool savedTCRTLC = UART_MCR(m_base)->TCRTLR;
-    UART_MCR(m_base)->TCRTLR = enable;
-
-    restoreLCR(savedLCR);
-    enableEnhancements(savedEnhancements);
-
-    return savedTCRTLC;
-}
-
 void AM335x_UART::setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry)
 {
     UART_SCR(m_base)->RXTRIGGRANU1 = rxGranulatiry;
@@ -414,11 +399,6 @@ void AM335x_UART::initFIFO()
 {
     setTriggerGranularity(TRIG_GRANULARITY_1, TRIG_GRANULARITY_1);
     setTriggerLevels(FIFO_TRIG_LEVEL_8, FIFO_TRIG_LEVEL_8);
-
-    //bool savedTCRTLC = enableTCRTLRAccess(true);
-    //UART_TLR(m_base)->RX_FIFO_TRIG_DMA = xxx;
-    //UART_TLR(m_base)->TX_FIFO_TRIG_DMA = xxx;
-    //enableTCRTLRAccess(savedTCRTLC);
 
     clearRxFIFO();
     clearTxFIFO();
