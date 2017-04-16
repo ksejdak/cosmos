@@ -18,4 +18,6 @@ typedef short           int16_t;
 typedef unsigned int    uint32_t;
 typedef int             int32_t;
 
+typedef uint32_t        size_t;
+
 #endif
