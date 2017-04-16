@@ -20,8 +20,13 @@ namespace Filesystem {
 class Device : public File {
 public:
     Device();
+
+    // Initialization.
     virtual void init();
 
+    // I/O operations.
+    virtual size_t read(void* buff, size_t size);
+    virtual size_t write(const void* buff, size_t size);
     virtual bool ioctl(uint32_t command, void* arg);
 
 protected:

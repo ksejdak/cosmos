@@ -23,6 +23,16 @@ void Device::init()
     m_initialized = true;
 }
 
+size_t Device::read(void*, size_t)
+{
+    return 0;
+}
+
+size_t Device::write(const void*, size_t)
+{
+    return 0;
+}
+
 bool Device::ioctl(uint32_t, void*)
 {
     return true;

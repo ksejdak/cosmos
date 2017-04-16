@@ -61,28 +61,28 @@ class AM335x_UART : public IUART {
 public:
     AM335x_UART(UARTId_t uartNo);
 
+    // Initialization.
     virtual void init() override;
     virtual void reset();
     virtual void enable() {}
     virtual void disable() {}
 
+    // Configuration.
+    virtual void setBaudRate(unsigned int baudRate);
     virtual bool setDataBits(DataBits_t dataBits);
     virtual bool setStopBits(StopBits_t stopBits);
     virtual bool setPartity(Partity_t partity);
     virtual bool setFlowControl(FlowControl_t flowControl);
     virtual bool setDirection(Direction_t direction);
     virtual bool setTransmissionMode(TransmissionMode_t transmissionMode);
-
-    virtual uint8_t read();
-    virtual bool write(uint8_t value);
-
-    void setBaudRate(unsigned int baudRate);
-    void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
-    void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
-    void enableDivisorLatches(bool enabled);
-    void enableBreakControl(bool enabled);
     void enableDMA(bool enabled);
     void enableFIFO(bool enabled);
+
+    // I/O operations.
+    virtual size_t read(void* buff, size_t size) override;
+    virtual size_t write(const void* buff, size_t size) override;
+    virtual uint8_t readChar();
+    virtual bool writeChar(uint8_t value);
 
 public:
     static constexpr int PORT_COUNT     = 6;
@@ -91,11 +91,14 @@ public:
 private:
     static int getBaseAddress(int portNo);
 
-    bool enableEnhancements(bool enable);
-    bool enableTCRTLRAccess(bool enable);
     uint32_t setConfigMode(ConfigMode_t mode);
     OperatingMode_t setOperatingMode(OperatingMode_t mode);
-
+    bool enableEnhancements(bool enable);
+    bool enableTCRTLRAccess(bool enable);
+    void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
+    void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
+    void enableDivisorLatches(bool enabled);
+    void enableBreakControl(bool enabled);
     void initFIFO();
 
 private:
