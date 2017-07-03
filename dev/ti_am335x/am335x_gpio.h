@@ -58,7 +58,7 @@ private:
 
 } // namespace GPIO
 
-template<>
+template <>
 constexpr int DeviceManager<GPIO::IGPIOPort>::getDeviceCount()
 {
     return GPIO::AM335x_GPIOPort::PORT_COUNT;

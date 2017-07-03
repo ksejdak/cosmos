@@ -16,7 +16,7 @@
 
 namespace Device {
 
-template<>
+template <>
 GPIO::IGPIOPort& DeviceManager<GPIO::IGPIOPort>::getDevice(int id)
 {
     using namespace GPIO;
