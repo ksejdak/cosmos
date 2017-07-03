@@ -126,7 +126,9 @@ typedef enum {
     PIN_USER_LED0 = 21,
     PIN_USER_LED1 = 22,
     PIN_USER_LED2 = 23,
-    PIN_USER_LED3 = 24
+    PIN_USER_LED3 = 24,
+    PIN_SERIAL_DEBUG_RX = 92,
+    PIN_SERIAL_DEBUG_TX = 93
 
 } BeagleBoneBlackPin_t;
 
