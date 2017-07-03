@@ -77,6 +77,7 @@ public:
     void enableFIFO(bool enabled);
     void clearRxFIFO();
     void clearTxFIFO();
+    bool isTxFIFOEmpty();
 
     // I/O operations.
     virtual size_t read(void* buff, size_t size) override;
@@ -102,11 +103,12 @@ private:
 private:
     UARTId_t m_uartNo;
     int m_base;
+    bool m_fifoEnabled;
 };
 
 } // namespace UART
 
-template<>
+template <>
 constexpr int DeviceManager<UART::IUART>::getDeviceCount()
 {
     return UART::AM335x_UART::PORT_COUNT;

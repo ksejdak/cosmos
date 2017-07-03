@@ -17,7 +17,7 @@
 
 namespace Device {
 
-template<>
+template <>
 UART::IUART& DeviceManager<UART::IUART>::getDevice(int id)
 {
     using namespace UART;
@@ -55,6 +55,7 @@ int AM335x_UART::getBaseAddress(int uartNo)
 AM335x_UART::AM335x_UART(UARTId_t uartNo)
     : m_uartNo(uartNo)
     , m_base(getBaseAddress(uartNo))
+    , m_fifoEnabled(false)
 {
     // TODO:
     // - register IRQ handler for given UART
@@ -67,7 +68,7 @@ void AM335x_UART::init()
 
     if (m_initialized)
         return;
-    
+
     // Enable interface and functional clocks.
     switch (m_uartNo) {
         case UART_0:
@@ -136,6 +137,7 @@ void AM335x_UART::init()
 
     reset();
     initFIFO();
+    setOperatingMode(MODE_UART_16x);
     enableFIFO(false);
     enableDMA(false);
 
@@ -294,6 +296,8 @@ void AM335x_UART::enableFIFO(bool enabled)
     uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
     UART_FCR(m_base)->FIFO_EN = enabled;
     restoreLCR(savedLCR);
+
+    m_fifoEnabled = enabled;
 }
 
 void AM335x_UART::clearRxFIFO()
@@ -310,16 +314,27 @@ void AM335x_UART::clearTxFIFO()
     restoreLCR(savedLCR);
 }
 
+bool AM335x_UART::isTxFIFOEmpty()
+{
+    return (UART_LSR(m_base)->TXSRE && UART_LSR(m_base)->TXFIFOE);
+}
+
 size_t AM335x_UART::read(void* buff __attribute__((unused)), size_t size __attribute__((unused)))
 {
     // TODO: Implement.
     return 0;
 }
 
-size_t AM335x_UART::write(const void* buff __attribute__((unused)), size_t size __attribute__((unused)))
+size_t AM335x_UART::write(const void* buff, size_t size)
 {
-    // TODO: Implement.
-    return 0;
+    size_t i;
+
+    for (i = 0; i < size; ++i) {
+        if (!writeChar(((uint8_t *) buff)[i]))
+            break;
+    }
+
+    return i;
 }
 
 uint8_t AM335x_UART::readChar()
@@ -328,10 +343,12 @@ uint8_t AM335x_UART::readChar()
     return 0;
 }
 
-bool AM335x_UART::writeChar(uint8_t value __attribute__((unused)))
+bool AM335x_UART::writeChar(uint8_t value)
 {
-    // TODO: Implement.
-    return false;
+    while (!isTxFIFOEmpty());
+
+    UART_THR(m_base)->THR = value;
+    return true;
 }
 
 uint16_t AM335x_UART::setConfigMode(ConfigMode_t mode)
