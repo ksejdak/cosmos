@@ -62,12 +62,21 @@ bool BeagleBoneBlack::initUserLED()
 bool BeagleBoneBlack::initConsole()
 {
     // Init console on UART1.
-    GPIOPin consoleTx(PIN_P9_24);
+    GPIOPin consoleTx(PIN_SERIAL_DEBUG_TX);
     consoleTx.setFunction(GPIO::PAD_FUNC_0);
     consoleTx.setDirection(DIRECTION_OUTPUT);
+    consoleTx.setResistor(RESISTOR_NONE);
 
-    AM335x_UART consoleUart(UART_1);
+    AM335x_UART consoleUart(UART_0);
     consoleUart.setBaudRate(115200);
+    consoleUart.setDataBits(DATA_BITS_8);
+    consoleUart.setStopBits(STOP_BITS_1);
+    consoleUart.setPartity(PARTITY_NONE);
+    consoleUart.setFlowControl(FLOW_CONTROL_NONE);
+    consoleUart.setDirection(DIRECTION_WRITE);
+    consoleUart.setTransmissionMode(MODE_ASYNCHRONOUS);
+
+    consoleUart.write("DUPA BLADA\r\n", 12);
 
     return console.init();
 
