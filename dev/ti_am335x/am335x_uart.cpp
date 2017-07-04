@@ -41,12 +41,13 @@ namespace UART {
 int AM335x_UART::getBaseAddress(int uartNo)
 {
     switch (uartNo) {
-        case UART_0:     return UART_0_BASE;
-        case UART_1:     return UART_1_BASE;
-        case UART_2:     return UART_2_BASE;
-        case UART_3:     return UART_3_BASE;
-        case UART_4:     return UART_4_BASE;
-        case UART_5:     return UART_5_BASE;
+        case UART_0:    return UART_0_BASE;
+        case UART_1:    return UART_1_BASE;
+        case UART_2:    return UART_2_BASE;
+        case UART_3:    return UART_3_BASE;
+        case UART_4:    return UART_4_BASE;
+        case UART_5:    return UART_5_BASE;
+        default:        break;
     }
 
     return -1;
@@ -146,7 +147,7 @@ void AM335x_UART::init()
 
 void AM335x_UART::reset()
 {
-    UART_SYSC(m_base)->SOFTRESET = true;
+    UART_SYSC(m_base)->SOFTRESET = static_cast<uint16_t>(true);
     while (!UART_SYSS(m_base)->RESETDONE);
 }
 
@@ -157,7 +158,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
     uint16_t savedLCR = setConfigMode(CONFIG_MODE_OPERATIONAL);
 
     // Disable sleep mode.
-    volatile bool savedSleepmode = UART_IER(m_base)->SLEEPMODE;
+    volatile bool savedSleepmode = static_cast<bool>(UART_IER(m_base)->SLEEPMODE);
     UART_IER(m_base)->SLEEPMODE = 0;
 
     // Enable access to DLL and DLH.
@@ -171,8 +172,8 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
     }
     else {
         uint32_t divisorValue = INPUT_CLOCK_HZ / (16 * baudRate);
-        UART_DLL(m_base)->CLOCK_LSB = (divisorValue & 0xff);
-        UART_DLH(m_base)->CLOCK_MSB = ((divisorValue >> 8) & 0xff);
+        UART_DLL(m_base)->CLOCK_LSB = static_cast<uint16_t>(divisorValue & 0xff);
+        UART_DLH(m_base)->CLOCK_MSB = static_cast<uint16_t>((divisorValue >> 8) & 0xff);
     }
 
     // Restore operating mode.
@@ -180,7 +181,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
 
     // Restore sleep mode.
     setConfigMode(CONFIG_MODE_OPERATIONAL);
-    UART_IER(m_base)->SLEEPMODE = savedSleepmode;
+    UART_IER(m_base)->SLEEPMODE = static_cast<uint16_t>(savedSleepmode);
 
     restoreLCR(savedLCR);
     enableEnhancements(savedEnhancements);
@@ -285,7 +286,7 @@ void AM335x_UART::enableDMA(bool enabled)
 {
     // Set SCR as DMA mode control register.
     UART_SCR(m_base)->DMAMODECTL = 0x1;
-    UART_SCR(m_base)->DMAMODE2 = (enabled ? 0x1 : 0x0);
+    UART_SCR(m_base)->DMAMODE2 = static_cast<uint16_t>(enabled ? 0x1 : 0x0);
 }
 
 void AM335x_UART::enableFIFO(bool enabled)
@@ -294,7 +295,7 @@ void AM335x_UART::enableFIFO(bool enabled)
     setBaudRate(0);
 
     uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
-    UART_FCR(m_base)->FIFO_EN = enabled;
+    UART_FCR(m_base)->FIFO_EN = static_cast<uint16_t>(enabled);
     restoreLCR(savedLCR);
 
     m_fifoEnabled = enabled;
@@ -371,10 +372,10 @@ uint16_t AM335x_UART::setConfigMode(ConfigMode_t mode)
 
 OperatingMode_t AM335x_UART::setOperatingMode(OperatingMode_t mode)
 {
-    volatile OperatingMode_t result = (OperatingMode_t) UART_MDR1(m_base)->MODESELECT;
+    volatile OperatingMode_t result = static_cast<OperatingMode_t>(UART_MDR1(m_base)->MODESELECT);
     UART_MDR1(m_base)->MODESELECT = mode;
 
-    return result;
+    return static_cast<OperatingMode_t>(result);
 }
 
 void AM335x_UART::restoreLCR(uint16_t value)
@@ -387,8 +388,8 @@ bool AM335x_UART::enableEnhancements(bool enable)
     // Enable access to EFR register.
     uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
 
-    volatile bool savedEnhancements = UART_EFR(m_base)->ENHANCEDEN;
-    UART_EFR(m_base)->ENHANCEDEN = enable;
+    volatile bool savedEnhancements = static_cast<bool>(UART_EFR(m_base)->ENHANCEDEN);
+    UART_EFR(m_base)->ENHANCEDEN = static_cast<uint16_t>(enable);
 
     restoreLCR(savedLCR);
 

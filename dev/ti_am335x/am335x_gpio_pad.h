@@ -28,7 +28,7 @@ typedef union {
         uint32_t PAD_PULLUP_SELECT : 1;
         uint32_t PAD_INPUT_ACTIVE : 1;
         uint32_t PAD_SLEW_RATE : 1;
-        uint32_t : 25;
+        uint32_t _reserved : 25;
     };
 
     uint32_t value;
