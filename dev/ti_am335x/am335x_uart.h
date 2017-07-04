@@ -33,26 +33,16 @@ typedef enum {
 } ConfigMode_t;
 
 typedef enum {
-    TRIG_GRANULARITY_4 = 0x0,
     TRIG_GRANULARITY_1 = 0x1
 } TrigGranularity_t;
 
 typedef enum {
-    FIFO_TRIG_LEVEL_8  = 0x0,
-    FIFO_TRIG_LEVEL_16 = 0x1,
-    FIFO_TRIG_LEVEL_56 = 0x2,
-    FIFO_TRIG_LEVEL_60 = 0x3
+    FIFO_TRIG_LEVEL_8  = 0x0
 } FIFOTrigLevel_t;
 
 typedef enum {
-    MODE_UART_16x,
-    MODE_SIR,
-    MODE_UART_16x_AUTOBAUD,
-    MODE_UART_13x,
-    MODE_MIR,
-    MODE_FIR,
-    MODE_CIR,
-    MODE_DISABLE
+    MODE_UART_16x = 0x0,
+    MODE_DISABLE  = 0x7
 } OperatingMode_t;
 
 class AM335x_UART : public IUART {
