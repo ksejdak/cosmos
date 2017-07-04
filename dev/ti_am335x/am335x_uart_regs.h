@@ -24,7 +24,7 @@ namespace UART {
 typedef union {
     struct {
         uint16_t THR : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -33,7 +33,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t RHR : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -42,7 +42,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t CLOCK_LSB : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -58,7 +58,7 @@ typedef union {
         uint16_t TXSTATUSIT : 1;
         uint16_t LINESTSIT : 1;
         uint16_t EOFIT : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -70,9 +70,9 @@ typedef union {
         uint16_t THRIT : 1;
         uint16_t RXSTOPIT : 1;
         uint16_t RXOVERRUNIT : 1;
-        uint16_t : 1;
+        uint16_t _reserved1 : 1;
         uint16_t TXSTATUSIT : 1;
-        uint16_t : 10;
+        uint16_t _reserved2 : 10;
     };
 
     uint16_t value;
@@ -88,7 +88,7 @@ typedef union {
         uint16_t XOFFIT : 1;
         uint16_t RTSIT : 1;
         uint16_t CTSIT : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -97,7 +97,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t CLOCK_MSB : 6;
-        uint16_t : 10;
+        uint16_t _reserved : 10;
     };
 
     uint16_t value;
@@ -110,7 +110,7 @@ typedef union {
         uint16_t SPECIALCHARDETECT : 1;
         uint16_t AUTORTSEN : 1;
         uint16_t AUTOCTSEN : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -121,7 +121,7 @@ typedef union {
         uint16_t IT_PENDING : 1;
         uint16_t IT_TYPE : 5;
         uint16_t FCR_MIRROR : 2;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -133,9 +133,9 @@ typedef union {
         uint16_t THRIT : 1;
         uint16_t RXSTOPIT : 1;
         uint16_t RXOEIT : 1;
-        uint16_t : 1;
+        uint16_t _reserved1 : 1;
         uint16_t TXSTATUSIT : 1;
-        uint16_t : 10;
+        uint16_t _reserved2 : 10;
     };
 
     uint16_t value;
@@ -149,7 +149,7 @@ typedef union {
         uint16_t DMA_MODE : 1;
         uint16_t TX_FIFO_TRIG : 2;
         uint16_t RX_FIFO_TRIG : 2;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -165,7 +165,7 @@ typedef union {
         uint16_t TX_STATUS_IT : 1;
         uint16_t LINE_STS_IT : 1;
         uint16_t EOF_IT : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -180,7 +180,7 @@ typedef union {
         uint16_t PARITY_TYPE2 : 1;
         uint16_t BREAK_EN : 1;
         uint16_t DIV_EN : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -195,7 +195,7 @@ typedef union {
         uint16_t LOOPBACKEN : 1;
         uint16_t XONEN : 1;
         uint16_t TCRTLR : 1;
-        uint16_t : 9;
+        uint16_t _reserved : 9;
     };
 
     uint16_t value;
@@ -204,7 +204,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t XONWORD1 : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -213,7 +213,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t XONWORD2 : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -222,11 +222,11 @@ typedef union {
 typedef union {
     struct {
         uint16_t RXFIFOE : 1;
-        uint16_t : 4;
+        uint16_t _reserved1 : 4;
         uint16_t RXSTOP : 1;
-        uint16_t : 1;
+        uint16_t _reserved2 : 1;
         uint16_t THREMPTY : 1;
-        uint16_t : 8;
+        uint16_t _reserved3 : 8;
     };
 
     uint16_t value;
@@ -242,7 +242,7 @@ typedef union {
         uint16_t RX_LAST_BYTE : 1;
         uint16_t STS_FIFO_FULL : 1;
         uint16_t THR_EMPTY : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -258,7 +258,7 @@ typedef union {
         uint16_t TXFIFOE : 1;
         uint16_t TXSRE : 1;
         uint16_t RXFIFOSTS : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -268,7 +268,7 @@ typedef union {
     struct {
         uint16_t RXFIFOTRIGHALT : 4;
         uint16_t RXFIFOTRIGSTART : 4;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -284,7 +284,7 @@ typedef union {
         uint16_t NDSR_STS : 1;
         uint16_t NRI_STS : 1;
         uint16_t NCD_STS : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -293,7 +293,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t XOFFWORD1 : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -302,7 +302,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t SPR_WORD : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -312,7 +312,7 @@ typedef union {
     struct {
         uint16_t TX_FIFO_TRIG_DMA : 4;
         uint16_t RX_FIFO_TRIG_DMA : 4;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -321,7 +321,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t XOFFWORD2 : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -335,7 +335,7 @@ typedef union {
         uint16_t SCT : 1;
         uint16_t SIPMODE : 1;
         uint16_t FRAMEENDMODE : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -349,7 +349,7 @@ typedef union {
         uint16_t CIRPULSEMODE : 2;
         uint16_t IRRXINVERT : 1;
         uint16_t SETTXIRALT : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -358,7 +358,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t TXFLL : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -366,12 +366,12 @@ typedef union {
 
 typedef union {
     struct {
-        uint16_t : 1;
+        uint16_t _reserved1 : 1;
         uint16_t CRC_ERROR : 1;
         uint16_t ABORT_DETECT : 1;
         uint16_t FRAME_TOO_LONG_ERROR : 1;
         uint16_t OE_ERROR : 1;
-        uint16_t : 11;
+        uint16_t _reserved2 : 11;
     };
 
     uint16_t value;
@@ -380,7 +380,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t RESUME : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -389,7 +389,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t TXFLH : 5;
-        uint16_t : 11;
+        uint16_t _reserved : 11;
     };
 
     uint16_t value;
@@ -398,7 +398,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t RXFLL : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -407,7 +407,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t SFREGL : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -416,7 +416,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t SFREGH : 4;
-        uint16_t : 12;
+        uint16_t _reserved : 12;
     };
 
     uint16_t value;
@@ -425,7 +425,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t RXFLH : 4;
-        uint16_t : 12;
+        uint16_t _reserved : 12;
     };
 
     uint16_t value;
@@ -433,10 +433,10 @@ typedef union {
 
 typedef union {
     struct {
-        uint16_t : 6;
+        uint16_t _reserved1 : 6;
         uint16_t XBOFTYPE : 1;
         uint16_t STSFIFORESET : 1;
-        uint16_t : 8;
+        uint16_t _reserved2 : 8;
     };
 
     uint16_t value;
@@ -447,7 +447,7 @@ typedef union {
         uint16_t SPEED : 5;
         uint16_t BITBYCHAR : 1;
         uint16_t PARITYTYPE : 2;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -463,7 +463,7 @@ typedef union {
         uint16_t DISIRRX : 1;
         uint16_t SDMOD : 1;
         uint16_t PULSETYPE : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -478,7 +478,7 @@ typedef union {
         uint16_t DSRIT : 1;
         uint16_t TXTRIGGRANU1 : 1;
         uint16_t RXTRIGGRANU1 : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -489,7 +489,7 @@ typedef union {
         uint16_t TXFIFOFULL : 1;
         uint16_t RXCTSDSRWAKEUPSTS : 1;
         uint16_t DMACOUNTERRST : 1;
-        uint16_t : 13;
+        uint16_t _reserved : 13;
     };
 
     uint16_t value;
@@ -498,7 +498,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t EBLR : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -507,9 +507,9 @@ typedef union {
 typedef union {
     struct {
         uint16_t MINORREV : 6;
-        uint16_t : 2;
+        uint16_t _reserved1 : 2;
         uint16_t MAJORREV : 3;
-        uint16_t : 5;
+        uint16_t _reserved2 : 5;
     };
 
     uint16_t value;
@@ -521,7 +521,7 @@ typedef union {
         uint16_t SOFTRESET : 1;
         uint16_t ENAWAKEUP : 1;
         uint16_t IDLEMODE : 2;
-        uint16_t : 11;
+        uint16_t _reserved : 11;
     };
 
     uint16_t value;
@@ -530,7 +530,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t RESETDONE : 1;
-        uint16_t : 15;
+        uint16_t _reserved : 15;
     };
 
     uint16_t value;
@@ -546,7 +546,7 @@ typedef union {
         uint16_t RHR_INTERRUPT : 1;
         uint16_t RLS_INTERRUPT : 1;
         uint16_t TXWAKEUPEN : 1;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -555,7 +555,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t CFPS : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -564,7 +564,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t RXFIFO_LVL : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -573,7 +573,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t TXFIFO_LVL : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -583,7 +583,7 @@ typedef union {
     struct {
         uint16_t EN_RXFIFO_EMPTY : 1;
         uint16_t EN_TXFIFO_EMPTY : 1;
-        uint16_t : 14;
+        uint16_t _reserved : 14;
     };
 
     uint16_t value;
@@ -593,7 +593,7 @@ typedef union {
     struct {
         uint16_t RXFIFO_EMPTY_STS : 1;
         uint16_t TXFIFO_EMPTY_STS : 1;
-        uint16_t : 14;
+        uint16_t _reserved : 14;
     };
 
     uint16_t value;
@@ -602,7 +602,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t FREQ_SEL : 8;
-        uint16_t : 8;
+        uint16_t _reserved : 8;
     };
 
     uint16_t value;
@@ -613,7 +613,7 @@ typedef union {
         uint16_t DISABLE_CIR_RX_DEMOD : 1;
         uint16_t NONDEFAULT_FREQ : 1;
         uint16_t SET_DMA_TX_THRESHOLD : 1;
-        uint16_t : 13;
+        uint16_t _reserved : 13;
     };
 
     uint16_t value;
@@ -622,7 +622,7 @@ typedef union {
 typedef union {
     struct {
         uint16_t TX_DMA_THRESHOLD : 6;
-        uint16_t : 12;
+        uint16_t _reserved : 12;
     };
 
     uint16_t value;

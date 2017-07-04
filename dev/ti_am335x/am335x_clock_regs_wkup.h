@@ -27,15 +27,15 @@ typedef union {
         uint32_t CLKACTIVITY_L4_WKUP_GCLK : 1;
         uint32_t CLKACTIVITY_SR_SYSCLK : 1;
         uint32_t CLKACTIVITY_WDT1_CLK : 1;
-        uint32_t : 3;
+        uint32_t _reserved1 : 3;
         uint32_t CLKACTIVITY_GPIO0_GDBCLK : 1;
-        uint32_t : 1;
+        uint32_t _reserved2 : 1;
         uint32_t CLKACTIVITY_TIMER0_GCLK : 1;
         uint32_t CLKACTIVITY_I2C0_GFCLK : 1;
         uint32_t CLKACTIVITY_UART0_GFCLK : 1;
         uint32_t CLKACTIVITY_TIMER1_GCLK : 1;
         uint32_t CLKACTIVITY_ADC_FCLK : 1;
-        uint32_t : 17;
+        uint32_t _reserved3 : 17;
     };
 
     uint32_t value;
@@ -44,9 +44,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -55,10 +55,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t OPTFCLKEN_GPIO0_GDBCLK : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -67,9 +67,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -78,9 +78,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -89,7 +89,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
         uint32_t OPTFCLKEN_DBGSYSCLK : 1;
@@ -98,7 +98,7 @@ typedef union {
         uint32_t TRC_PMD_CLKDIVSEL : 3;
         uint32_t STM_PMD_CLKDIVSEL : 3;
         uint32_t OPTCLK_DEBUG_CLKA : 1;
-        uint32_t : 1;
+        uint32_t _reserved2 : 1;
     };
 
     uint32_t value;
@@ -110,7 +110,7 @@ typedef union {
         uint32_t CLKACTIVITY_DBGSYSCLK : 1;
         uint32_t CLKACTIVITY_L3_AON_GCLK : 1;
         uint32_t CLKACTIVITY_DEBUG_CLKA : 1;
-        uint32_t : 27;
+        uint32_t _reserved : 27;
     };
 
     uint32_t value;
@@ -119,7 +119,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t AUTO_DPLL_MODE : 3;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -128,9 +128,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t ST_DPLL_CLK : 1;
-        uint32_t : 7;
+        uint32_t _reserved1 : 7;
         uint32_t ST_MN_BYPASS : 1;
-        uint32_t : 23;
+        uint32_t _reserved2 : 23;
     };
 
     uint32_t value;
@@ -140,7 +140,7 @@ typedef union {
     struct {
         uint32_t DELTAMSTEP_FRACTION : 18;
         uint32_t DELTAMSTEP_INTEGER : 2;
-        uint32_t : 12;
+        uint32_t _reserved : 12;
     };
 
     uint32_t value;
@@ -149,9 +149,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODFREQDIV_MANTISSA : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t MODFREQDIV_EXPONENT : 3;
-        uint32_t : 21;
+        uint32_t _reserved2 : 21;
     };
 
     uint32_t value;
@@ -160,11 +160,11 @@ typedef union {
 typedef union {
     struct {
         uint32_t DPLL_DIV : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t DPLL_MULT : 11;
-        uint32_t : 4;
+        uint32_t _reserved2 : 4;
         uint32_t DPLL_BYP_CLKSEL : 1;
-        uint32_t : 8;
+        uint32_t _reserved3 : 8;
     };
 
     uint32_t value;
@@ -173,7 +173,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t AUTO_DPLL_MODE : 3;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -182,9 +182,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t ST_DPLL_CLK : 1;
-        uint32_t : 7;
+        uint32_t _reserved1 : 7;
         uint32_t ST_MN_BYPASS : 1;
-        uint32_t : 23;
+        uint32_t _reserved2 : 23;
     };
 
     uint32_t value;
@@ -194,7 +194,7 @@ typedef union {
     struct {
         uint32_t DELTAMSTEP_FRACTION : 18;
         uint32_t DELTAMSTEP_INTEGER : 2;
-        uint32_t : 12;
+        uint32_t _reserved : 12;
     };
 
     uint32_t value;
@@ -203,9 +203,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODFREQDIV_MANTISSA : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t MODFREQDIV_EXPONENT : 3;
-        uint32_t : 21;
+        uint32_t _reserved2 : 21;
     };
 
     uint32_t value;
@@ -214,11 +214,11 @@ typedef union {
 typedef union {
     struct {
         uint32_t DPLL_DIV : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t DPLL_MULT : 11;
-        uint32_t : 4;
+        uint32_t _reserved2 : 4;
         uint32_t DPLL_BYP_CLKSEL : 1;
-        uint32_t : 8;
+        uint32_t _reserved3 : 8;
     };
 
     uint32_t value;
@@ -228,7 +228,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t AUTO_DPLL_MODE : 3;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -237,9 +237,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t ST_DPLL_CLK : 1;
-        uint32_t : 7;
+        uint32_t _reserved1 : 7;
         uint32_t ST_MN_BYPASS : 1;
-        uint32_t : 23;
+        uint32_t _reserved2 : 23;
     };
 
     uint32_t value;
@@ -249,7 +249,7 @@ typedef union {
     struct {
         uint32_t DELTAMSTEP_FRACTION : 18;
         uint32_t DELTAMSTEP_INTEGER : 2;
-        uint32_t : 12;
+        uint32_t _reserved : 12;
     };
 
     uint32_t value;
@@ -258,9 +258,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODFREQDIV_MANTISSA : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t MODFREQDIV_EXPONENT : 3;
-        uint32_t : 21;
+        uint32_t _reserved2 : 21;
     };
 
     uint32_t value;
@@ -269,11 +269,11 @@ typedef union {
 typedef union {
     struct {
         uint32_t DPLL_DIV : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t DPLL_MULT : 11;
-        uint32_t : 4;
+        uint32_t _reserved2 : 4;
         uint32_t DPLL_BYP_CLKSEL : 1;
-        uint32_t : 8;
+        uint32_t _reserved3 : 8;
     };
 
     uint32_t value;
@@ -282,7 +282,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t AUTO_DPLL_MODE : 3;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -291,9 +291,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t ST_DPLL_CLK : 1;
-        uint32_t : 7;
+        uint32_t _reserved1 : 7;
         uint32_t ST_MN_BYPASS : 1;
-        uint32_t : 23;
+        uint32_t _reserved2 : 23;
     };
 
     uint32_t value;
@@ -303,7 +303,7 @@ typedef union {
     struct {
         uint32_t DELTAMSTEP_FRACTION : 18;
         uint32_t DELTAMSTEP_INTEGER : 2;
-        uint32_t : 12;
+        uint32_t _reserved : 12;
     };
 
     uint32_t value;
@@ -312,9 +312,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODFREQDIV_MANTISSA : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t MODFREQDIV_EXPONENT : 3;
-        uint32_t : 21;
+        uint32_t _reserved2 : 21;
     };
 
     uint32_t value;
@@ -323,9 +323,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t DPLL_DIV : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t DPLL_MULT : 11;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -334,7 +334,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t AUTO_DPLL_MODE : 3;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -343,9 +343,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t ST_DPLL_CLK : 1;
-        uint32_t : 7;
+        uint32_t _reserved1 : 7;
         uint32_t ST_MN_BYPASS : 1;
-        uint32_t : 23;
+        uint32_t _reserved2 : 23;
     };
 
     uint32_t value;
@@ -355,7 +355,7 @@ typedef union {
     struct {
         uint32_t DELTAMSTEP_FRACTION : 18;
         uint32_t DELTAMSTEP_INTEGER : 2;
-        uint32_t : 12;
+        uint32_t _reserved : 12;
     };
 
     uint32_t value;
@@ -364,9 +364,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODFREQDIV_MANTISSA : 7;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t MODFREQDIV_EXPONENT : 3;
-        uint32_t : 21;
+        uint32_t _reserved2 : 21;
     };
 
     uint32_t value;
@@ -374,12 +374,12 @@ typedef union {
 
 typedef union {
     struct {
-        uint32_t : 8;
+        uint32_t _reserved1 : 8;
         uint32_t DPLL_CLKDCOLDO_GATE_CTRL : 1;
         uint32_t ST_DPLL_CLKDCOLDO : 1;
-        uint32_t : 2;
+        uint32_t _reserved2 : 2;
         uint32_t DPLL_CLKDCOLDO_PWDN : 1;
-        uint32_t : 19;
+        uint32_t _reserved3 : 19;
     };
 
     uint32_t value;
@@ -389,12 +389,12 @@ typedef union {
     struct {
         uint32_t HSDIVIDER_CLKOUT1_DIV : 5;
         uint32_t HSDIVIDER_CLKOUT1_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t HSDIVIDER_CLKOUT1_GATE_CTRL : 1;
         uint32_t ST_HSDIVIDER_CLKOUT1 : 1;
-        uint32_t : 2;
+        uint32_t _reserved2 : 2;
         uint32_t HSDIVIDER_CLKOUT1_PWDN : 1;
-        uint32_t : 19;
+        uint32_t _reserved3 : 19;
     };
 
     uint32_t value;
@@ -404,12 +404,12 @@ typedef union {
     struct {
         uint32_t HSDIVIDER_CLKOUT2_DIV : 5;
         uint32_t HSDIVIDER_CLKOUT2_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t HSDIVIDER_CLKOUT2_GATE_CTRL : 1;
         uint32_t ST_HSDIVIDER_CLKOUT2 : 1;
-        uint32_t : 2;
+        uint32_t _reserved2 : 2;
         uint32_t HSDIVIDER_CLKOUT2_PWDN : 1;
-        uint32_t : 19;
+        uint32_t _reserved3 : 19;
     };
 
     uint32_t value;
@@ -428,7 +428,7 @@ typedef union {
         uint32_t DPLL_SSC_ACK : 1;
         uint32_t DPLL_SSC_DOWNSPREAD : 1;
         uint32_t DPLL_SSC_TYPE : 1;
-        uint32_t : 16;
+        uint32_t _reserved : 16;
     };
 
     uint32_t value;
@@ -437,12 +437,12 @@ typedef union {
 typedef union {
     struct {
         uint32_t DPLL_EN : 3;
-        uint32_t : 9;
+        uint32_t _reserved1 : 9;
         uint32_t DPLL_SSC_EN : 1;
         uint32_t DPLL_SSC_ACK : 1;
         uint32_t DPLL_SSC_DOWNSPREAD : 1;
         uint32_t DPLL_SSC_TYPE : 1;
-        uint32_t : 16;
+        uint32_t _reserved2 : 16;
     };
 
     uint32_t value;
@@ -461,7 +461,7 @@ typedef union {
         uint32_t DPLL_SSC_ACK : 1;
         uint32_t DPLL_SSC_DOWNSPREAD : 1;
         uint32_t DPLL_SSC_TYPE : 1;
-        uint32_t : 16;
+        uint32_t _reserved : 16;
     };
 
     uint32_t value;
@@ -480,7 +480,7 @@ typedef union {
         uint32_t DPLL_SSC_ACK : 1;
         uint32_t DPLL_SSC_DOWNSPREAD : 1;
         uint32_t DPLL_SSC_TYPE : 1;
-        uint32_t : 16;
+        uint32_t _reserved : 16;
     };
 
     uint32_t value;
@@ -499,7 +499,7 @@ typedef union {
         uint32_t DPLL_SSC_ACK : 1;
         uint32_t DPLL_SSC_DOWNSPREAD : 1;
         uint32_t DPLL_SSC_TYPE : 1;
-        uint32_t : 16;
+        uint32_t _reserved : 16;
     };
 
     uint32_t value;
@@ -509,7 +509,7 @@ typedef union {
     struct {
         uint32_t DPLL_DIV : 8;
         uint32_t DPLL_MULT : 12;
-        uint32_t : 4;
+        uint32_t _reserved : 4;
         uint32_t DPLL_SD_DIV : 8;
     };
 
@@ -520,9 +520,9 @@ typedef union {
     struct {
         uint32_t DPLL_CLKOUT_DIV : 5;
         uint32_t DPLL_CLKOUT_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t DPLL_CLKOUT_GATE_CTRL : 1;
-        uint32_t : 22;
+        uint32_t _reserved2 : 22;
     };
 
     uint32_t value;
@@ -532,10 +532,10 @@ typedef union {
     struct {
         uint32_t DPLL_CLKOUT_DIV : 5;
         uint32_t DPLL_CLKOUT_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t DPLL_CLKOUT_GATE_CTRL : 2;
         uint32_t ST_DPLL_CLKOUT : 1;
-        uint32_t : 22;
+        uint32_t _reserved2 : 22;
     };
 
     uint32_t value;
@@ -545,10 +545,10 @@ typedef union {
     struct {
         uint32_t DPLL_CLKOUT_DIV : 5;
         uint32_t DPLL_CLKOUT_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t DPLL_CLKOUT_GATE_CTRL : 2;
         uint32_t ST_DPLL_CLKOUT : 1;
-        uint32_t : 22;
+        uint32_t _reserved2 : 22;
     };
 
     uint32_t value;
@@ -558,10 +558,10 @@ typedef union {
     struct {
         uint32_t DPLL_CLKOUT_DIV : 5;
         uint32_t DPLL_CLKOUT_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t DPLL_CLKOUT_GATE_CTRL : 2;
         uint32_t ST_DPLL_CLKOUT : 1;
-        uint32_t : 22;
+        uint32_t _reserved2 : 22;
     };
 
     uint32_t value;
@@ -570,9 +570,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 16;
+        uint32_t _reserved1 : 16;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -581,9 +581,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -592,9 +592,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -603,9 +603,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -614,9 +614,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -625,9 +625,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -636,9 +636,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -648,7 +648,7 @@ typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
         uint32_t CLKACTIVITY_L4_WKUP_AON_GCLK : 1;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -657,9 +657,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -669,12 +669,12 @@ typedef union {
     struct {
         uint32_t HSDIVIDER_CLKOUT3_DIV : 5;
         uint32_t HSDIVIDER_CLKOUT3_DIVCHACK : 1;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t HSDIVIDER_CLKOUT3_GATE_CTRL : 1;
         uint32_t ST_HSDIVIDER_CLKOUT3 : 1;
-        uint32_t : 2;
+        uint32_t _reserved2 : 2;
         uint32_t HSDIVIDER_CLKOUT3_PWDN : 1;
-        uint32_t : 19;
+        uint32_t _reserved3 : 19;
     };
 
     uint32_t value;

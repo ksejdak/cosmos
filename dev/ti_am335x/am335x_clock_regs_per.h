@@ -24,28 +24,28 @@ namespace Clock {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 6;
+        uint32_t _reserved1 : 6;
         uint32_t CLKACTIVITY_L4LS_GCLK : 1;
-        uint32_t : 1;
+        uint32_t _reserved2 : 1;
         uint32_t CLKACTIVITY_UART_GFCLK : 1;
         uint32_t CLKACTIVITY_CAN_CLK : 1;
-        uint32_t : 1;
+        uint32_t _reserved3 : 1;
         uint32_t CLKACTIVITY_TIMER7_GCLK : 1;
         uint32_t CLKACTIVITY_TIMER2_GCLK : 1;
         uint32_t CLKACTIVITY_TIMER3_GCLK : 1;
         uint32_t CLKACTIVITY_TIMER4_GCLK : 1;
         uint32_t CLKACTIVITY_LCDC_GCLK : 1;
-        uint32_t : 1;
+        uint32_t _reserved4 : 1;
         uint32_t CLKACTIVITY_GPIO_1_GDBCLK : 1;
         uint32_t CLKACTIVITY_GPIO_2_GDBCLK : 1;
         uint32_t CLKACTIVITY_GPIO_3_GDBCLK : 1;
-        uint32_t : 2;
+        uint32_t _reserved5 : 2;
         uint32_t CLKACTIVITY_I2C_FCLK : 1;
         uint32_t CLKACTIVITY_SPI_GCLK : 1;
-        uint32_t : 1;
+        uint32_t _reserved6 : 1;
         uint32_t CLKACTIVITY_TIMER5_GCLK : 1;
         uint32_t CLKACTIVITY_TIMER6_GCLK : 1;
-        uint32_t : 3;
+        uint32_t _reserved7 : 3;
     };
 
     uint32_t value;
@@ -54,9 +54,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t CLKACTIVITY_L3S_GCLK : 1;
-        uint32_t : 28;
+        uint32_t _reserved2 : 28;
     };
 
     uint32_t value;
@@ -68,10 +68,10 @@ typedef union {
         uint32_t CLKACTIVITY_EMIF_GCLK : 1;
         uint32_t CLKACTIVITY_MMC_FCLK : 1;
         uint32_t CLKACTIVITY_L3_GCLK : 1;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t CLKACTIVITY_CPTS_RFT_GCLK : 1;
         uint32_t CLKACTIVITY_MCASP_GCLK : 1;
-        uint32_t : 24;
+        uint32_t _reserved2 : 24;
     };
 
     uint32_t value;
@@ -80,10 +80,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -92,10 +92,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -104,10 +104,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -116,10 +116,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -128,9 +128,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -139,9 +139,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -150,9 +150,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -161,9 +161,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -172,9 +172,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -183,9 +183,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -194,9 +194,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -205,9 +205,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -216,9 +216,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -227,9 +227,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -238,9 +238,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -249,9 +249,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -260,9 +260,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -271,9 +271,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -282,9 +282,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -293,9 +293,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -304,9 +304,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -315,9 +315,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -326,9 +326,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -337,9 +337,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -348,9 +348,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -359,10 +359,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t OPTFCLKEN_GPIO_1_GDBCLK : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -371,10 +371,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t OPTFCLKEN_GPIO_2_GDBCLK : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -383,10 +383,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t OPTFCLKEN_GPIO_3_GDBCLK : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -395,9 +395,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -406,9 +406,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -417,9 +417,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -428,9 +428,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -439,9 +439,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -450,9 +450,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -461,9 +461,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -472,9 +472,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -483,10 +483,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -495,10 +495,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -507,9 +507,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -518,9 +518,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -529,9 +529,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -540,9 +540,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -551,10 +551,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -563,10 +563,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -575,9 +575,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -586,9 +586,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -597,12 +597,12 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 1;
+        uint32_t _reserved1 : 1;
         uint32_t CLKACTIVITY_L4HS_GCLK : 1;
         uint32_t CLKACTIVITY_CPSW_250MHZ_GCLK : 1;
         uint32_t CLKACTIVITY_CPSW_50MHZ_GCLK : 1;
         uint32_t CLKACTIVITY_CPSW_5MHZ_GCLK : 1;
-        uint32_t : 25;
+        uint32_t _reserved2 : 25;
     };
 
     uint32_t value;
@@ -611,9 +611,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -622,10 +622,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t CLKACTIVITY_OCPWP_L3_GCLK : 1;
         uint32_t CLKACTIVITY_OCPWP_L4_GCLK : 1;
-        uint32_t : 26;
+        uint32_t _reserved2 : 26;
     };
 
     uint32_t value;
@@ -634,10 +634,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
         uint32_t STBYST : 1;
-        uint32_t : 13;
+        uint32_t _reserved2 : 13;
     };
 
     uint32_t value;
@@ -646,11 +646,11 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t CLKACTIVITY_PRU_ICSS_OCP_GCLK : 1;
         uint32_t CLKACTIVITY_PRU_ICSS_IEP_GCLK : 1;
         uint32_t CLKACTIVITY_PRU_ICSS_UART_GCLK : 1;
-        uint32_t : 25;
+        uint32_t _reserved2 : 25;
     };
 
     uint32_t value;
@@ -659,9 +659,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t CLKACTIVITY_CPSW_125MHz_GCLK : 1;
-        uint32_t : 27;
+        uint32_t _reserved2 : 27;
     };
 
     uint32_t value;
@@ -670,10 +670,10 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL : 2;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t CLKACTIVITY_LCDC_L3_OCP_GCLK : 1;
         uint32_t CLKACTIVITY_LCDC_L4_OCP_GCLK : 1;
-        uint32_t : 26;
+        uint32_t _reserved2 : 26;
     };
 
     uint32_t value;
@@ -682,9 +682,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t MODULEMODE : 2;
-        uint32_t : 14;
+        uint32_t _reserved1 : 14;
         uint32_t IDLEST : 2;
-        uint32_t : 14;
+        uint32_t _reserved2 : 14;
     };
 
     uint32_t value;
@@ -693,9 +693,9 @@ typedef union {
 typedef union {
     struct {
         uint32_t CLKTRCTRL: 2;
-        uint32_t : 2;
+        uint32_t _reserved1 : 2;
         uint32_t CLKACTIVITY_CLK_24MHZ_GCLK : 1;
-        uint32_t : 27;
+        uint32_t _reserved2 : 27;
     };
 
     uint32_t value;

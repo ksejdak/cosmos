@@ -28,7 +28,7 @@ typedef union {
         uint32_t MAJOR : 3;
         uint32_t RTL : 5;
         uint32_t FUNC : 12;
-        uint32_t : 2;
+        uint32_t _reserved : 2;
         uint32_t SCHEME : 2;
     };
 
@@ -41,7 +41,7 @@ typedef union {
         uint32_t SOFTRESET : 1;
         uint32_t ENAWAKEUP : 1;
         uint32_t IDLEMODE : 2;
-        uint32_t : 27;
+        uint32_t _reserved : 27;
     };
 
     uint32_t value;
@@ -50,7 +50,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t DMAEvent_Ack : 1;
-        uint32_t : 31;
+        uint32_t _reserved : 31;
     };
 
     uint32_t value;
@@ -139,7 +139,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t RESETDONE : 1;
-        uint32_t : 31;
+        uint32_t _reserved : 31;
     };
 
     uint32_t value;
@@ -149,7 +149,7 @@ typedef union {
     struct {
         uint32_t DISABLEMODULE : 1;
         uint32_t GATINGRATIO : 2;
-        uint32_t : 29;
+        uint32_t _reserved : 29;
     };
 
     uint32_t value;
@@ -222,7 +222,7 @@ typedef union {
 typedef union {
     struct {
         uint32_t DEBOUNCETIME : 8;
-        uint32_t : 24;
+        uint32_t _reserved : 24;
     };
 
     uint32_t value;
