@@ -32,7 +32,7 @@ GPIOPin::GPIOPin(int portNo, int pinNo)
     }
 }
 
-bool GPIOPin::setFunction(int function)
+bool GPIOPin::setFunction(Function_t function)
 {
     return m_port.setFunction(m_id, function);
 }

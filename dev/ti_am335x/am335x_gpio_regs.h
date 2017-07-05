@@ -23,9 +23,9 @@ namespace GPIO {
 
 typedef union {
     struct {
-        uint32_t AUTOIDLE : 1;
-        uint32_t SOFTRESET : 1;
-        uint32_t ENAWAKEUP : 1;
+        bool AUTOIDLE : 1;
+        bool SOFTRESET : 1;
+        bool ENAWAKEUP : 1;
         uint32_t IDLEMODE : 2;
         uint32_t _reserved : 27;
     };
@@ -35,7 +35,7 @@ typedef union {
 
 typedef union {
     struct {
-        uint32_t RESETDONE : 1;
+        bool RESETDONE : 1;
         uint32_t _reserved : 31;
     };
 
@@ -44,7 +44,7 @@ typedef union {
 
 typedef union {
     struct {
-        uint32_t DISABLEMODULE : 1;
+        bool DISABLEMODULE : 1;
         uint32_t GATINGRATIO : 2;
         uint32_t _reserved : 29;
     };

@@ -51,7 +51,7 @@ bool BeagleBoneBlack::initUserLED()
 {
     // Init user led0.
     GPIOPin led0(PIN_USER_LED0);
-    led0.setFunction(GPIO::PAD_FUNC_7);
+    led0.setFunction(FUNCTION_7);
     led0.setDirection(DIRECTION_OUTPUT);
     led0.setResistor(RESISTOR_NONE);
     led0.write(true);
@@ -63,7 +63,7 @@ bool BeagleBoneBlack::initConsole()
 {
     // Init console on UART1.
     GPIOPin consoleTx(PIN_SERIAL_DEBUG_TX);
-    consoleTx.setFunction(GPIO::PAD_FUNC_0);
+    consoleTx.setFunction(FUNCTION_0);
     consoleTx.setDirection(DIRECTION_OUTPUT);
     consoleTx.setResistor(RESISTOR_NONE);
 

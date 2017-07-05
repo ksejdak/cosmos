@@ -32,6 +32,17 @@ extern PinMux_t pinmux[];
 extern int pinmuxSize;
 
 typedef enum {
+    FUNCTION_0,
+    FUNCTION_1,
+    FUNCTION_2,
+    FUNCTION_3,
+    FUNCTION_4,
+    FUNCTION_5,
+    FUNCTION_6,
+    FUNCTION_7
+} Function_t;
+
+typedef enum {
     DIRECTION_INPUT,
     DIRECTION_OUTPUT
 } Direction_t;
@@ -48,7 +59,7 @@ public:
     virtual void enable() = 0;
     virtual void disable() = 0;
 
-    virtual bool setFunction(int id, int function) = 0;
+    virtual bool setFunction(int id, Function_t function) = 0;
     virtual void setDirection(int pinNo, Direction_t direction) = 0;
     virtual void setResistor(int id, Resitor_t resistor) = 0;
 
@@ -62,7 +73,7 @@ public:
     GPIOPin(int id);
     GPIOPin(int portNo, int pinNo);
 
-    bool setFunction(int function);
+    bool setFunction(Function_t function);
     void setDirection(Direction_t direction);
     void setResistor(Resitor_t resistor);
 

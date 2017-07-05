@@ -11,6 +11,7 @@
 #ifndef AM335X_GPIO_PAD_H
 #define AM335X_GPIO_PAD_H
 
+#include <dev/gpio.h>
 #include <os/stdint.h>
 #include <os/utils.h>
 
@@ -23,41 +24,16 @@ namespace GPIO {
 
 typedef union {
     struct {
-        uint32_t PAD_FUNC : 3;
-        uint32_t PAD_PULLUP_ENABLE : 1;
-        uint32_t PAD_PULLUP_SELECT : 1;
-        uint32_t PAD_INPUT_ACTIVE : 1;
-        uint32_t PAD_SLEW_RATE : 1;
+        Function_t PAD_FUNC : 3;
+        bool PAD_PULLUP_DISABLE : 1;
+        bool PAD_PULLUP_SELECT : 1;
+        bool PAD_INPUT_ACTIVE : 1;
+        bool PAD_SLOW_SLEWRATE : 1;
         uint32_t _reserved : 25;
     };
 
     uint32_t value;
 } PAD_t;
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-// FIELD VALUES
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-typedef enum {
-    PAD_FUNC_0 = 0x0,
-    PAD_FUNC_1 = 0x1,
-    PAD_FUNC_2 = 0x2,
-    PAD_FUNC_3 = 0x3,
-    PAD_FUNC_4 = 0x4,
-    PAD_FUNC_5 = 0x5,
-    PAD_FUNC_6 = 0x6,
-    PAD_FUNC_7 = 0x7
-} PadFunc_t;
-
-typedef enum {
-    PAD_OUTPUT = 0x0,
-    PAD_INPUT  = 0x1
-} PadDir_t;
-
-typedef enum {
-    PAD_SLEW_FAST = 0x0,
-    PAD_SLEW_SLOW = 0x1
-} PadSlewRate_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER ADDRESSES
@@ -71,7 +47,7 @@ typedef enum {
 // PIN MUX
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Pin number -> (GPIO port, GPIO pin)
+// [Pin number] -> (GPIO port, GPIO pin)
 #define AM335X_PINMUX { \
     { 1, 0 },           \
     { 1, 1 },           \
