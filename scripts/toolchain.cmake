@@ -9,7 +9,12 @@ macro(set_toolchain ARCH)
         set(CMAKE_RANLIB "arm-none-eabi-ranlib")
         set(CMAKE_AR "arm-none-eabi-ar")
 
-        set(COMMON_FLAGS "-mcpu=cortex-a8 -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -fno-common -ffunction-sections -fdata-sections -static -Wall -Wextra -nostartfiles -nostdinc")
+        set(COMMON_FLAGS "${COMMON_FLAGS} -march=armv7-a -mcpu=cortex-a8")              # Optimize code for ARM Cortex-A8.
+        set(COMMON_FLAGS "${COMMON_FLAGS} -mthumb")                                     # Use Thumb instruction set.
+        #set(COMMON_FLAGS "${COMMON_FLAGS} -mfloat-abi=hard")                            # Don't emulate floating point operations, use CPU instructions instead.
+        set(COMMON_FLAGS "${COMMON_FLAGS} -static")                                     # Prevent linking with shared libraries.
+        set(COMMON_FLAGS "${COMMON_FLAGS} -Wall -Wextra")                               # Enable all possible warnings.
+        set(COMMON_FLAGS "${COMMON_FLAGS} -nostartfiles")                               # Don't use standard startup files when linking.
         set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
         set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
@@ -19,7 +24,7 @@ macro(set_toolchain ARCH)
         set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -Werror")
 
         # Set C++ compilation flags.
-        set(CMAKE_CXX_FLAGS "${COMMON_FLAGS} -std=c++14")
+        set(CMAKE_CXX_FLAGS "${COMMON_FLAGS} -std=c++14")                               # Enable C++14 standard.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-unwind-tables")    # Disable C++ exceptions support, because it requires libc.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")                             # Disable C++ run time information, because it requires libc.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-threadsafe-statics")               # Do not produce code to initialize statics in thread-safe way.
