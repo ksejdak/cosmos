@@ -8,6 +8,20 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    .section    .data
+    .global     __dso_handle
+
+__dso_handle:   .word   0
+
+    .section    .text
+    .global     _fini
+    .func       _fini
+
+_fini:
+    bx      lr
+
+    .endfunc
+
     .section    .boot, "ax"
     .global     _start
     .func       _start
