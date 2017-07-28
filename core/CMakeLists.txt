@@ -1,6 +1,7 @@
 set(SOURCES
     console.cpp
     main.cpp
+    newlib.cpp
 )
 
 register_executable(${PROJECT_NAME})
