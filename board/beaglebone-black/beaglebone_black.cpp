@@ -76,8 +76,6 @@ bool BeagleBoneBlack::initConsole()
     consoleUart.setDirection(DIRECTION_WRITE);
     consoleUart.setTransmissionMode(MODE_ASYNCHRONOUS);
 
-    consoleUart.write("DUPA BLADA\r\n", 12);
-
     return console.init();
 
 }
