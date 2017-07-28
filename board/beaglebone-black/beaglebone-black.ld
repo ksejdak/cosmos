@@ -74,6 +74,12 @@ SECTIONS {
         *(.rodata1)
     } AT > sram = 0
 
+    .ARM.exidx : {
+        __exidx_start = .;
+        *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+        __exidx_end = .;
+    } AT > sram
+
 	/* BSS. */
 	.bss : ALIGN(4) {
 		_bssStart_pa = .;
@@ -99,4 +105,5 @@ SECTIONS {
 
 	/* Heap. */
 	_heapStart_pa = .;
+	end = _heapStart_pa;
 }
