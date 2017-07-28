@@ -11,7 +11,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include <os/stdint.h>
+#include <cstdint>
 
 namespace Filesystem {
 

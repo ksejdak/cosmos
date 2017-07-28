@@ -13,7 +13,8 @@
 
 #include "file.h"
 
-#include <os/stdint.h>
+#include <cstdint>
+#include <cstring>
 
 namespace Filesystem {
 

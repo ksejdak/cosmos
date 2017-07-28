@@ -13,7 +13,7 @@
 
 #include "pagepool.h"
 
-#include <os/stdint.h>
+#include <cstdint>
 
 namespace Memory {
 

@@ -17,7 +17,8 @@
 
 #include <os/chain.h>
 #include <os/pair.h>
-#include <os/stdint.h>
+
+#include <cstdint>
 
 namespace Memory {
 

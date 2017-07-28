@@ -11,7 +11,7 @@
 #ifndef REGIONS_H
 #define REGIONS_H
 
-#include <os/stdint.h>
+#include <cstdint>
 
 namespace Memory {
 

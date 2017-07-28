@@ -12,7 +12,8 @@
 #define PAGE_H
 
 #include <os/chain.h>
-#include <os/stdint.h>
+
+#include <cstdint>
 
 namespace Memory {
 

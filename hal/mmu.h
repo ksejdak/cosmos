@@ -11,7 +11,7 @@
 #ifndef MMU_H
 #define MMU_H
 
-#include <os/stdint.h>
+#include <cstdint>
 
 namespace HAL {
 

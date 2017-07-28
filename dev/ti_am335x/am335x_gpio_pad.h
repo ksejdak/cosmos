@@ -12,8 +12,9 @@
 #define AM335X_GPIO_PAD_H
 
 #include <dev/gpio.h>
-#include <os/stdint.h>
 #include <os/utils.h>
+
+#include <cstdint>
 
 namespace Device {
 namespace GPIO {
