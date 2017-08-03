@@ -31,13 +31,13 @@ private:
     MemoryRegions();
 
 private:
-    struct __attribute__((packed)) MemoryRegionEntry {
+    typedef struct {
         uint32_t physicalAddress;
         uint32_t totalSize;
         uint32_t usedSize;
-    };
+    } __attribute__((packed)) MemoryRegionEntry;
 
-    struct MemoryRegionEntry *regions;
+    MemoryRegionEntry *m_regions;
     int m_count;
 };
 

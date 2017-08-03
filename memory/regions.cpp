@@ -10,19 +10,17 @@
 
 #include "regions.h"
 
-#include <os/assert.h>
+#include <cassert>
 
 extern int _memoryRegions_pa;
 
 namespace Memory {
 
 MemoryRegions::MemoryRegions()
-    : regions(nullptr)
+    : m_regions(reinterpret_cast<MemoryRegionEntry *>(&_memoryRegions_pa))
     , m_count(0)
 {
-    regions = (struct MemoryRegionEntry *) &_memoryRegions_pa;
-
-    for (struct MemoryRegionEntry *it = regions; it->totalSize != 0; ++it)
+    for (auto it = m_regions; it->totalSize != 0; ++it)
         ++m_count;
 }
 
@@ -34,19 +32,19 @@ int MemoryRegions::count()
 uint32_t MemoryRegions::physicalAddress(int index)
 {
     assert(index < m_count);
-    return regions[index].physicalAddress;
+    return m_regions[index].physicalAddress;
 }
 
 uint32_t MemoryRegions::totalSize(int index)
 {
     assert(index < m_count);
-    return regions[index].totalSize;
+    return m_regions[index].totalSize;
 }
 
 uint32_t MemoryRegions::usedSize(int index)
 {
     assert(index < m_count);
-    return regions[index].usedSize;
+    return m_regions[index].usedSize;
 }
 
 } // namespace Memory

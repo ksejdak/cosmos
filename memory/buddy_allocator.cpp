@@ -11,7 +11,8 @@
 #include "buddy_allocator.h"
 
 #include <hal/mmu.h>
-#include <os/assert.h>
+
+#include <cassert>
 
 using namespace HAL;
 

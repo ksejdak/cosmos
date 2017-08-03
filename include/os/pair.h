@@ -11,8 +11,6 @@
 #ifndef PAIR_H
 #define PAIR_H
 
-#include <os/assert.h>
-
 namespace os {
 
 template <typename T, typename U>

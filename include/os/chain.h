@@ -11,7 +11,7 @@
 #ifndef CHAIN_H
 #define CHAIN_H
 
-#include <os/assert.h>
+#include <cassert>
 
 namespace os {
 

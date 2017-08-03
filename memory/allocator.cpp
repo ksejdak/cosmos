@@ -10,7 +10,7 @@
 
 #include "allocator.h"
 
-#include <os/assert.h>
+#include <cassert>
 
 // Replace global operator new and delete to use kernel allocator.
 void* operator new(unsigned int size)

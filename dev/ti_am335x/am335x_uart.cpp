@@ -13,7 +13,7 @@
 #include "am335x_clock_regs_wkup.h"
 #include "am335x_uart_regs.h"
 
-#include <os/assert.h>
+#include <cassert>
 
 namespace Device {
 
