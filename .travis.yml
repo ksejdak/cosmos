@@ -1,0 +1,13 @@
+language: cpp
+
+addons:
+  apt:
+    packages:
+      - cmake
+      - arm-none-eabi-gcc
+
+script:
+  - mkdir -p build
+  - cd build
+  - cmake ..
+  - make
