@@ -3,7 +3,7 @@
 #################################################################################################################
 
 # Required cmake version.
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.2)
 
 # Additional user defined macros.
 include(${CMAKE_SOURCE_DIR}/scripts/toolchain.cmake)
