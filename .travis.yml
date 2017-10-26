@@ -4,7 +4,7 @@ addons:
   apt:
     packages:
       - cmake
-      - arm-none-eabi-gcc
+      - gcc-arm-none-eabi
 
 script:
   - mkdir -p build
