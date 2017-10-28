@@ -12,7 +12,7 @@ install:
 
       # GCC 6.3.1
       wget --no-check-certificate http://bit.ly/2idj7FR -O gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2;
-      tar -xzf gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2;
+      tar -xjf gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2;
       export PATH=$PWD/gcc-arm-none-eabi-6-2017-q2-update-linux/bin:$PATH;
     fi
 
