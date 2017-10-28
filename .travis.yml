@@ -1,16 +1,9 @@
 language: cpp
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-arm-none-eabi
-
 install:
 
-# Linux
   - |
+    # Linux
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       # CMake 3.9.4
       wget --no-check-certificate https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz;
@@ -18,9 +11,9 @@ install:
       export PATH=$PWD/cmake-3.9.4-Linux-x86_64/bin:$PATH;
 
       # GCC 6.3.1
-      wget --no-check-certificate http://bit.ly/2idj7FR;
-      tar -xzf gcc-arm-none-eabi-6-2017-q2-update.tar.bz2;
-      export PATH=$PWD/gcc-arm-none-eabi-6-2017-q2-update/bin:$PATH;
+      wget --no-check-certificate http://bit.ly/2idj7FR -O gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2;
+      tar -xzf gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2;
+      export PATH=$PWD/gcc-arm-none-eabi-6-2017-q2-update-linux/bin:$PATH;
     fi
 
 script:
