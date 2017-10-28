@@ -12,10 +12,15 @@ install:
 # Linux
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-       # CMake
-       wget --no-check-certificate https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz;
-       tar -xzf cmake-3.9.4-Linux-x86_64.tar.gz;
-       export PATH=$PWD/cmake-3.9.4-Linux-x86_64/bin:$PATH;
+      # CMake 3.9.4
+      wget --no-check-certificate https://cmake.org/files/v3.9/cmake-3.9.4-Linux-x86_64.tar.gz;
+      tar -xzf cmake-3.9.4-Linux-x86_64.tar.gz;
+      export PATH=$PWD/cmake-3.9.4-Linux-x86_64/bin:$PATH;
+
+      # GCC 6.3.1
+      wget --no-check-certificate http://bit.ly/2idj7FR;
+      tar -xzf gcc-arm-none-eabi-6-2017-q2-update.tar.bz2;
+      export PATH=$PWD/gcc-arm-none-eabi-6-2017-q2-update/bin:$PATH;
     fi
 
 script:
