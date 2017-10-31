@@ -29,19 +29,19 @@ int MemoryRegions::count()
     return m_count;
 }
 
-uint32_t MemoryRegions::physicalAddress(int index)
+std::uint32_t MemoryRegions::physicalAddress(int index)
 {
     assert(index < m_count);
     return m_regions[index].physicalAddress;
 }
 
-uint32_t MemoryRegions::totalSize(int index)
+std::uint32_t MemoryRegions::totalSize(int index)
 {
     assert(index < m_count);
     return m_regions[index].totalSize;
 }
 
-uint32_t MemoryRegions::usedSize(int index)
+std::uint32_t MemoryRegions::usedSize(int index)
 {
     assert(index < m_count);
     return m_regions[index].usedSize;

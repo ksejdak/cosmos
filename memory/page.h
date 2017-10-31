@@ -20,17 +20,17 @@ namespace Memory {
 class Page : public os::IChainable<Page> {
 public:
     Page();
-    Page(uint32_t physicalAddress);
+    Page(std::uint32_t physicalAddress);
 
-    uint32_t physicalAddress();
-    void setPhysicalAddress(uint32_t physicalAddress);
+    std::uint32_t physicalAddress();
+    void setPhysicalAddress(std::uint32_t physicalAddress);
 
     bool isOccupied();
     void setOccupied();
     void setFree();
 
 private:
-    uint32_t m_physicalAddress;
+    std::uint32_t m_physicalAddress;
     bool m_occupied;
 };
 

@@ -39,8 +39,8 @@ public:
     virtual void setDirection(int pinNo, Direction_t direction);
     virtual void setResistor(int id, Resitor_t resistor);
 
-    virtual uint32_t read();
-    virtual bool write(uint32_t value);
+    virtual std::uint32_t read();
+    virtual bool write(std::uint32_t value);
     virtual bool writePin(int pinNo, bool state);
 
 public:

@@ -23,18 +23,18 @@ public:
     }
 
     int count();
-    uint32_t physicalAddress(int index);
-    uint32_t totalSize(int index);
-    uint32_t usedSize(int index);
+    std::uint32_t physicalAddress(int index);
+    std::uint32_t totalSize(int index);
+    std::uint32_t usedSize(int index);
 
 private:
     MemoryRegions();
 
 private:
     typedef struct {
-        uint32_t physicalAddress;
-        uint32_t totalSize;
-        uint32_t usedSize;
+        std::uint32_t physicalAddress;
+        std::uint32_t totalSize;
+        std::uint32_t usedSize;
     } __attribute__((packed)) MemoryRegionEntry;
 
     MemoryRegionEntry *m_regions;

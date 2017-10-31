@@ -24,89 +24,89 @@ namespace Clock {
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t CLKACTIVITY_L4_WKUP_GCLK : 1;
-        uint32_t CLKACTIVITY_SR_SYSCLK : 1;
-        uint32_t CLKACTIVITY_WDT1_CLK : 1;
-        uint32_t _reserved1 : 3;
-        uint32_t CLKACTIVITY_GPIO0_GDBCLK : 1;
-        uint32_t _reserved2 : 1;
-        uint32_t CLKACTIVITY_TIMER0_GCLK : 1;
-        uint32_t CLKACTIVITY_I2C0_GFCLK : 1;
-        uint32_t CLKACTIVITY_UART0_GFCLK : 1;
-        uint32_t CLKACTIVITY_TIMER1_GCLK : 1;
-        uint32_t CLKACTIVITY_ADC_FCLK : 1;
-        uint32_t _reserved3 : 17;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t CLKACTIVITY_L4_WKUP_GCLK : 1;
+        std::uint32_t CLKACTIVITY_SR_SYSCLK : 1;
+        std::uint32_t CLKACTIVITY_WDT1_CLK : 1;
+        std::uint32_t _reserved1 : 3;
+        std::uint32_t CLKACTIVITY_GPIO0_GDBCLK : 1;
+        std::uint32_t _reserved2 : 1;
+        std::uint32_t CLKACTIVITY_TIMER0_GCLK : 1;
+        std::uint32_t CLKACTIVITY_I2C0_GFCLK : 1;
+        std::uint32_t CLKACTIVITY_UART0_GFCLK : 1;
+        std::uint32_t CLKACTIVITY_TIMER1_GCLK : 1;
+        std::uint32_t CLKACTIVITY_ADC_FCLK : 1;
+        std::uint32_t _reserved3 : 17;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_WKUP_CLKSTCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_WKUP_CONTROL_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t OPTFCLKEN_GPIO0_GDBCLK : 1;
-        uint32_t _reserved2 : 13;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t OPTFCLKEN_GPIO0_GDBCLK : 1;
+        std::uint32_t _reserved2 : 13;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_WKUP_GPIO0_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_WKUP_L4WKUP_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t CLKACTIVITY_DBGSYSCLK : 1;
-        uint32_t CLKACTIVITY_L3_AON_GCLK : 1;
-        uint32_t CLKACTIVITY_DEBUG_CLKA : 1;
-        uint32_t _reserved : 27;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t CLKACTIVITY_DBGSYSCLK : 1;
+        std::uint32_t CLKACTIVITY_L3_AON_GCLK : 1;
+        std::uint32_t CLKACTIVITY_DEBUG_CLKA : 1;
+        std::uint32_t _reserved : 27;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_L3_AON_CLKSTCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_WKUP_UART0_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t CLKACTIVITY_L4_WKUP_AON_GCLK : 1;
-        uint32_t _reserved : 29;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t CLKACTIVITY_L4_WKUP_AON_GCLK : 1;
+        std::uint32_t _reserved : 29;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_L4_WKUP_AON_CLKSTCTRL_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -70,8 +70,8 @@ public:
     virtual bool setTransmissionMode(TransmissionMode_t transmissionMode) = 0;
 
     // I/O operations.
-    virtual uint8_t readChar() = 0;
-    virtual bool writeChar(uint8_t value) = 0;
+    virtual std::uint8_t readChar() = 0;
+    virtual bool writeChar(std::uint8_t value) = 0;
 };
 
 } // namespace UART

@@ -72,8 +72,8 @@ public:
     // I/O operations.
     virtual size_t read(void* buff, size_t size) override;
     virtual size_t write(const void* buff, size_t size) override;
-    virtual uint8_t readChar();
-    virtual bool writeChar(uint8_t value);
+    virtual std::uint8_t readChar();
+    virtual bool writeChar(std::uint8_t value);
 
 public:
     static constexpr int PORT_COUNT     = 6;
@@ -82,9 +82,9 @@ public:
 private:
     static int getBaseAddress(int portNo);
 
-    uint16_t setConfigMode(ConfigMode_t mode);
+    std::uint16_t setConfigMode(ConfigMode_t mode);
     OperatingMode_t setOperatingMode(OperatingMode_t mode);
-    void restoreLCR(uint16_t value);
+    void restoreLCR(std::uint16_t value);
     bool enableEnhancements(bool enable);
     void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
     void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);

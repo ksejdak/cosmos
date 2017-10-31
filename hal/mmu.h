@@ -17,7 +17,7 @@ namespace HAL {
 
 class IMMU {
 public:
-    static uint32_t pageSize();
+    static std::uint32_t pageSize();
 };
 
 } // namespace HAL

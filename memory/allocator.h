@@ -21,7 +21,7 @@ class IAllocator {
 public:
     static void init();
 
-    virtual void* allocate(uint32_t size) = 0;
+    virtual void* allocate(std::uint32_t size) = 0;
     virtual void release(void *memoryChunk) = 0;
 
 protected:

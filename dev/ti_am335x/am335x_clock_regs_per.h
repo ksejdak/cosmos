@@ -24,183 +24,183 @@ namespace Clock {
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t _reserved1 : 6;
-        uint32_t CLKACTIVITY_L4LS_GCLK : 1;
-        uint32_t _reserved2 : 1;
-        uint32_t CLKACTIVITY_UART_GFCLK : 1;
-        uint32_t CLKACTIVITY_CAN_CLK : 1;
-        uint32_t _reserved3 : 1;
-        uint32_t CLKACTIVITY_TIMER7_GCLK : 1;
-        uint32_t CLKACTIVITY_TIMER2_GCLK : 1;
-        uint32_t CLKACTIVITY_TIMER3_GCLK : 1;
-        uint32_t CLKACTIVITY_TIMER4_GCLK : 1;
-        uint32_t CLKACTIVITY_LCDC_GCLK : 1;
-        uint32_t _reserved4 : 1;
-        uint32_t CLKACTIVITY_GPIO_1_GDBCLK : 1;
-        uint32_t CLKACTIVITY_GPIO_2_GDBCLK : 1;
-        uint32_t CLKACTIVITY_GPIO_3_GDBCLK : 1;
-        uint32_t _reserved5 : 2;
-        uint32_t CLKACTIVITY_I2C_FCLK : 1;
-        uint32_t CLKACTIVITY_SPI_GCLK : 1;
-        uint32_t _reserved6 : 1;
-        uint32_t CLKACTIVITY_TIMER5_GCLK : 1;
-        uint32_t CLKACTIVITY_TIMER6_GCLK : 1;
-        uint32_t _reserved7 : 3;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t _reserved1 : 6;
+        std::uint32_t CLKACTIVITY_L4LS_GCLK : 1;
+        std::uint32_t _reserved2 : 1;
+        std::uint32_t CLKACTIVITY_UART_GFCLK : 1;
+        std::uint32_t CLKACTIVITY_CAN_CLK : 1;
+        std::uint32_t _reserved3 : 1;
+        std::uint32_t CLKACTIVITY_TIMER7_GCLK : 1;
+        std::uint32_t CLKACTIVITY_TIMER2_GCLK : 1;
+        std::uint32_t CLKACTIVITY_TIMER3_GCLK : 1;
+        std::uint32_t CLKACTIVITY_TIMER4_GCLK : 1;
+        std::uint32_t CLKACTIVITY_LCDC_GCLK : 1;
+        std::uint32_t _reserved4 : 1;
+        std::uint32_t CLKACTIVITY_GPIO_1_GDBCLK : 1;
+        std::uint32_t CLKACTIVITY_GPIO_2_GDBCLK : 1;
+        std::uint32_t CLKACTIVITY_GPIO_3_GDBCLK : 1;
+        std::uint32_t _reserved5 : 2;
+        std::uint32_t CLKACTIVITY_I2C_FCLK : 1;
+        std::uint32_t CLKACTIVITY_SPI_GCLK : 1;
+        std::uint32_t _reserved6 : 1;
+        std::uint32_t CLKACTIVITY_TIMER5_GCLK : 1;
+        std::uint32_t CLKACTIVITY_TIMER6_GCLK : 1;
+        std::uint32_t _reserved7 : 3;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_L4LS_CLKSTCTRL_t;
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t _reserved1 : 1;
-        uint32_t CLKACTIVITY_L3S_GCLK : 1;
-        uint32_t _reserved2 : 28;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t _reserved1 : 1;
+        std::uint32_t CLKACTIVITY_L3S_GCLK : 1;
+        std::uint32_t _reserved2 : 28;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_L3S_CLKSTCTRL_t;
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t CLKACTIVITY_EMIF_GCLK : 1;
-        uint32_t CLKACTIVITY_MMC_FCLK : 1;
-        uint32_t CLKACTIVITY_L3_GCLK : 1;
-        uint32_t _reserved1 : 1;
-        uint32_t CLKACTIVITY_CPTS_RFT_GCLK : 1;
-        uint32_t CLKACTIVITY_MCASP_GCLK : 1;
-        uint32_t _reserved2 : 24;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t CLKACTIVITY_EMIF_GCLK : 1;
+        std::uint32_t CLKACTIVITY_MMC_FCLK : 1;
+        std::uint32_t CLKACTIVITY_L3_GCLK : 1;
+        std::uint32_t _reserved1 : 1;
+        std::uint32_t CLKACTIVITY_CPTS_RFT_GCLK : 1;
+        std::uint32_t CLKACTIVITY_MCASP_GCLK : 1;
+        std::uint32_t _reserved2 : 24;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_L3_CLKSTCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_UART5_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_UART1_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_UART2_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_UART3_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_UART4_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t OPTFCLKEN_GPIO_1_GDBCLK : 1;
-        uint32_t _reserved2 : 13;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t OPTFCLKEN_GPIO_1_GDBCLK : 1;
+        std::uint32_t _reserved2 : 13;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_GPIO1_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t OPTFCLKEN_GPIO_2_GDBCLK : 1;
-        uint32_t _reserved2 : 13;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t OPTFCLKEN_GPIO_2_GDBCLK : 1;
+        std::uint32_t _reserved2 : 13;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_GPIO2_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t OPTFCLKEN_GPIO_3_GDBCLK : 1;
-        uint32_t _reserved2 : 13;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t OPTFCLKEN_GPIO_3_GDBCLK : 1;
+        std::uint32_t _reserved2 : 13;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_GPIO3_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_L3_INSTR_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t MODULEMODE : 2;
-        uint32_t _reserved1 : 14;
-        uint32_t IDLEST : 2;
-        uint32_t _reserved2 : 14;
+        std::uint32_t MODULEMODE : 2;
+        std::uint32_t _reserved1 : 14;
+        std::uint32_t IDLEST : 2;
+        std::uint32_t _reserved2 : 14;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_L3_CLKCTRL_t;
 
 typedef union {
     struct {
-        uint32_t CLKTRCTRL : 2;
-        uint32_t _reserved1 : 2;
-        uint32_t CLKACTIVITY_OCPWP_L3_GCLK : 1;
-        uint32_t CLKACTIVITY_OCPWP_L4_GCLK : 1;
-        uint32_t _reserved2 : 26;
+        std::uint32_t CLKTRCTRL : 2;
+        std::uint32_t _reserved1 : 2;
+        std::uint32_t CLKACTIVITY_OCPWP_L3_GCLK : 1;
+        std::uint32_t CLKACTIVITY_OCPWP_L4_GCLK : 1;
+        std::uint32_t _reserved2 : 26;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } CM_PER_OCPWP_L3_CLKSTCTRL_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

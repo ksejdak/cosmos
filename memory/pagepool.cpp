@@ -22,7 +22,7 @@ namespace Memory {
 PagePool::PagePool()
 {
     // Check, that initial page starts at the beginning of first region.
-    uint32_t initialPagePA = (uint32_t) &_pagePoolStart_pa;
+    std::uint32_t initialPagePA = (std::uint32_t) &_pagePoolStart_pa;
     MemoryRegions& regions = MemoryRegions::instance();
     assert(initialPagePA == regions.physicalAddress(0));
 
@@ -37,10 +37,10 @@ bool PagePool::init()
 {
     MemoryRegions& regions = MemoryRegions::instance();
     for (int i = 0; i < regions.count(); ++i) {
-        uint32_t regionEndPA = regions.physicalAddress(i) + regions.totalSize(i);
-        uint32_t regionUsedEndPA = regions.physicalAddress(i) + regions.usedSize(i);
+        std::uint32_t regionEndPA = regions.physicalAddress(i) + regions.totalSize(i);
+        std::uint32_t regionUsedEndPA = regions.physicalAddress(i) + regions.usedSize(i);
 
-        for (uint32_t address = regions.physicalAddress(i); address + IMMU::pageSize() < regionEndPA; address += IMMU::pageSize()) {
+        for (std::uint32_t address = regions.physicalAddress(i); address + IMMU::pageSize() < regionEndPA; address += IMMU::pageSize()) {
             if (address == regions.physicalAddress(0)) {
                 // Skip address describing initial page. We already have it.
                 continue;

@@ -27,70 +27,70 @@ typedef union {
         bool AUTOIDLE : 1;
         bool SOFTRESET : 1;
         bool ENAWAKEUP : 1;
-        uint32_t IDLEMODE : 2;
-        uint32_t _reserved : 27;
+        std::uint32_t IDLEMODE : 2;
+        std::uint32_t _reserved : 27;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_SYSCONFIG_t;
 
 typedef union {
     struct {
         bool RESETDONE : 1;
-        uint32_t _reserved : 31;
+        std::uint32_t _reserved : 31;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_SYSSTATUS_t;
 
 typedef union {
     struct {
         bool DISABLEMODULE : 1;
-        uint32_t GATINGRATIO : 2;
-        uint32_t _reserved : 29;
+        std::uint32_t GATINGRATIO : 2;
+        std::uint32_t _reserved : 29;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_CTRL_t;
 
 typedef union {
     struct {
-        uint32_t OUTPUTENn;
+        std::uint32_t OUTPUTENn;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_OE_t;
 
 typedef union {
     struct {
-        uint32_t DATAINn;
+        std::uint32_t DATAINn;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_DATAIN_t;
 
 typedef union {
     struct {
-        uint32_t DATAOUTn;
+        std::uint32_t DATAOUTn;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_DATAOUT_t;
 
 typedef union {
     struct {
-        uint32_t INTLINEn;
+        std::uint32_t INTLINEn;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_CLEARDATAOUT_t;
 
 typedef union {
     struct {
-        uint32_t INTLINEn;
+        std::uint32_t INTLINEn;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } GPIO_SETDATAOUT_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

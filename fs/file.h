@@ -28,12 +28,12 @@ public:
     bool open();
     bool close();
 
-    int read(uint8_t* buffer, uint32_t size);
-    int write(uint8_t* buffer, uint32_t size);
+    int read(std::uint8_t* buffer, std::uint32_t size);
+    int write(std::uint8_t* buffer, std::uint32_t size);
 
 protected:
     FileType m_fileType;
-    uint32_t m_offset;
+    std::uint32_t m_offset;
 };
 
 } // namespace Filesystem;

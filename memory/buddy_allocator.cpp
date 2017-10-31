@@ -18,7 +18,7 @@ using namespace HAL;
 
 namespace Memory {
 
-static const uint32_t MEMORY_CHUNK_MAGIC = 0x08081990;
+static const std::uint32_t MEMORY_CHUNK_MAGIC = 0x08081990;
 
 MemoryChunk::MemoryChunk()
     : m_magic(0)
@@ -33,7 +33,7 @@ bool MemoryChunk::checkMagic()
     return (m_magic == MEMORY_CHUNK_MAGIC);
 }
 
-uint32_t MemoryChunk::virtualAddress()
+std::uint32_t MemoryChunk::virtualAddress()
 {
     return m_virtualAddress;
 }
@@ -43,7 +43,7 @@ void* MemoryChunk::data()
     return reinterpret_cast<void*>(m_virtualAddress + sizeof(MemoryChunk));
 }
 
-uint16_t MemoryChunk::size()
+std::uint16_t MemoryChunk::size()
 {
     return m_size;
 }
@@ -59,19 +59,19 @@ void MemoryChunk::init(Page* parentPage)
     m_parentPage = parentPage;
 }
 
-void MemoryChunk::setVirtualAddress(uint32_t virtualAddress)
+void MemoryChunk::setVirtualAddress(std::uint32_t virtualAddress)
 {
     m_virtualAddress = virtualAddress;
 }
 
-void MemoryChunk::setSize(uint32_t size)
+void MemoryChunk::setSize(std::uint32_t size)
 {
     m_size = size;
 }
 
 os::pair<MemoryChunk, MemoryChunk> MemoryChunk::split()
 {
-    uint32_t newSize = m_size / 2;
+    std::uint32_t newSize = m_size / 2;
 
     MemoryChunk* first = reinterpret_cast<MemoryChunk*>(m_virtualAddress);
     first->init(m_parentPage);
@@ -98,12 +98,12 @@ BuddyAllocator::BuddyAllocator()
 {
 }
 
-void* BuddyAllocator::allocate(uint32_t size)
+void* BuddyAllocator::allocate(std::uint32_t size)
 {
     if (size == 0)
         return nullptr;
 
-    uint32_t requiredSize = size + sizeof(MemoryChunk);
+    std::uint32_t requiredSize = size + sizeof(MemoryChunk);
     int factor = sizeToFactor(requiredSize);
 
     while (true) {
@@ -159,7 +159,7 @@ bool BuddyAllocator::allocatePage()
 
     MemoryChunk* newChunk = reinterpret_cast<MemoryChunk*>(pageVirtualAddress);
     newChunk->init(page.front());
-    newChunk->setVirtualAddress((uint32_t) pageVirtualAddress);
+    newChunk->setVirtualAddress((std::uint32_t) pageVirtualAddress);
     newChunk->setSize(IMMU::pageSize());
 
     // Insert this chunk to the list of free chunks.
@@ -168,7 +168,7 @@ bool BuddyAllocator::allocatePage()
     return true;
 }
 
-int BuddyAllocator::sizeToFactor(uint32_t size)
+int BuddyAllocator::sizeToFactor(std::uint32_t size)
 {
     for (int i = 0; i < MEMORY_CHUNK_FACTOR; ++i) {
         if (factorToSize(i) >= size)
@@ -178,7 +178,7 @@ int BuddyAllocator::sizeToFactor(uint32_t size)
     return -1;
 }
 
-uint32_t BuddyAllocator::factorToSize(int factor)
+std::uint32_t BuddyAllocator::factorToSize(int factor)
 {
     return (1 << factor);
 }

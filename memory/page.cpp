@@ -17,18 +17,18 @@ Page::Page()
 {
 }
 
-Page::Page(uint32_t physicalAddress)
+Page::Page(std::uint32_t physicalAddress)
     : m_physicalAddress(physicalAddress)
     , m_occupied(false)
 {
 }
 
-uint32_t Page::physicalAddress()
+std::uint32_t Page::physicalAddress()
 {
     return m_physicalAddress;
 }
 
-void Page::setPhysicalAddress(uint32_t physicalAddress)
+void Page::setPhysicalAddress(std::uint32_t physicalAddress)
 {
     m_physicalAddress = physicalAddress;
 }

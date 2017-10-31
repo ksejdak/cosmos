@@ -20,7 +20,7 @@ void __attribute__ ((section (".boot"))) mmu_init()
 
 namespace HAL {
 
-uint32_t IMMU::pageSize()
+std::uint32_t IMMU::pageSize()
 {
     return 4 * 1024;
 }

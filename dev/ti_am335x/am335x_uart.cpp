@@ -147,7 +147,7 @@ void AM335x_UART::init()
 
 void AM335x_UART::reset()
 {
-    UART_SYSC(m_base)->SOFTRESET = static_cast<uint16_t>(true);
+    UART_SYSC(m_base)->SOFTRESET = static_cast<std::uint16_t>(true);
     while (!UART_SYSS(m_base)->RESETDONE);
 }
 
@@ -155,7 +155,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
 {
     // Enable access to IER[4] (SLEEPMODE).
     bool savedEnhancements = enableEnhancements(true);
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_OPERATIONAL);
+    std::uint16_t savedLCR = setConfigMode(CONFIG_MODE_OPERATIONAL);
 
     // Disable sleep mode.
     volatile bool savedSleepmode = static_cast<bool>(UART_IER(m_base)->SLEEPMODE);
@@ -171,9 +171,9 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
         UART_DLH(m_base)->CLOCK_MSB = 0;
     }
     else {
-        uint32_t divisorValue = INPUT_CLOCK_HZ / (16 * baudRate);
-        UART_DLL(m_base)->CLOCK_LSB = static_cast<uint16_t>(divisorValue & 0xff);
-        UART_DLH(m_base)->CLOCK_MSB = static_cast<uint16_t>((divisorValue >> 8) & 0xff);
+        std::uint32_t divisorValue = INPUT_CLOCK_HZ / (16 * baudRate);
+        UART_DLL(m_base)->CLOCK_LSB = static_cast<std::uint16_t>(divisorValue & 0xff);
+        UART_DLH(m_base)->CLOCK_MSB = static_cast<std::uint16_t>((divisorValue >> 8) & 0xff);
     }
 
     // Restore operating mode.
@@ -181,7 +181,7 @@ void AM335x_UART::setBaudRate(unsigned int baudRate)
 
     // Restore sleep mode.
     setConfigMode(CONFIG_MODE_OPERATIONAL);
-    UART_IER(m_base)->SLEEPMODE = static_cast<uint16_t>(savedSleepmode);
+    UART_IER(m_base)->SLEEPMODE = static_cast<std::uint16_t>(savedSleepmode);
 
     restoreLCR(savedLCR);
     enableEnhancements(savedEnhancements);
@@ -249,7 +249,7 @@ bool AM335x_UART::setPartity(Partity_t partity)
 
 bool AM335x_UART::setFlowControl(FlowControl_t flowControl)
 {
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
+    std::uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
     bool result = true;
 
     switch (flowControl) {
@@ -286,7 +286,7 @@ void AM335x_UART::enableDMA(bool enabled)
 {
     // Set SCR as DMA mode control register.
     UART_SCR(m_base)->DMAMODECTL = 0x1;
-    UART_SCR(m_base)->DMAMODE2 = static_cast<uint16_t>(enabled ? 0x1 : 0x0);
+    UART_SCR(m_base)->DMAMODE2 = static_cast<std::uint16_t>(enabled ? 0x1 : 0x0);
 }
 
 void AM335x_UART::enableFIFO(bool enabled)
@@ -294,8 +294,8 @@ void AM335x_UART::enableFIFO(bool enabled)
     // Disable baud clock before enabling/disabling FIFO.
     setBaudRate(0);
 
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
-    UART_FCR(m_base)->FIFO_EN = static_cast<uint16_t>(enabled);
+    std::uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
+    UART_FCR(m_base)->FIFO_EN = static_cast<std::uint16_t>(enabled);
     restoreLCR(savedLCR);
 
     m_fifoEnabled = enabled;
@@ -303,14 +303,14 @@ void AM335x_UART::enableFIFO(bool enabled)
 
 void AM335x_UART::clearRxFIFO()
 {
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
+    std::uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
     UART_FCR(m_base)->RX_FIFO_CLEAR = 0x1;
     restoreLCR(savedLCR);
 }
 
 void AM335x_UART::clearTxFIFO()
 {
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
+    std::uint16_t savedLCR = setConfigMode(CONFIG_MODE_A);
     UART_FCR(m_base)->TX_FIFO_CLEAR = 0x1;
     restoreLCR(savedLCR);
 }
@@ -331,20 +331,20 @@ size_t AM335x_UART::write(const void* buff, size_t size)
     size_t i;
 
     for (i = 0; i < size; ++i) {
-        if (!writeChar(((uint8_t *) buff)[i]))
+        if (!writeChar(((std::uint8_t *) buff)[i]))
             break;
     }
 
     return i;
 }
 
-uint8_t AM335x_UART::readChar()
+std::uint8_t AM335x_UART::readChar()
 {
     // TODO: Implement.
     return 0;
 }
 
-bool AM335x_UART::writeChar(uint8_t value)
+bool AM335x_UART::writeChar(std::uint8_t value)
 {
     while (!isTxFIFOEmpty());
 
@@ -352,9 +352,9 @@ bool AM335x_UART::writeChar(uint8_t value)
     return true;
 }
 
-uint16_t AM335x_UART::setConfigMode(ConfigMode_t mode)
+std::uint16_t AM335x_UART::setConfigMode(ConfigMode_t mode)
 {
-    volatile uint16_t result = UART_LCR(m_base)->value;
+    volatile std::uint16_t result = UART_LCR(m_base)->value;
 
     switch (mode) {
         case CONFIG_MODE_A:
@@ -378,7 +378,7 @@ OperatingMode_t AM335x_UART::setOperatingMode(OperatingMode_t mode)
     return static_cast<OperatingMode_t>(result);
 }
 
-void AM335x_UART::restoreLCR(uint16_t value)
+void AM335x_UART::restoreLCR(std::uint16_t value)
 {
     UART_LCR(m_base)->value = value;
 }
@@ -386,10 +386,10 @@ void AM335x_UART::restoreLCR(uint16_t value)
 bool AM335x_UART::enableEnhancements(bool enable)
 {
     // Enable access to EFR register.
-    uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
+    std::uint16_t savedLCR = setConfigMode(CONFIG_MODE_B);
 
     volatile bool savedEnhancements = static_cast<bool>(UART_EFR(m_base)->ENHANCEDEN);
-    UART_EFR(m_base)->ENHANCEDEN = static_cast<uint16_t>(enable);
+    UART_EFR(m_base)->ENHANCEDEN = static_cast<std::uint16_t>(enable);
 
     restoreLCR(savedLCR);
 

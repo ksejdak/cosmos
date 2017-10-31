@@ -13,7 +13,7 @@
 
 #include <fs/device.h>
 
-#define PIN_MASK(gpioPinNo)     ((uint32_t) (1 << gpioPinNo))
+#define PIN_MASK(gpioPinNo)     ((std::uint32_t) (1 << gpioPinNo))
 
 namespace Device {
 namespace GPIO {
@@ -62,8 +62,8 @@ public:
     virtual void setDirection(int pinNo, Direction_t direction) = 0;
     virtual void setResistor(int id, Resitor_t resistor) = 0;
 
-    virtual uint32_t read() = 0;
-    virtual bool write(uint32_t value) = 0;
+    virtual std::uint32_t read() = 0;
+    virtual bool write(std::uint32_t value) = 0;
     virtual bool writePin(int pinNo, bool state) = 0;
 };
 

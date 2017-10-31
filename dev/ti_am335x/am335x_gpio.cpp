@@ -146,13 +146,13 @@ void AM335x_GPIOPort::setResistor(int id, Resitor_t resistor)
     GPIO_PAD(id)->PAD_PULLUP_SELECT = (resistor == RESISTOR_PULLUP);
 }
 
-uint32_t AM335x_GPIOPort::read()
+std::uint32_t AM335x_GPIOPort::read()
 {
-    volatile uint32_t value = GPIO_DATAIN(m_base)->DATAINn;
+    volatile std::uint32_t value = GPIO_DATAIN(m_base)->DATAINn;
     return value;
 }
 
-bool AM335x_GPIOPort::write(uint32_t value)
+bool AM335x_GPIOPort::write(std::uint32_t value)
 {
     if (value & GPIO_OE(m_base)->OUTPUTENn) {
         // Attempt to write to input pin.

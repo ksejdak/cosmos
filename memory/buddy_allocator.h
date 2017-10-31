@@ -27,21 +27,21 @@ public:
     MemoryChunk();
 
     bool checkMagic();
-    uint32_t virtualAddress();
+    std::uint32_t virtualAddress();
     void* data();
-    uint16_t size();
+    std::uint16_t size();
     Page* parentPage();
 
     void init(Page* parentPage);
-    void setVirtualAddress(uint32_t virtualAddress);
-    void setSize(uint32_t size);
+    void setVirtualAddress(std::uint32_t virtualAddress);
+    void setSize(std::uint32_t size);
 
     os::pair<MemoryChunk, MemoryChunk> split();
 
 private:
-    uint32_t m_magic;
-    uint32_t m_virtualAddress;
-    uint32_t m_size;
+    std::uint32_t m_magic;
+    std::uint32_t m_virtualAddress;
+    std::uint32_t m_size;
     Page* m_parentPage;
 } __attribute__ ((packed));
 
@@ -49,13 +49,13 @@ class BuddyAllocator : public IAllocator {
 public:
     BuddyAllocator();
 
-    virtual void* allocate(uint32_t size);
+    virtual void* allocate(std::uint32_t size);
     virtual void release(void *memoryChunk);
 
 private:
     bool allocatePage();
-    int sizeToFactor(uint32_t size);
-    uint32_t factorToSize(int factor);
+    int sizeToFactor(std::uint32_t size);
+    std::uint32_t factorToSize(int factor);
     void splitChunk(MemoryChunk* chunk);
 
 private:

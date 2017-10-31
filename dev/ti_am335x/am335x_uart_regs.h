@@ -24,153 +24,153 @@ namespace UART {
 
 typedef union {
     struct {
-        uint16_t THR : 8;
-        uint16_t _reserved : 8;
+        std::uint16_t THR : 8;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_THR_t;
 
 typedef union {
     struct {
-        uint16_t CLOCK_LSB : 8;
-        uint16_t _reserved : 8;
+        std::uint16_t CLOCK_LSB : 8;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_DLL_t;
 
 typedef union {
     struct {
-        uint16_t RHRIT : 1;
-        uint16_t THRIT : 1;
-        uint16_t LINESTSIT : 1;
-        uint16_t MODEMSTSIT : 1;
-        uint16_t SLEEPMODE : 1;
-        uint16_t XOFFIT : 1;
-        uint16_t RTSIT : 1;
-        uint16_t CTSIT : 1;
-        uint16_t _reserved : 8;
+        std::uint16_t RHRIT : 1;
+        std::uint16_t THRIT : 1;
+        std::uint16_t LINESTSIT : 1;
+        std::uint16_t MODEMSTSIT : 1;
+        std::uint16_t SLEEPMODE : 1;
+        std::uint16_t XOFFIT : 1;
+        std::uint16_t RTSIT : 1;
+        std::uint16_t CTSIT : 1;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_IER_t;
 
 typedef union {
     struct {
-        uint16_t CLOCK_MSB : 6;
-        uint16_t _reserved : 10;
+        std::uint16_t CLOCK_MSB : 6;
+        std::uint16_t _reserved : 10;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_DLH_t;
 
 typedef union {
     struct {
-        uint16_t SWFLOWCONTROL : 4;
-        uint16_t ENHANCEDEN : 1;
-        uint16_t SPECIALCHARDETECT : 1;
-        uint16_t AUTORTSEN : 1;
-        uint16_t AUTOCTSEN : 1;
-        uint16_t _reserved : 8;
+        std::uint16_t SWFLOWCONTROL : 4;
+        std::uint16_t ENHANCEDEN : 1;
+        std::uint16_t SPECIALCHARDETECT : 1;
+        std::uint16_t AUTORTSEN : 1;
+        std::uint16_t AUTOCTSEN : 1;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_EFR_t;
 
 typedef union {
     struct {
-        uint16_t FIFO_EN : 1;
-        uint16_t RX_FIFO_CLEAR : 1;
-        uint16_t TX_FIFO_CLEAR : 1;
-        uint16_t DMA_MODE : 1;
-        uint16_t TX_FIFO_TRIG : 2;
-        uint16_t RX_FIFO_TRIG : 2;
-        uint16_t _reserved : 8;
+        std::uint16_t FIFO_EN : 1;
+        std::uint16_t RX_FIFO_CLEAR : 1;
+        std::uint16_t TX_FIFO_CLEAR : 1;
+        std::uint16_t DMA_MODE : 1;
+        std::uint16_t TX_FIFO_TRIG : 2;
+        std::uint16_t RX_FIFO_TRIG : 2;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_FCR_t;
 
 typedef union {
     struct {
-        uint16_t CHAR_LENGTH : 2;
-        uint16_t NB_STOP : 1;
-        uint16_t PARITY_EN : 1;
-        uint16_t PARITY_TYPE1 : 1;
-        uint16_t PARITY_TYPE2 : 1;
-        uint16_t BREAK_EN : 1;
-        uint16_t DIV_EN : 1;
-        uint16_t _reserved : 8;
+        std::uint16_t CHAR_LENGTH : 2;
+        std::uint16_t NB_STOP : 1;
+        std::uint16_t PARITY_EN : 1;
+        std::uint16_t PARITY_TYPE1 : 1;
+        std::uint16_t PARITY_TYPE2 : 1;
+        std::uint16_t BREAK_EN : 1;
+        std::uint16_t DIV_EN : 1;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_LCR_t;
 
 typedef union {
     struct {
-        uint16_t RXFIFOE : 1;
-        uint16_t RXOE : 1;
-        uint16_t RXPE : 1;
-        uint16_t RXFE : 1;
-        uint16_t RXBI : 1;
-        uint16_t TXFIFOE : 1;
-        uint16_t TXSRE : 1;
-        uint16_t RXFIFOSTS : 1;
-        uint16_t _reserved : 8;
+        std::uint16_t RXFIFOE : 1;
+        std::uint16_t RXOE : 1;
+        std::uint16_t RXPE : 1;
+        std::uint16_t RXFE : 1;
+        std::uint16_t RXBI : 1;
+        std::uint16_t TXFIFOE : 1;
+        std::uint16_t TXSRE : 1;
+        std::uint16_t RXFIFOSTS : 1;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_LSR_t;
 
 typedef union {
     struct {
-        uint16_t MODESELECT : 3;
-        uint16_t IRSLEEP : 1;
-        uint16_t SETTXIR : 1;
-        uint16_t SCT : 1;
-        uint16_t SIPMODE : 1;
-        uint16_t FRAMEENDMODE : 1;
-        uint16_t _reserved : 8;
+        std::uint16_t MODESELECT : 3;
+        std::uint16_t IRSLEEP : 1;
+        std::uint16_t SETTXIR : 1;
+        std::uint16_t SCT : 1;
+        std::uint16_t SIPMODE : 1;
+        std::uint16_t FRAMEENDMODE : 1;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_MDR1_t;
 
 typedef union {
     struct {
-        uint16_t DMAMODECTL : 1;
-        uint16_t DMAMODE2 : 2;
-        uint16_t TXEMPTYCTLIT : 1;
-        uint16_t RXCTSDSRWAKEUPENABLE : 1;
-        uint16_t DSRIT : 1;
-        uint16_t TXTRIGGRANU1 : 1;
-        uint16_t RXTRIGGRANU1 : 1;
-        uint16_t _reserved : 8;
+        std::uint16_t DMAMODECTL : 1;
+        std::uint16_t DMAMODE2 : 2;
+        std::uint16_t TXEMPTYCTLIT : 1;
+        std::uint16_t RXCTSDSRWAKEUPENABLE : 1;
+        std::uint16_t DSRIT : 1;
+        std::uint16_t TXTRIGGRANU1 : 1;
+        std::uint16_t RXTRIGGRANU1 : 1;
+        std::uint16_t _reserved : 8;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_SCR_t;
 
 typedef union {
     struct {
-        uint16_t AUTOIDLE : 1;
-        uint16_t SOFTRESET : 1;
-        uint16_t ENAWAKEUP : 1;
-        uint16_t IDLEMODE : 2;
-        uint16_t _reserved : 11;
+        std::uint16_t AUTOIDLE : 1;
+        std::uint16_t SOFTRESET : 1;
+        std::uint16_t ENAWAKEUP : 1;
+        std::uint16_t IDLEMODE : 2;
+        std::uint16_t _reserved : 11;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_SYSC_t;
 
 typedef union {
     struct {
-        uint16_t RESETDONE : 1;
-        uint16_t _reserved : 15;
+        std::uint16_t RESETDONE : 1;
+        std::uint16_t _reserved : 15;
     };
 
-    uint16_t value;
+    std::uint16_t value;
 } UART_SYSS_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

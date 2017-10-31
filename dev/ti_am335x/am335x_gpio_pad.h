@@ -30,10 +30,10 @@ typedef union {
         bool PAD_PULLUP_SELECT : 1;
         bool PAD_INPUT_ACTIVE : 1;
         bool PAD_SLOW_SLEWRATE : 1;
-        uint32_t _reserved : 25;
+        std::uint32_t _reserved : 25;
     };
 
-    uint32_t value;
+    std::uint32_t value;
 } PAD_t;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -33,12 +33,12 @@ bool File::close()
     return true;
 }
 
-int File::read(uint8_t*, uint32_t)
+int File::read(std::uint8_t*, std::uint32_t)
 {
     return 0;
 }
 
-int File::write(uint8_t*, uint32_t)
+int File::write(std::uint8_t*, std::uint32_t)
 {
     return 0;
 }
