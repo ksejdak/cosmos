@@ -26,8 +26,8 @@ public:
     virtual void init();
 
     // I/O operations.
-    virtual size_t read(void* buff, size_t size);
-    virtual size_t write(const void* buff, size_t size);
+    virtual std::size_t read(void* buff, std::size_t size);
+    virtual std::size_t write(const void* buff, std::size_t size);
     virtual bool ioctl(std::uint32_t command, void* arg);
 
 protected:

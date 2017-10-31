@@ -70,8 +70,8 @@ public:
     bool isTxFIFOEmpty();
 
     // I/O operations.
-    virtual size_t read(void* buff, size_t size) override;
-    virtual size_t write(const void* buff, size_t size) override;
+    virtual std::size_t read(void* buff, std::size_t size) override;
+    virtual std::size_t write(const void* buff, std::size_t size) override;
     virtual std::uint8_t readChar();
     virtual bool writeChar(std::uint8_t value);
 

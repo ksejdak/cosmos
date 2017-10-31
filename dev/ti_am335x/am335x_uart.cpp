@@ -320,15 +320,15 @@ bool AM335x_UART::isTxFIFOEmpty()
     return (UART_LSR(m_base)->TXSRE && UART_LSR(m_base)->TXFIFOE);
 }
 
-size_t AM335x_UART::read(void* buff __attribute__((unused)), size_t size __attribute__((unused)))
+std::size_t AM335x_UART::read(void* buff __attribute__((unused)), std::size_t size __attribute__((unused)))
 {
     // TODO: Implement.
     return 0;
 }
 
-size_t AM335x_UART::write(const void* buff, size_t size)
+std::size_t AM335x_UART::write(const void* buff, std::size_t size)
 {
-    size_t i;
+    std::size_t i;
 
     for (i = 0; i < size; ++i) {
         if (!writeChar(((std::uint8_t *) buff)[i]))

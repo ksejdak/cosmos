@@ -23,12 +23,12 @@ void Device::init()
     m_initialized = true;
 }
 
-size_t Device::read(void*, size_t)
+std::size_t Device::read(void*, std::size_t)
 {
     return 0;
 }
 
-size_t Device::write(const void*, size_t)
+std::size_t Device::write(const void*, std::size_t)
 {
     return 0;
 }

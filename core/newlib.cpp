@@ -8,6 +8,7 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <cstdint>
 #include <sys/types.h>
 
 extern "C" {
@@ -22,12 +23,12 @@ int _close(int fd __attribute__((unused)))
     return -1;
 }
 
-int _read(int fd __attribute__((unused)), void *buf __attribute__((unused)), size_t count __attribute__((unused)))
+int _read(int fd __attribute__((unused)), void *buf __attribute__((unused)), std::size_t count __attribute__((unused)))
 {
     return 0;
 }
 
-int _write(int fd __attribute__((unused)), const void *buf __attribute__((unused)), size_t count __attribute__((unused)))
+int _write(int fd __attribute__((unused)), const void *buf __attribute__((unused)), std::size_t count __attribute__((unused)))
 {
     return 0;
 }
