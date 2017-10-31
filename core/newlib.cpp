@@ -8,64 +8,39 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <array>
 #include <cstdint>
 #include <sys/types.h>
 
 extern "C" {
 
-int _open(const char *pathname __attribute__((unused)), int flags __attribute__((unused)), mode_t mode __attribute__((unused)))
+caddr_t _sbrk(intptr_t increment)
 {
-    return -1;
+    static std::array<char, 1024> buffer;
+    static std::size_t offset = 0;
+
+    std::size_t prevOffset = offset;
+
+    if (offset + increment > buffer.size())
+        return nullptr;
+
+    offset += increment;
+    return &buffer[prevOffset];
 }
 
-int _close(int fd __attribute__((unused)))
-{
-    return -1;
-}
-
-int _read(int fd __attribute__((unused)), void *buf __attribute__((unused)), std::size_t count __attribute__((unused)))
+int _write(int, const void *buf __attribute__((unused)), std::size_t count __attribute__((unused)))
 {
     return 0;
 }
 
-int _write(int fd __attribute__((unused)), const void *buf __attribute__((unused)), std::size_t count __attribute__((unused)))
-{
-    return 0;
-}
-
-off_t _lseek(int fd __attribute__((unused)), off_t offset __attribute__((unused)), int whence __attribute__((unused)))
-{
-    return static_cast<off_t>(-1);
-}
-
-void _exit(int status __attribute__((unused)))
-{
-    while (true);
-}
-
-int _kill(pid_t pid __attribute__((unused)), int sig __attribute__((unused)))
-{
-    return -1;
-}
-
-pid_t _getpid()
-{
-    return 0;
-}
-
-int _fstat(int fd __attribute__((unused)), struct stat *buf __attribute__((unused)))
-{
-    return -1;
-}
-
-int _isatty(int fd __attribute__((unused)))
-{
-    return 0;
-}
-
-caddr_t _sbrk(intptr_t increment __attribute__((unused)))
-{
-    return NULL;
-}
+int _open(const char *, int, mode_t)    { return -1; }
+int _close(int)                         { return -1; }
+int _read(int, void *, std::size_t)     { return 0; }
+off_t _lseek(int, off_t, int)           { return static_cast<off_t>(-1); }
+void _exit(int)                         { while (true); }
+int _kill(pid_t, int)                   { return -1; }
+pid_t _getpid()                         { return 0; }
+int _fstat(int, struct stat *)          { return -1; }
+int _isatty(int)                        { return 0; }
 
 }
