@@ -17,37 +17,37 @@
 namespace Device {
 namespace UART {
 
-typedef enum {
-    UART_0,
-    UART_1,
-    UART_2,
-    UART_3,
-    UART_4,
-    UART_5
-} UARTId_t;
+enum class UARTId {
+    _0,
+    _1,
+    _2,
+    _3,
+    _4,
+    _5
+};
 
-typedef enum {
-    CONFIG_MODE_A           = 0x80,
-    CONFIG_MODE_B           = 0xbf,
-    CONFIG_MODE_OPERATIONAL = 0x7f
-} ConfigMode_t;
+enum class ConfigMode {
+    A           = 0x80,
+    B           = 0xbf,
+    Operational = 0x7f
+};
 
-typedef enum {
-    TRIG_GRANULARITY_1 = 0x1
-} TrigGranularity_t;
+enum class TrigGranularity {
+    _1 = 0x1
+};
 
-typedef enum {
-    FIFO_TRIG_LEVEL_8  = 0x0
-} FIFOTrigLevel_t;
+enum class FIFOTrigLevel {
+    _8  = 0x0
+};
 
-typedef enum {
-    MODE_UART_16x = 0x0,
-    MODE_DISABLE  = 0x7
-} OperatingMode_t;
+enum class OperatingMode {
+    Uart16x = 0x0,
+    Disable = 0x7
+};
 
 class AM335x_UART : public IUART {
 public:
-    AM335x_UART(UARTId_t uartNo);
+    AM335x_UART(UARTId uartNo);
 
     // Initialization.
     virtual void init() override;
@@ -57,12 +57,12 @@ public:
 
     // Configuration.
     virtual void setBaudRate(unsigned int baudRate);
-    virtual bool setDataBits(DataBits_t dataBits);
-    virtual bool setStopBits(StopBits_t stopBits);
-    virtual bool setPartity(Partity_t partity);
-    virtual bool setFlowControl(FlowControl_t flowControl);
-    virtual bool setDirection(Direction_t direction);
-    virtual bool setTransmissionMode(TransmissionMode_t transmissionMode);
+    virtual bool setDataBits(DataBits dataBits);
+    virtual bool setStopBits(StopBits stopBits);
+    virtual bool setPartity(Partity partity);
+    virtual bool setFlowControl(FlowControl flowControl);
+    virtual bool setDirection(Direction direction);
+    virtual bool setTransmissionMode(TransmissionMode mode);
     void enableDMA(bool enabled);
     void enableFIFO(bool enabled);
     void clearRxFIFO();
@@ -80,18 +80,18 @@ public:
     static constexpr int INPUT_CLOCK_HZ = 48 * 1000 * 1000;
 
 private:
-    static int getBaseAddress(int portNo);
+    static int getBaseAddress(UARTId uartNo);
 
-    std::uint16_t setConfigMode(ConfigMode_t mode);
-    OperatingMode_t setOperatingMode(OperatingMode_t mode);
+    std::uint16_t setConfigMode(ConfigMode mode);
+    OperatingMode setOperatingMode(OperatingMode mode);
     void restoreLCR(std::uint16_t value);
     bool enableEnhancements(bool enable);
-    void setTriggerGranularity(TrigGranularity_t rxGranulatiry, TrigGranularity_t txGranulatiry);
-    void setTriggerLevels(FIFOTrigLevel_t rxLevel, FIFOTrigLevel_t txLevel);
+    void setTriggerGranularity(TrigGranularity rxGranulatiry, TrigGranularity txGranulatiry);
+    void setTriggerLevels(FIFOTrigLevel rxLevel, FIFOTrigLevel txLevel);
     void initFIFO();
 
 private:
-    UARTId_t m_uartNo;
+    UARTId m_uartNo;
     int m_base;
     bool m_fifoEnabled;
 };

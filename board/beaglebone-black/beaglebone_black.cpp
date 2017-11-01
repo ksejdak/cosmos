@@ -67,14 +67,14 @@ bool BeagleBoneBlack::initConsole()
     consoleTx.setDirection(DIRECTION_OUTPUT);
     consoleTx.setResistor(RESISTOR_NONE);
 
-    AM335x_UART consoleUart(UART_0);
+    AM335x_UART consoleUart(UARTId::_0);
     consoleUart.setBaudRate(115200);
-    consoleUart.setDataBits(DATA_BITS_8);
-    consoleUart.setStopBits(STOP_BITS_1);
-    consoleUart.setPartity(PARTITY_NONE);
-    consoleUart.setFlowControl(FLOW_CONTROL_NONE);
-    consoleUart.setDirection(DIRECTION_WRITE);
-    consoleUart.setTransmissionMode(MODE_ASYNCHRONOUS);
+    consoleUart.setDataBits(DataBits::_8);
+    consoleUart.setStopBits(StopBits::_1);
+    consoleUart.setPartity(Partity::None);
+    consoleUart.setFlowControl(FlowControl::None);
+    consoleUart.setDirection(Direction::Write);
+    consoleUart.setTransmissionMode(TransmissionMode::Asynchronous);
 
     return console.init();
 

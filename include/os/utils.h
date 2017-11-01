@@ -11,6 +11,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#define REGISTER(type, addr)                ((volatile type *) (addr))
+#define REGISTER(type, addr)                (reinterpret_cast<volatile type *>(addr))
 
 #endif

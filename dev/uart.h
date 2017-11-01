@@ -16,42 +16,42 @@
 namespace Device {
 namespace UART {
 
-typedef enum {
-    DATA_BITS_5,
-    DATA_BITS_6,
-    DATA_BITS_7,
-    DATA_BITS_8,
-} DataBits_t;
+enum class DataBits {
+    _5,
+    _6,
+    _7,
+    _8,
+};
 
-typedef enum {
-    STOP_BITS_0_5,
-    STOP_BITS_1,
-    STOP_BITS_1_5,
-    STOP_BITS_2
-} StopBits_t;
+enum class StopBits{
+    _0_5,
+    _1,
+    _1_5,
+    _2
+};
 
-typedef enum {
-    PARTITY_NONE,
-    PARTITY_EVEN,
-    PARTITY_ODD
-} Partity_t;
+enum class Partity {
+    None,
+    Even,
+    Odd
+};
 
-typedef enum {
-    FLOW_CONTROL_NONE,
-    FLOW_CONTROL_RTS_CTS,
-    FLOW_CONTROL_XON_XOFF
-} FlowControl_t;
+enum class FlowControl {
+    None,
+    RtsCts,
+    XonXoff
+};
 
-typedef enum {
-    DIRECTION_READ,
-    DIRECTION_WRITE,
-    DIRECTION_BIDIRECTIONAL
-} Direction_t;
+enum class Direction {
+    Read,
+    Write,
+    Bidirectional
+};
 
-typedef enum {
-    MODE_SYNCHRONOUS,
-    MODE_ASYNCHRONOUS
-} TransmissionMode_t;
+ enum class TransmissionMode {
+    Synchronous,
+    Asynchronous
+};
 
 class IUART : public Filesystem::Device {
 public:
@@ -62,12 +62,12 @@ public:
 
     // Configuration
     virtual void setBaudRate(unsigned int baudRate) = 0;
-    virtual bool setDataBits(DataBits_t dataBits) = 0;
-    virtual bool setStopBits(StopBits_t stopBits) = 0;
-    virtual bool setPartity(Partity_t partity) = 0;
-    virtual bool setFlowControl(FlowControl_t flowControl) = 0;
-    virtual bool setDirection(Direction_t direction) = 0;
-    virtual bool setTransmissionMode(TransmissionMode_t transmissionMode) = 0;
+    virtual bool setDataBits(DataBits dataBits) = 0;
+    virtual bool setStopBits(StopBits stopBits) = 0;
+    virtual bool setPartity(Partity partity) = 0;
+    virtual bool setFlowControl(FlowControl flowControl) = 0;
+    virtual bool setDirection(Direction direction) = 0;
+    virtual bool setTransmissionMode(TransmissionMode mode) = 0;
 
     // I/O operations.
     virtual std::uint8_t readChar() = 0;
