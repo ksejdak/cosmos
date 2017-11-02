@@ -51,9 +51,9 @@ bool BeagleBoneBlack::initUserLED()
 {
     // Init user led0.
     GPIOPin led0(PIN_USER_LED0);
-    led0.setFunction(FUNCTION_7);
-    led0.setDirection(DIRECTION_OUTPUT);
-    led0.setResistor(RESISTOR_NONE);
+    led0.setFunction(Function::_7);
+    led0.setDirection(GPIO::Direction::Output);
+    led0.setResistor(Resitor::None);
     led0.write(true);
 
     return true;
@@ -63,9 +63,9 @@ bool BeagleBoneBlack::initConsole()
 {
     // Init console on UART1.
     GPIOPin consoleTx(PIN_SERIAL_DEBUG_TX);
-    consoleTx.setFunction(FUNCTION_0);
-    consoleTx.setDirection(DIRECTION_OUTPUT);
-    consoleTx.setResistor(RESISTOR_NONE);
+    consoleTx.setFunction(Function::_0);
+    consoleTx.setDirection(GPIO::Direction::Output);
+    consoleTx.setResistor(Resitor::None);
 
     AM335x_UART consoleUart(UARTId::_0);
     consoleUart.setBaudRate(115200);
@@ -73,7 +73,7 @@ bool BeagleBoneBlack::initConsole()
     consoleUart.setStopBits(StopBits::_1);
     consoleUart.setPartity(Partity::None);
     consoleUart.setFlowControl(FlowControl::None);
-    consoleUart.setDirection(Direction::Write);
+    consoleUart.setDirection(UART::Direction::Write);
     consoleUart.setTransmissionMode(TransmissionMode::Asynchronous);
 
     return console.init();

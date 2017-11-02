@@ -29,27 +29,27 @@ typedef struct {
 extern PinMux_t pinmux[];
 extern int pinmuxSize;
 
-typedef enum {
-    FUNCTION_0,
-    FUNCTION_1,
-    FUNCTION_2,
-    FUNCTION_3,
-    FUNCTION_4,
-    FUNCTION_5,
-    FUNCTION_6,
-    FUNCTION_7
-} Function_t;
+enum class Function {
+    _0,
+    _1,
+    _2,
+    _3,
+    _4,
+    _5,
+    _6,
+    _7
+};
 
-typedef enum {
-    DIRECTION_INPUT,
-    DIRECTION_OUTPUT
-} Direction_t;
+enum class Direction {
+    Input,
+    Output
+};
 
-typedef enum {
-    RESISTOR_NONE,
-    RESISTOR_PULLUP,
-    RESISTOR_PULLDOWN
-} Resitor_t;
+enum class Resitor {
+    None,
+    PullUp,
+    PullDown
+};
 
 class IGPIOPort : public Filesystem::Device {
 public:
@@ -57,9 +57,9 @@ public:
     virtual void enable() = 0;
     virtual void disable() = 0;
 
-    virtual bool setFunction(int id, Function_t function) = 0;
-    virtual void setDirection(int pinNo, Direction_t direction) = 0;
-    virtual void setResistor(int id, Resitor_t resistor) = 0;
+    virtual bool setFunction(int id, Function function) = 0;
+    virtual void setDirection(int pinNo, Direction direction) = 0;
+    virtual void setResistor(int id, Resitor resistor) = 0;
 
     virtual std::uint32_t read() = 0;
     virtual bool write(std::uint32_t value) = 0;
@@ -71,9 +71,9 @@ public:
     GPIOPin(int id);
     GPIOPin(int portNo, int pinNo);
 
-    bool setFunction(Function_t function);
-    void setDirection(Direction_t direction);
-    void setResistor(Resitor_t resistor);
+    bool setFunction(Function function);
+    void setDirection(Direction direction);
+    void setResistor(Resitor resistor);
 
     bool read();
     bool write(bool state);

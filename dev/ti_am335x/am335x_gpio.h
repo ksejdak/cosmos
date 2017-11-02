@@ -35,9 +35,9 @@ public:
     virtual void enable();
     virtual void disable();
 
-    virtual bool setFunction(int id, Function_t function);
-    virtual void setDirection(int pinNo, Direction_t direction);
-    virtual void setResistor(int id, Resitor_t resistor);
+    virtual bool setFunction(int id, Function function);
+    virtual void setDirection(int pinNo, Direction direction);
+    virtual void setResistor(int id, Resitor resistor);
 
     virtual std::uint32_t read();
     virtual bool write(std::uint32_t value);

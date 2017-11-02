@@ -31,17 +31,17 @@ GPIOPin::GPIOPin(int portNo, int pinNo)
     }
 }
 
-bool GPIOPin::setFunction(Function_t function)
+bool GPIOPin::setFunction(Function function)
 {
     return m_port.setFunction(m_id, function);
 }
 
-void GPIOPin::setDirection(Direction_t direction)
+void GPIOPin::setDirection(Direction direction)
 {
     m_port.setDirection(m_pinNo, direction);
 }
 
-void GPIOPin::setResistor(Resitor_t resistor)
+void GPIOPin::setResistor(Resitor resistor)
 {
     m_port.setResistor(m_id, resistor);
 }

@@ -24,7 +24,7 @@ namespace Device::GPIO {
 
 typedef union {
     struct {
-        Function_t PAD_FUNC : 3;
+        int PAD_FUNC : 3;
         bool PAD_PULLUP_DISABLE : 1;
         bool PAD_PULLUP_SELECT : 1;
         bool PAD_INPUT_ACTIVE : 1;
