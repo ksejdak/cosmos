@@ -11,8 +11,7 @@
 #include "gpio.h"
 #include "device_manager.h"
 
-namespace Device {
-namespace GPIO {
+namespace Device::GPIO {
 
 GPIOPin::GPIOPin(int id)
     : GPIOPin(pinmux[id].portNo, pinmux[id].pinNo)
@@ -63,5 +62,4 @@ void GPIOPin::toggle()
     write(!state);
 }
 
-} // namespace GPIO
-} // namespace Device
+} // namespace Device::GPIO

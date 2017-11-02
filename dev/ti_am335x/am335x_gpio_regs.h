@@ -15,8 +15,7 @@
 
 #include <cstdint>
 
-namespace Device {
-namespace GPIO {
+namespace Device::GPIO {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -111,7 +110,6 @@ typedef union {
 #define GPIO_CLEARDATAOUT(GPIO_BASE)        REGISTER(GPIO_CLEARDATAOUT_t, (GPIO_BASE + 0x190))
 #define GPIO_SETDATAOUT(GPIO_BASE)          REGISTER(GPIO_SETDATAOUT_t, (GPIO_BASE + 0x194))
 
-} // namespace GPIO
-} // namespace Device
+} // namespace Device::GPIO
 
 #endif

@@ -15,8 +15,7 @@
 
 #include <cstdint>
 
-namespace Device {
-namespace Clock {
+namespace Device::Clock {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -251,7 +250,6 @@ typedef enum {
 #define CM_PER_L3_CLKCTRL               REGISTER(CM_PER_L3_CLKCTRL_t, (CM_PER_REGISTERS_BASE + 0xe0))
 #define CM_PER_OCPWP_L3_CLKSTCTRL       REGISTER(CM_PER_OCPWP_L3_CLKSTCTRL_t, (CM_PER_REGISTERS_BASE + 0x12c))
 
-} // namespace Clock
-} // namespace Device
+} // namespace Device::Clock
 
 #endif

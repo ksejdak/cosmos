@@ -15,8 +15,7 @@
 
 #include <cstdint>
 
-namespace Device {
-namespace UART {
+namespace Device::UART {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -197,7 +196,6 @@ typedef union {
 #define UART_SYSC(UART_BASE)             REGISTER(UART_SYSC_t, (UART_BASE + 0x54))
 #define UART_SYSS(UART_BASE)             REGISTER(UART_SYSS_t, (UART_BASE + 0x58))
 
-} // namespace UART
-} // namespace Device
+} // namespace Device::UART
 
 #endif

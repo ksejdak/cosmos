@@ -16,8 +16,7 @@
 
 #include <cstdint>
 
-namespace Device {
-namespace GPIO {
+namespace Device::GPIO {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // REGISTER DEFINITIONS
@@ -162,7 +161,6 @@ typedef union {
     { 3, 20 }           \
 }
 
-} // namespace GPIO
-} // namespace Device
+} // namespace Device::GPIO
 
 #endif

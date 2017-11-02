@@ -13,8 +13,7 @@
 
 #include <fs/device.h>
 
-namespace Device {
-namespace UART {
+namespace Device::UART {
 
 enum class DataBits {
     _5,
@@ -74,7 +73,6 @@ public:
     virtual bool writeChar(std::uint8_t value) = 0;
 };
 
-} // namespace UART
-} // namespace Device
+} // namespace Device::UART
 
 #endif
