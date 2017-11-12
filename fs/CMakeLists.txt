@@ -1,5 +1,5 @@
 set(SOURCES
-    device.cpp
+    device.h
 	file.cpp
 )
 

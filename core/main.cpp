@@ -11,6 +11,8 @@
 #include <board/board.h>
 #include <memory/allocator.h>
 
+#include <cstdio>
+
 using namespace Board;
 using namespace Memory;
 
@@ -19,5 +21,6 @@ int main()
     IAllocator::init();
     IBoard::init();
 
+    printf("Hello World!\n");
     return 0;
 }

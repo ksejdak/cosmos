@@ -15,46 +15,24 @@
 
 #include <cassert>
 
-namespace Device {
+namespace Device::UART {
 
-template <>
-UART::IUART& DeviceManager<UART::IUART>::getDevice(int id)
-{
-    using namespace UART;
+int AM335x_UART::m_nextId = 0;
 
-    static AM335x_UART uarts[getDeviceCount()] {
-        UARTId::_0,
-        UARTId::_1,
-        UARTId::_2,
-        UARTId::_3,
-        UARTId::_4,
-        UARTId::_5
-    };
+AM335x_UART::AM335x_UART()
+    : m_id(static_cast<UARTId>(m_nextId++))
+    , m_base([&] {
+        switch (m_id) {
+            case UARTId::_0:    return UART_0_BASE;
+            case UARTId::_1:    return UART_1_BASE;
+            case UARTId::_2:    return UART_2_BASE;
+            case UARTId::_3:    return UART_3_BASE;
+            case UARTId::_4:    return UART_4_BASE;
+            case UARTId::_5:    return UART_5_BASE;
+        }
 
-    assert(id >= 0 && id < getDeviceCount());
-    return uarts[id];
-}
-
-namespace UART {
-
-
-int AM335x_UART::getBaseAddress(UARTId portNo)
-{
-    switch (portNo) {
-        case UARTId::_0:    return UART_0_BASE;
-        case UARTId::_1:    return UART_1_BASE;
-        case UARTId::_2:    return UART_2_BASE;
-        case UARTId::_3:    return UART_3_BASE;
-        case UARTId::_4:    return UART_4_BASE;
-        case UARTId::_5:    return UART_5_BASE;
-    }
-
-    return -1;
-}
-
-AM335x_UART::AM335x_UART(UARTId uartNo)
-    : m_uartNo(uartNo)
-    , m_base(getBaseAddress(uartNo))
+        assert(false);
+    }())
     , m_fifoEnabled(false)
 {
     // TODO:
@@ -70,7 +48,7 @@ void AM335x_UART::init()
         return;
 
     // Enable interface and functional clocks.
-    switch (m_uartNo) {
+    switch (m_id) {
         case UARTId::_0:
             CM_PER_L3_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_L3_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
@@ -370,7 +348,7 @@ OperatingMode AM335x_UART::setOperatingMode(OperatingMode mode)
     volatile OperatingMode result = static_cast<OperatingMode>(UART_MDR1(m_base)->MODESELECT);
     UART_MDR1(m_base)->MODESELECT = static_cast<std::uint16_t>(mode);
 
-    return static_cast<OperatingMode>(result);
+    return result;
 }
 
 void AM335x_UART::restoreLCR(std::uint16_t value)
@@ -417,5 +395,4 @@ void AM335x_UART::initFIFO()
     clearTxFIFO();
 }
 
-} // namespace UART
-} // namespace Device
+} // namespace Device::UART

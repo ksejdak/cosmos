@@ -38,8 +38,8 @@ BeagleBoneBlack::BeagleBoneBlack()
 
 bool BeagleBoneBlack::initDevice()
 {
-    DeviceManager<IGPIOPort>::init();
-    DeviceManager<IUART>::init();
+    DeviceManager<AM335x_GPIO>::init();
+    DeviceManager<AM335x_UART>::init();
 
     initUserLED();
     initConsole();
@@ -50,7 +50,7 @@ bool BeagleBoneBlack::initDevice()
 bool BeagleBoneBlack::initUserLED()
 {
     // Init user led0.
-    GPIOPin led0(PIN_USER_LED0);
+    auto led0 = GPIOPin<AM335x_GPIO>(PIN_USER_LED0);
     led0.setFunction(Function::_7);
     led0.setDirection(GPIO::Direction::Output);
     led0.setResistor(Resitor::None);
@@ -62,12 +62,12 @@ bool BeagleBoneBlack::initUserLED()
 bool BeagleBoneBlack::initConsole()
 {
     // Init console on UART1.
-    GPIOPin consoleTx(PIN_SERIAL_DEBUG_TX);
+    auto consoleTx = GPIOPin<AM335x_GPIO>(PIN_SERIAL_DEBUG_TX);
     consoleTx.setFunction(Function::_0);
     consoleTx.setDirection(GPIO::Direction::Output);
     consoleTx.setResistor(Resitor::None);
 
-    AM335x_UART consoleUart(UARTId::_0);
+    auto& consoleUart = DeviceManager<AM335x_UART>::get(UARTId::_0);
     consoleUart.setBaudRate(115200);
     consoleUart.setDataBits(DataBits::_8);
     consoleUart.setStopBits(StopBits::_1);

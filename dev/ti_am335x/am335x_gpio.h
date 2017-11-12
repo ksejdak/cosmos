@@ -16,20 +16,21 @@
 #include <dev/device_manager.h>
 #include <dev/gpio.h>
 
-namespace Device {
-namespace GPIO {
+namespace Device::GPIO {
 
-typedef enum {
-    GPIO_0,
-    GPIO_1,
-    GPIO_2,
-    GPIO_3
-} GPIOId_t;
+enum class GPIOId {
+    _0,
+    _1,
+    _2,
+    _3
+};
 
-class AM335x_GPIOPort : public IGPIOPort {
+class AM335x_GPIO : public IGPIO<4> {
 public:
-    AM335x_GPIOPort(GPIOId_t portNo);
+    using id_type = GPIOId;
+    friend class DeviceManager<AM335x_GPIO>;
 
+public:
     virtual void init() override;
     virtual void reset();
     virtual void enable();
@@ -43,26 +44,17 @@ public:
     virtual bool write(std::uint32_t value);
     virtual bool writePin(int pinNo, bool state);
 
-public:
-    static constexpr int PORT_COUNT = 4;
-    static constexpr int PIN_COUNT  = 32;
+private:
+    AM335x_GPIO();
 
 private:
-    static int getBaseAddress(int portNo);
-
-private:
-    GPIOId_t m_portNo;
+    GPIOId m_id;
     int m_base;
+
+    static constexpr int PIN_COUNT  = 32;
+    static int m_nextId;
 };
 
-} // namespace GPIO
-
-template <>
-constexpr int DeviceManager<GPIO::IGPIOPort>::getDeviceCount()
-{
-    return GPIO::AM335x_GPIOPort::PORT_COUNT;
-}
-
-} // namespace Device
+} // namespace Device::GPIO
 
 #endif

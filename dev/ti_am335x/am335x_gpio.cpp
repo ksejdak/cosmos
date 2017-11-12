@@ -15,32 +15,25 @@
 
 #include <cassert>
 
-namespace Device {
-
-template <>
-GPIO::IGPIOPort& DeviceManager<GPIO::IGPIOPort>::getDevice(int id)
-{
-    using namespace GPIO;
-
-    static AM335x_GPIOPort ports[getDeviceCount()] {
-        GPIO_0,
-        GPIO_1,
-        GPIO_2,
-        GPIO_3
-    };
-
-    assert(id >= 0 && id < getDeviceCount());
-    return ports[id];
-}
-
-namespace GPIO {
+namespace Device::GPIO {
 
 PinMux_t pinmux[] = AM335X_PINMUX;
 int pinmuxSize = sizeof(pinmux) / sizeof(PinMux_t);
 
-AM335x_GPIOPort::AM335x_GPIOPort(GPIOId_t portNo)
-    : m_portNo(portNo)
-    , m_base(getBaseAddress(portNo))
+int AM335x_GPIO::m_nextId = 0;
+
+AM335x_GPIO::AM335x_GPIO()
+    : m_id(static_cast<GPIOId>(m_nextId++))
+    , m_base([&]() {
+        switch (m_id) {
+            case GPIOId::_0:     return GPIO_0_BASE;
+            case GPIOId::_1:     return GPIO_1_BASE;
+            case GPIOId::_2:     return GPIO_2_BASE;
+            case GPIOId::_3:     return GPIO_3_BASE;
+        }
+
+        assert(false);
+    }())
 {
     // TODO:
     // - check REVISION register.
@@ -48,7 +41,7 @@ AM335x_GPIOPort::AM335x_GPIOPort(GPIOId_t portNo)
     // - register /dev/gpioX device.
 }
 
-void AM335x_GPIOPort::init()
+void AM335x_GPIO::init()
 {
     using namespace Clock;
 
@@ -56,8 +49,8 @@ void AM335x_GPIOPort::init()
         return;
 
     // Enable interface and functional clocks.
-    switch (m_portNo) {
-        case GPIO_0:
+    switch (m_id) {
+        case GPIOId::_0:
             CM_WKUP_GPIO0_CLKCTRL->MODULEMODE = CM_WKUP_MODULEMODE_ENABLE;
             while (CM_WKUP_GPIO0_CLKCTRL->MODULEMODE != CM_WKUP_MODULEMODE_ENABLE);
             CM_WKUP_GPIO0_CLKCTRL->OPTFCLKEN_GPIO0_GDBCLK = CM_WKUP_CLK_ACTIVE;
@@ -70,7 +63,7 @@ void AM335x_GPIOPort::init()
             while (CM_WKUP_GPIO0_CLKCTRL->IDLEST != CM_WKUP_IDLEST_FUNCTIONAL);
             while (CM_WKUP_CLKSTCTRL->CLKACTIVITY_GPIO0_GDBCLK != CM_WKUP_CLK_ACTIVE);
             break;
-        case GPIO_1:
+        case GPIOId::_1:
             CM_PER_GPIO1_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_GPIO1_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             CM_PER_GPIO1_CLKCTRL->OPTFCLKEN_GPIO_1_GDBCLK = CM_PER_CLK_ACTIVE;
@@ -78,7 +71,7 @@ void AM335x_GPIOPort::init()
             while (CM_PER_GPIO1_CLKCTRL->IDLEST != CM_PER_IDLEST_FUNCTIONAL);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_GPIO_1_GDBCLK != CM_PER_CLK_ACTIVE);
             break;
-        case GPIO_2:
+        case GPIOId::_2:
             CM_PER_GPIO2_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_GPIO2_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             CM_PER_GPIO2_CLKCTRL->OPTFCLKEN_GPIO_2_GDBCLK = CM_PER_CLK_ACTIVE;
@@ -86,7 +79,7 @@ void AM335x_GPIOPort::init()
             while (CM_PER_GPIO2_CLKCTRL->IDLEST != CM_PER_IDLEST_FUNCTIONAL);
             while (CM_PER_L4LS_CLKSTCTRL->CLKACTIVITY_GPIO_2_GDBCLK != CM_PER_CLK_ACTIVE);
             break;
-        case GPIO_3:
+        case GPIOId::_3:
             CM_PER_GPIO3_CLKCTRL->MODULEMODE = CM_PER_MODULEMODE_ENABLE;
             while (CM_PER_GPIO3_CLKCTRL->MODULEMODE != CM_PER_MODULEMODE_ENABLE);
             CM_PER_GPIO3_CLKCTRL->OPTFCLKEN_GPIO_3_GDBCLK = CM_PER_CLK_ACTIVE;
@@ -102,23 +95,23 @@ void AM335x_GPIOPort::init()
     m_initialized = true;
 }
 
-void AM335x_GPIOPort::reset()
+void AM335x_GPIO::reset()
 {
     GPIO_SYSCONFIG(m_base)->SOFTRESET = true;
     while (!GPIO_SYSSTATUS(m_base)->RESETDONE);
 }
 
-void AM335x_GPIOPort::enable()
+void AM335x_GPIO::enable()
 {
     GPIO_CTRL(m_base)->DISABLEMODULE = false;
 }
 
-void AM335x_GPIOPort::disable()
+void AM335x_GPIO::disable()
 {
     GPIO_CTRL(m_base)->DISABLEMODULE = true;
 }
 
-bool AM335x_GPIOPort::setFunction(int id, Function function)
+bool AM335x_GPIO::setFunction(int id, Function function)
 {
     if (function > Function::_7)
         return false;
@@ -128,7 +121,7 @@ bool AM335x_GPIOPort::setFunction(int id, Function function)
     return true;
 }
 
-void AM335x_GPIOPort::setDirection(int pinNo, Direction direction)
+void AM335x_GPIO::setDirection(int pinNo, Direction direction)
 {
     // TODO: Set also PAD_RECEIVER_ACTIVE using pin id.
     if (direction == Direction::Input)
@@ -137,7 +130,7 @@ void AM335x_GPIOPort::setDirection(int pinNo, Direction direction)
         GPIO_OE(m_base)->OUTPUTENn &= ~PIN_MASK(pinNo);
 }
 
-void AM335x_GPIOPort::setResistor(int id, Resitor resistor)
+void AM335x_GPIO::setResistor(int id, Resitor resistor)
 {
     GPIO_PAD(id)->PAD_PULLUP_DISABLE = (resistor == Resitor::None);
     if (resistor == Resitor::None)
@@ -146,13 +139,13 @@ void AM335x_GPIOPort::setResistor(int id, Resitor resistor)
     GPIO_PAD(id)->PAD_PULLUP_SELECT = (resistor == Resitor::PullUp);
 }
 
-std::uint32_t AM335x_GPIOPort::read()
+std::uint32_t AM335x_GPIO::read()
 {
     volatile std::uint32_t value = GPIO_DATAIN(m_base)->DATAINn;
     return value;
 }
 
-bool AM335x_GPIOPort::write(std::uint32_t value)
+bool AM335x_GPIO::write(std::uint32_t value)
 {
     if (value & GPIO_OE(m_base)->OUTPUTENn) {
         // Attempt to write to input pin.
@@ -163,7 +156,7 @@ bool AM335x_GPIOPort::write(std::uint32_t value)
     return true;
 }
 
-bool AM335x_GPIOPort::writePin(int pinNo, bool state)
+bool AM335x_GPIO::writePin(int pinNo, bool state)
 {
     if (pinNo < 0 || pinNo >= PIN_COUNT)
         return false;
@@ -176,18 +169,4 @@ bool AM335x_GPIOPort::writePin(int pinNo, bool state)
     return true;
 }
 
-int AM335x_GPIOPort::getBaseAddress(int portNo)
-{
-    switch (portNo) {
-        case GPIO_0:     return GPIO_0_BASE;
-        case GPIO_1:     return GPIO_1_BASE;
-        case GPIO_2:     return GPIO_2_BASE;
-        case GPIO_3:     return GPIO_3_BASE;
-        default:         break;
-    }
-
-    return -1;
-}
-
-} // namespace GPIO
-} // namespace Device
+} // namespace Device::GPIO

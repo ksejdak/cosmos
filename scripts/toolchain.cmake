@@ -22,7 +22,7 @@ macro(set_toolchain ARCH)
         set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -Werror")
 
         # Set C++ compilation flags.
-        set(CMAKE_CXX_FLAGS "${COMMON_FLAGS} -std=c++17")                               # Enable C++14 standard.
+        set(CMAKE_CXX_FLAGS "${COMMON_FLAGS} -std=c++17")                               # Enable C++17 standard.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -fno-unwind-tables")    # Disable C++ exceptions support, because it requires libc.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")                             # Disable C++ run time information, because it requires libc.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-threadsafe-statics")               # Do not produce code to initialize statics in thread-safe way.

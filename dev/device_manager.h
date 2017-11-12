@@ -16,13 +16,16 @@ namespace Device {
 template <typename T>
 class DeviceManager {
 public:
-    static constexpr int getDeviceCount();
-    static T& getDevice(int id);
+    static T& get(typename T::id_type id)
+    {
+        static T devices[T::count()];
+        return devices[static_cast<int>(id)];
+    }
 
-    static void init() {
-        constexpr int count = getDeviceCount();
-        for (int i = 0; i < count; ++i)
-            getDevice(i).init();
+    static void init()
+    {
+        for (int i = 0; i < T::count(); ++i)
+            get(static_cast<typename T::id_type>(i)).init();
     }
 };
 

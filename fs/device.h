@@ -18,17 +18,39 @@
 
 namespace Filesystem {
 
+template <int N>
 class Device : public File {
 public:
-    Device();
+    static constexpr int count() { return N; }
+
+public:
+    Device()
+        : File(FileType::Device)
+        , m_initialized(false)
+    {
+    }
 
     // Initialization.
-    virtual void init();
+    virtual void init()
+    {
+        m_initialized = true;
+    }
 
     // I/O operations.
-    virtual std::size_t read(void* buff, std::size_t size);
-    virtual std::size_t write(const void* buff, std::size_t size);
-    virtual bool ioctl(std::uint32_t command, void* arg);
+    virtual std::size_t read(void* buff __attribute__((unused)), std::size_t size __attribute__((unused)))
+    {
+        return 0;
+    }
+
+    virtual std::size_t write(const void* buff __attribute__((unused)), std::size_t size __attribute__((unused)))
+    {
+        return 0;
+    }
+
+    virtual bool ioctl(std::uint32_t command __attribute__((unused)), void* arg __attribute__((unused)))
+    {
+        return true;
+    }
 
 protected:
     bool m_initialized;

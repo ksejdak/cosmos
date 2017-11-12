@@ -52,7 +52,8 @@ enum class Direction {
     Asynchronous
 };
 
-class IUART : public Filesystem::Device {
+template <int N>
+class IUART : public Filesystem::Device<N> {
 public:
     // Initialization.
     virtual void reset() = 0;

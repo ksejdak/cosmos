@@ -11,7 +11,11 @@
 #ifndef GPIO_H
 #define GPIO_H
 
+#include "device_manager.h"
+
 #include <fs/device.h>
+
+#include <type_traits>
 
 #define PIN_MASK(gpioPinNo)     ((std::uint32_t) (1 << gpioPinNo))
 
@@ -51,7 +55,8 @@ enum class Resitor {
     PullDown
 };
 
-class IGPIOPort : public Filesystem::Device {
+template <int N>
+class IGPIO : public Filesystem::Device<N> {
 public:
     virtual void reset() = 0;
     virtual void enable() = 0;
@@ -66,21 +71,64 @@ public:
     virtual bool writePin(int pinNo, bool state) = 0;
 };
 
+template <typename T>
+using IsGPIO = typename std::enable_if_t<std::is_base_of<IGPIO<T::count()>, T>::value, T>;
+
+template <typename T, typename = IsGPIO<T>>
 class GPIOPin {
 public:
-    GPIOPin(int id);
-    GPIOPin(int portNo, int pinNo);
+    GPIOPin(int id)
+        : GPIOPin((typename T::id_type) pinmux[id].portNo, pinmux[id].pinNo)
+    {
+    }
 
-    bool setFunction(Function function);
-    void setDirection(Direction direction);
-    void setResistor(Resitor resistor);
+    GPIOPin(typename T::id_type id, int pinNo)
+        : m_gpio(DeviceManager<T>::get(id))
+        , m_pinNo(pinNo)
+        , m_id(-1)
+    {
+        for (int i = 0; i < pinmuxSize; ++i){
+            if (pinmux[i].portNo == static_cast<int>(id) && pinmux[i].pinNo == pinNo) {
+                m_id = i;
+                break;
+            }
+        }
+    }
 
-    bool read();
-    bool write(bool state);
-    void toggle();
+    bool setFunction(Function function)
+    {
+        return m_gpio.setFunction(m_id, function);
+    }
+
+    void setDirection(Direction direction)
+    {
+        m_gpio.setDirection(m_pinNo, direction);
+    }
+
+    void setResistor(Resitor resistor)
+    {
+        m_gpio.setResistor(m_id, resistor);
+    }
+
+    bool read()
+    {
+        return (bool) (m_gpio.read() & PIN_MASK(m_pinNo));
+    }
+
+    bool write(bool state)
+    {
+        return m_gpio.writePin(m_pinNo, state);
+    }
+
+    void toggle()
+    {
+        volatile bool state = read();
+        write(!state);
+    }
 
 private:
-    IGPIOPort& m_port;
+    IGPIO<T::count()>& m_gpio;
+    //int m_pin;
     int m_pinNo;
     int m_id;
 };

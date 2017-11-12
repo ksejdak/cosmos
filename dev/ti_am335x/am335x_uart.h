@@ -14,8 +14,7 @@
 #include <dev/device_manager.h>
 #include <dev/uart.h>
 
-namespace Device {
-namespace UART {
+namespace Device::UART {
 
 enum class UARTId {
     _0,
@@ -45,10 +44,12 @@ enum class OperatingMode {
     Disable = 0x7
 };
 
-class AM335x_UART : public IUART {
+class AM335x_UART : public IUART<6> {
 public:
-    AM335x_UART(UARTId uartNo);
+    using id_type = UARTId;
+    friend class DeviceManager<AM335x_UART>;
 
+public:
     // Initialization.
     virtual void init() override;
     virtual void reset();
@@ -75,12 +76,8 @@ public:
     virtual std::uint8_t readChar();
     virtual bool writeChar(std::uint8_t value);
 
-public:
-    static constexpr int PORT_COUNT     = 6;
-    static constexpr int INPUT_CLOCK_HZ = 48 * 1000 * 1000;
-
 private:
-    static int getBaseAddress(UARTId uartNo);
+    AM335x_UART();
 
     std::uint16_t setConfigMode(ConfigMode mode);
     OperatingMode setOperatingMode(OperatingMode mode);
@@ -91,19 +88,14 @@ private:
     void initFIFO();
 
 private:
-    UARTId m_uartNo;
+    UARTId m_id;
     int m_base;
     bool m_fifoEnabled;
+
+    static constexpr int INPUT_CLOCK_HZ = 48 * 1000 * 1000;
+    static int m_nextId;
 };
 
-} // namespace UART
-
-template <>
-constexpr int DeviceManager<UART::IUART>::getDeviceCount()
-{
-    return UART::AM335x_UART::PORT_COUNT;
-}
-
-} // namespace Device
+} // namespace Device::UART
 
 #endif

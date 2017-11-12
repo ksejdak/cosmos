@@ -8,15 +8,21 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <dev/device_manager.h>
+#include <dev/ti_am335x/am335x_uart.h>
+
 #include <array>
 #include <cstdint>
 #include <sys/types.h>
+
+using namespace Device;
+using namespace Device::UART;
 
 extern "C" {
 
 caddr_t _sbrk(intptr_t increment)
 {
-    static std::array<char, 1024> buffer;
+    static std::array<char, 2048> buffer;
     static std::size_t offset = 0;
 
     std::size_t prevOffset = offset;
@@ -28,9 +34,10 @@ caddr_t _sbrk(intptr_t increment)
     return &buffer[prevOffset];
 }
 
-int _write(int, const void *buf __attribute__((unused)), std::size_t count __attribute__((unused)))
+int _write(int, const void *buf, std::size_t count)
 {
-    return 0;
+    auto& consoleUart = DeviceManager<AM335x_UART>::get(UARTId::_0);
+    return consoleUart.write(buf, count);
 }
 
 int _open(const char *, int, mode_t)    { return -1; }

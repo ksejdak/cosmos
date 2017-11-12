@@ -17,12 +17,12 @@ namespace Filesystem {
 
 class File {
 public:
-    typedef enum {
-        REGULAR_FILE,
-        DEVICE_FILE
-    } FileType;
+    enum class FileType {
+        Regular,
+        Device
+    };
 
-    File(FileType fileType = REGULAR_FILE);
+    File(FileType fileType = FileType::Regular);
     FileType fileType() const;
 
     bool open();

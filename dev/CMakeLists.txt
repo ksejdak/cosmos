@@ -1,6 +1,6 @@
 set(SOURCES
     device_manager.h
-    gpio.cpp
+    gpio.h
     uart.h
 )
 
