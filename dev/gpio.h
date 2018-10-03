@@ -105,7 +105,7 @@ public:
         , m_pinNo(pinNo)
         , m_id(-1)
     {
-        for (int i = 0; i < pinmuxSize; ++i){
+        for (int i = 0; i < pinmuxSize; ++i) {
             if (pinmux[i].portNo == static_cast<int>(id) && pinmux[i].pinNo == pinNo) {
                 m_id = i;
                 break;
