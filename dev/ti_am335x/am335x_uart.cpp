@@ -319,14 +319,12 @@ std::size_t AM335x_UART::read(void* buff __attribute__((unused)), std::size_t si
 
 std::size_t AM335x_UART::write(const void* buff, std::size_t size)
 {
-    std::size_t i;
-
-    for (i = 0; i < size; ++i) {
+    for (std::size_t i = 0; i < size; ++i) {
         if (!writeChar(((std::uint8_t *) buff)[i]))
-            break;
+            return i;
     }
 
-    return i;
+    return size - 1;
 }
 
 std::uint8_t AM335x_UART::readChar()
